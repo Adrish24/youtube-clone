@@ -10,7 +10,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -27,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/channel",
         element: <Channel />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
