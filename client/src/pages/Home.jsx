@@ -1,7 +1,5 @@
-import React from "react";
-
 const Home = () => {
-  return <div>Home Page</div>;
+  return <div className="flex-2 pt-14 bg-black">Home Page</div>;
 };
 
 export default Home;

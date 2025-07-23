@@ -5,16 +5,14 @@ import {
   ProfileButton,
   SearchButton,
   SearchModal,
-} from "./navigation";
-import { SearchBar } from "./features";
+} from "../navigation";
+import { SearchBar } from "../features";
 
 const Header = () => {
   const [showSearchbar, setShowSearchBar] = useState(false);
 
-  console.log(window.innerWidth);
-
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between fill-base-content px-2 z-50 bg-base-300">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between fill-base-content px-4 z-50 bg-base-300">
       <div className="flex items-center">
         {/* Burger Menu Icon */}
         {/* This is used for mobile view to toggle sidebar */}

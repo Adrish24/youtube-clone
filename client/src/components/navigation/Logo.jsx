@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
-const Logo = () => {
+const Logo = memo(() => {
   return (
     <Link to="/" className="p-4">
       <svg
@@ -31,6 +32,6 @@ const Logo = () => {
       </svg>
     </Link>
   );
-};
+});
 
 export default Logo;

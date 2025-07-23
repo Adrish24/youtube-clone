@@ -1,4 +1,6 @@
-const ProfileButton = () => {
+import { memo } from "react";
+
+const ProfileButton = memo(() => {
   return (
     <div className="py-2">
       <button className="btn btn-circle btn-primary">
@@ -6,6 +8,6 @@ const ProfileButton = () => {
       </button>
     </div>
   );
-};
+});
 
 export default ProfileButton;

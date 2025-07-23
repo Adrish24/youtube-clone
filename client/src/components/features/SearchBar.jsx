@@ -14,7 +14,7 @@ const SearchBar = () => {
         type="text"
         placeholder="Search"
       />
-      <div className="py-2 pr-2 pl-4 bg-base-100 border-l-1 border-l-base-content/20">
+      <div className="py-2 pr-4 pl-6 bg-base-100 border-l-1 border-l-base-content/20">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
