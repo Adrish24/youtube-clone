@@ -1,7 +1,5 @@
-import React from "react";
-
 const Channel = () => {
-  return <div>Channel Page</div>;
+  return <div className="flex-2 pt-14 bg-base-300">Channel Page</div>;
 };
 
 export default Channel;

@@ -1,26 +1,31 @@
 import { Outlet } from "react-router-dom";
-import { Header, Sidebar } from "./components/main";
-import { Drawer } from "./components/ui";
+
+import { Provider } from "react-redux";
+import store from "./context/store/store";
+import Header from "./components/header/Header";
+import Sidebar from "./components/sidebar/Sidebar";
 
 const App = () => {
   // const theme = localStorage.getItem("theme") || "light";
   return (
-    <main data-theme={"dark"}>
-      <Header />
-      {/* <Drawer /> */}
-      <div
-        className="
+    <Provider store={store}>
+      <main data-theme={"dark"}>
+        <Header />
+
+        <div
+          className="
       overflow-hidden 
       min-h-screen 
       scroll-mt-14 
       h-full 
       bg-base-300 flex
       "
-      >
-        <Sidebar />
-        <Outlet />
-      </div>
-    </main>
+        >
+          <Sidebar />
+          <Outlet />
+        </div>
+      </main>
+    </Provider>
   );
 };
 

@@ -1,8 +1,10 @@
-const Icon = ({ children, className }) => {
+import { Link } from "react-router-dom";
+
+const Icon = ({ children, className, path = '#' }) => {
   return (
-    <div className={`py-4 text-xs flex flex-col items-center justify-center ${className}`}>
+    <Link to={path} className={`hover:bg-base-100 rounded-lg ${className}`}>
       {children}
-    </div>
+    </Link>
   );
 };
 

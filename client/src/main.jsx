@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Auth, Channel, Home, NotFound, VideoPlayer } from "./pages";
+import { Auth, Channel, Home, NotFound, WatchVideo } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/watch",
-        element: <VideoPlayer />,
+        element: <WatchVideo />,
       },
       {
         path: "/channel",

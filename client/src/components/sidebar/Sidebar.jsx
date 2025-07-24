@@ -1,5 +1,6 @@
 import { memo } from "react";
-import { Drawer, Icon } from "../ui";
+import Drawer from "./Drawer";
+import { Icon } from "../ui";
 
 const Sidebar = memo(() => {
   return (
@@ -8,9 +9,13 @@ const Sidebar = memo(() => {
 
       <div
         id="sidebar-menu"
-        className="px-1 pt-14 h-full hidden lg:block xl:hidden"
+        className={`px-1 pt-14 h-full hidden md:block 
+          `}
       >
-        <Icon>
+        <Icon
+          path="/"
+          className={`py-4 text-xs flex flex-col items-center justify-center`}
+        >
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -31,10 +36,11 @@ const Sidebar = memo(() => {
           <span>Home</span>
         </Icon>
 
-        <Icon>
-          <div className="">
+        <Icon
+          className={`py-4 text-xs flex flex-col items-center justify-center`}
+        >
+          <div>
             <svg
-              className=""
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               height="24"
@@ -53,7 +59,9 @@ const Sidebar = memo(() => {
           <span>Shorts</span>
         </Icon>
 
-        <Icon>
+        <Icon
+          className={`py-4 text-xs flex flex-col items-center justify-center`}
+        >
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +82,9 @@ const Sidebar = memo(() => {
           <span>Subscriptions</span>
         </Icon>
 
-        <Icon>
+        <Icon
+          className={`py-4 text-xs flex flex-col items-center justify-center`}
+        >
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"

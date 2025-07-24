@@ -1,4 +1,4 @@
-const SearchButton = ({ setShowSearchBar }) => {
+const SearchToggle = ({ setShowSearchBar }) => {
   return (
     <button
       onClick={() => setShowSearchBar(true)}
@@ -23,4 +23,4 @@ const SearchButton = ({ setShowSearchBar }) => {
   );
 };
 
-export default SearchButton;
+export default SearchToggle;
