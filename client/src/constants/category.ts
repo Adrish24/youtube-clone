@@ -1,0 +1,38 @@
+export const VIDEO_CATEGORY = [
+  "All",
+  "Programming",
+  "Full Stack",
+  "React",
+  "Gaming",
+  "Music",
+  "Podcasts",
+  "News",
+  "Movies",
+  "TV Shows",
+  "Documentaries",
+  "Education",
+  "Sports",
+  "Cricket",
+  "Football",
+  "Travel",
+  "Food",
+  "Health",
+  "Lifestyle",
+  "Fitness",
+  "Technology",
+  "Science",
+  "Art",
+  "Photography",
+  "Animation",
+  "DIY",
+  "Video editing",
+  "Reactions",
+  "Recently uploaded",
+  "Watched",
+  "New to you",
+] as const;
+
+export type VideoCategory = (typeof VIDEO_CATEGORY)[number];
+
+export const THEME = ["light", "dark"] as const;
+export type Theme = (typeof THEME)[number];

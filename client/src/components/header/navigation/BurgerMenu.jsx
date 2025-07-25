@@ -21,6 +21,10 @@ const BurgerMenu = memo(() => {
     }
 
     if (drawer && width >= 1280) {
+      const homePage = document.getElementById("home");
+      homePage.classList.toggle("xl:ml-60");
+      const categories = document.getElementById("categories");
+      categories.classList.toggle("xl:left-60");
       const sidebarMenu = document.getElementById("sidebar-menu");
       sidebarMenu.classList.toggle("xl:hidden");
       drawer.classList.toggle("xl:drawer-open");
@@ -31,7 +35,7 @@ const BurgerMenu = memo(() => {
   return (
     <button
       onClick={handleDrawerToggle}
-      className="btn btn-circle mr-2 drawer-button "
+      className="btn btn-circle mr-2 drawer-button p-2"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -4,17 +4,18 @@ import { Icon } from "../ui";
 
 const Sidebar = memo(() => {
   return (
-    <div>
-      <Drawer />
-
+    <>
+      <div className="fixed  z-[100] bg-base-300 h-full" onWheel={(e) => e.stopPropagation()}>
+        <Drawer />
+      </div>
       <div
         id="sidebar-menu"
-        className={`px-1 pt-14 h-full hidden md:block 
-          `}
+        className="fixed px-1 pt-14 h-full hidden md:block"
+        onWheel={(e) => e.stopPropagation()}
       >
         <Icon
           path="/"
-          className={`py-4 text-xs flex flex-col items-center justify-center`}
+          className="py-4 text-xs flex flex-col items-center justify-center"
         >
           <div>
             <svg
@@ -105,7 +106,7 @@ const Sidebar = memo(() => {
           <span>You</span>
         </Icon>
       </div>
-    </div>
+    </>
   );
 });
 
