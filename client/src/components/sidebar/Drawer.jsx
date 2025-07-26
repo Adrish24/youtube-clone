@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import DrawerItem from "./DrawerItem";
 import useResizeWindow from "../../hooks/useResizeWindow";
 import { BurgerMenu, Logo } from "../header/navigation";
+import { useThemeContext } from "../../context/ThemeProvider";
 
 // Drawer component for the sidebar
 // It uses a checkbox input to toggle the visibility of the sidebar
@@ -21,18 +22,27 @@ const Drawer = () => {
 
   const windowWidth = useResizeWindow(); // Custom hook to get the current window width
 
+  const { isSidebarOpen } = useThemeContext();
+
   // Handle window resize to close the drawer on larger screens
   // This ensures that the drawer is closed when the screen width exceeds 1280px
   // This is useful for responsive design
 
   useEffect(() => {
-    const input = inputRef.current;
-    if (input) {
-      if (windowWidth > 1280) {
-        input.checked = false;
+    const checkbox = inputRef.current;
+    const drawer = document.getElementById("drawer");
+    if (checkbox) {
+      if (windowWidth < 1280) {
+        drawer.classList.remove("xl:drawer-open");
+        return;
+      }
+      if (windowWidth >= 1280) {
+        checkbox.checked = false;
+        if (isSidebarOpen) drawer.classList.add("xl:drawer-open");
+        return;
       }
     }
-  }, [windowWidth]);
+  }, [isSidebarOpen, windowWidth]);
 
   return (
     <div id="drawer" className="drawer">
@@ -50,7 +60,7 @@ const Drawer = () => {
           className="drawer-overlay"
         ></label>
 
-        <div className="flex-nowrap bg-base-300  text-base-content h-screen  w-60   overflow-hidden">
+        <div className="flex-nowrap bg-base-300 text-base-content h-screen  w-60  overflow-hidden">
           {/* Sidebar Menu */}
           <div className="flex items-center pl-3 fill-base-content">
             {/* Burger Menu Icon */}
@@ -64,7 +74,7 @@ const Drawer = () => {
           <div
             className="
           h-screen pb-20 pl-3
-          overflow-y-auto  z-50
+          overflow-y-auto 
           scroll-smooth 
           [scrollbar-width:thin]"
           >

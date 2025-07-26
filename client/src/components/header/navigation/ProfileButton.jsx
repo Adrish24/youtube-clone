@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserInfo } from "../../../context/userSlice";
+import { setUserInfo } from "../../../context/redux/userSlice";
 
 const ProfileButton = memo(() => {
   const isUserLoggedIn = useSelector((state) => state.user.userInfo); // Check if the user is logged in

@@ -33,6 +33,3 @@ export const VIDEO_CATEGORY = [
 ] as const;
 
 export type VideoCategory = (typeof VIDEO_CATEGORY)[number];
-
-export const THEME = ["light", "dark"] as const;
-export type Theme = (typeof THEME)[number];

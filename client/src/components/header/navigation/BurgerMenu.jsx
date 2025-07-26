@@ -1,8 +1,12 @@
 import { memo } from "react";
 import { useLocation } from "react-router-dom";
+import { useThemeContext } from "../../../context/ThemeProvider";
+
 
 const BurgerMenu = memo(() => {
   const path = useLocation().pathname; // Get the current path to conditionally render drawer
+
+  const { setIsSidebarOpen } = useThemeContext(); // Use the theme context to access theme-related values
 
   // Function to handle the drawer toggle
   // It checks the screen width and toggles the drawer accordingly
@@ -15,12 +19,13 @@ const BurgerMenu = memo(() => {
 
     const drawer = document.getElementById("drawer");
     if ((drawer && width < 1280) || path === "/watch") {
-      const input = drawer.querySelector("input");
-      input.checked = !input.checked;
+      const checkbox = drawer.querySelector("input");
+      checkbox.checked = !checkbox.checked;
       return;
     }
 
     if (drawer && width >= 1280) {
+      setIsSidebarOpen((prev) => !prev);
       const homePage = document.getElementById("home");
       homePage.classList.toggle("xl:ml-60");
       const categories = document.getElementById("categories");

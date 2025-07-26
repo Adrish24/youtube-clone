@@ -1,27 +1,25 @@
 import { Outlet } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import store from "./context/store/store";
+
+import store from "./context/redux/store/store";
+
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
 
 const App = () => {
-  // const theme = localStorage.getItem("theme") || "light";
   return (
     <Provider store={store}>
-      <main data-theme={"dark"}>
+      <main data-theme={"dark"} className="h-screen overflow-hidden">
         <Header />
-
+        <Sidebar />
         <div
           className="
-      overflow-hidden 
-      min-h-screen 
-      scroll-mt-14 
-      h-full 
-      bg-base-300 flex
-      "
+          scroll-mt-14 
+          h-full 
+          bg-base-300 overflow-y-auto
+          "
         >
-          <Sidebar />
           <Outlet />
         </div>
       </main>

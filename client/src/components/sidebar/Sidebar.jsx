@@ -5,13 +5,12 @@ import { Icon } from "../ui";
 const Sidebar = memo(() => {
   return (
     <>
-      <div className="fixed  z-[100] bg-base-300 h-full" onWheel={(e) => e.stopPropagation()}>
+      <div className="fixed  z-[100] bg-base-300">
         <Drawer />
       </div>
       <div
         id="sidebar-menu"
         className="fixed px-1 pt-14 h-full hidden md:block"
-        onWheel={(e) => e.stopPropagation()}
       >
         <Icon
           path="/"
