@@ -36,22 +36,11 @@ const Home = () => {
       id="home"
       className="flex-2 grid justify-center p-3 mt-24 md:ml-20  bg-base-300"
     >
-      <div
-        id="categories"
-        ref={categoryRef}
-        className="
-        fixed 
-        top-14 
-        h-14 w-full
-        bg-base-300/85 z-1
-        flex items-center space-x-2 overflow-y-hidden overflow-x-auto
-        "
-      >
-        <VideoFilter />
-      </div>
-      <div className="relative -z-0">
-        <VideoGrid />
-      </div>
+      {/* Video Filter Component */}
+      <VideoFilter categoryRef={categoryRef} />
+
+      {/* This is the main content area where the video grid will be displayed */}
+      <VideoGrid />
     </div>
   );
 };

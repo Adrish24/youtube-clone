@@ -10,7 +10,10 @@ import Sidebar from "./components/sidebar/Sidebar";
 const App = () => {
   return (
     <Provider store={store}>
-      <main data-theme={"dark"} className="h-screen overflow-hidden">
+      <main
+        data-theme={"dark"}
+        className="h-screen overflow-hidden scroll-smooth"
+      >
         <Header />
         <Sidebar />
         <div

@@ -30,6 +30,4 @@ export const VIDEO_CATEGORY = [
   "Recently uploaded",
   "Watched",
   "New to you",
-] as const;
-
-export type VideoCategory = (typeof VIDEO_CATEGORY)[number];
+];
