@@ -11,11 +11,13 @@ import DrawerItem from "./DrawerItem";
 import useResizeWindow from "../../hooks/useResizeWindow";
 import { BurgerMenu, Logo } from "../header/navigation";
 import { useThemeContext } from "../../context/ThemeProvider";
+import { useLocation } from "react-router-dom";
 
 // Drawer component for the sidebar
 // It uses a checkbox input to toggle the visibility of the sidebar
 
 const Drawer = () => {
+  const path = useLocation().pathname;
   const inputRef = useRef(null);
 
   const isUserLoggedIn = useSelector((state) => state.user.userInfo); // Check if the user is logged in
@@ -32,7 +34,7 @@ const Drawer = () => {
     const checkbox = inputRef.current;
     const drawer = document.getElementById("drawer");
     if (checkbox) {
-      if (windowWidth < 1280) {
+      if (windowWidth < 1280 || path === "/watch") {
         drawer.classList.remove("xl:drawer-open");
         return;
       }
@@ -42,7 +44,7 @@ const Drawer = () => {
         return;
       }
     }
-  }, [isSidebarOpen, windowWidth]);
+  }, [isSidebarOpen, path, windowWidth]);
 
   return (
     <div id="drawer" className="drawer">

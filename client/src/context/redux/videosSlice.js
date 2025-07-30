@@ -4,6 +4,8 @@ const videosSlice = createSlice({
   name: "videos",
   initialState: {
     items: [], // Initial state with the videos data
+    isLoading: true, // Indicates if the videos are being fetched
+    error: null, // Holds any error that occurs during fetching
   },
   reducers: {
     setVideos: (state, action) => {
@@ -12,8 +14,15 @@ const videosSlice = createSlice({
     clearVideos: (state) => {
       state.items = null;
     },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { setVideos, clearVideos } = videosSlice.actions;
+export const { setVideos, clearVideos, setIsLoading, setError } =
+  videosSlice.actions;
 export default videosSlice.reducer;

@@ -34,7 +34,7 @@ const Home = () => {
     <div
       ref={homeRef}
       id="home"
-      className="flex-2 grid justify-center p-3 mt-24 md:ml-20  bg-base-300"
+      className="flex px-2 mt-24 md:ml-20  bg-neutral"
     >
       {/* Video Filter Component */}
       <VideoFilter categoryRef={categoryRef} />

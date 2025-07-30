@@ -13,7 +13,7 @@ const useCarousel = () => {
   const checkScrollPosition = () => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-      console.log(scrollLeft, scrollWidth, clientWidth);
+      // console.log(scrollLeft, scrollWidth, clientWidth);
 
       // Show the left scroll button if the user has scrolled left
       // This is determined by checking if `scrollLeft` is greater than 0.

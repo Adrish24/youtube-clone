@@ -2,7 +2,6 @@ import { memo } from "react";
 import { useLocation } from "react-router-dom";
 import { useThemeContext } from "../../../context/ThemeProvider";
 
-
 const BurgerMenu = memo(() => {
   const path = useLocation().pathname; // Get the current path to conditionally render drawer
 

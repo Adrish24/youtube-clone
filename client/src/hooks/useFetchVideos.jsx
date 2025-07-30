@@ -1,51 +1,48 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { videos } from "../data/videos";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { setVideos } from "../context/redux/videosSlice";
+import { useCallback, useEffect, useState } from "react";
+import {
+  setError,
+  setIsLoading,
+  setVideos,
+} from "../context/redux/videosSlice";
+import { VIDEO_CATEGORY } from "../constants/category";
 
-const useFetchVideos = (category) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+const useFetchVideos = () => {
+  const items = useSelector((state) => state.videos.items);
+  const isLoading = useSelector((state) => state.videos.isLoading);
+  const error = useSelector((state) => state.videos.error);
 
-  const timeoutRef = useRef(null);
+  const [activeCategory, setActiveCategory] = useState(VIDEO_CATEGORY[0]);
 
   const dispatch = useDispatch();
 
   // Simulating an API call with a timeout
   const fetchVideos = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    timeoutRef.current = setTimeout(() => {
+    dispatch(setIsLoading(true));
+    dispatch(setError(null));
+    setTimeout(() => {
       try {
         const filteredVideos = videos.filter(
-          (video) => video.category.includes(category) || category === "All"
+          (video) =>
+            video.category.includes(activeCategory) || activeCategory === "All"
         );
         // Dispatching the fetched videos to the Redux store
         dispatch(setVideos(filteredVideos));
       } catch (error) {
         console.log(error.message);
+        dispatch(setError("Failed to fetch videos"));
       } finally {
-        setIsLoading(false);
+        dispatch(setIsLoading(false));
       }
     }, 1000);
-  }, [category, dispatch]);
+  }, [activeCategory, dispatch]);
 
   useEffect(() => {
     fetchVideos();
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current); // Clear timeout on unmount
-      }
-    };
   }, [fetchVideos]);
 
-  return { isLoading, error };
+  return { items, isLoading, error, activeCategory, setActiveCategory };
 };
 
 export default useFetchVideos;

@@ -1,11 +1,25 @@
-import { StrictMode } from "react";
+import { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Auth, Channel, Home, NotFound, WatchVideo } from "./pages";
+
+// Importing the ThemeProvider context
 import { ThemeProvider } from "./context/ThemeProvider.jsx";
+
+// Importing the UI loader & error componeents
+import { HomeLoader } from "./components/ui/Loader.jsx";
+
+// Importing data loaders
+import { watchVideoLoader } from "./utils";
+
+// Importing pages
+const Home = lazy(() => import("./pages/Home.jsx"));
+const WatchVideo = lazy(() => import("./pages/WatchVideo.jsx"));
+const Auth = lazy(() => import("./pages/Auth.jsx"));
+const Channel = lazy(() => import("./pages/Channel.jsx"));
+const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -14,23 +28,45 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <Suspense fallback={<HomeLoader />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "/login",
-        element: <Auth />,
+        element: (
+          <Suspense>
+            <Auth />
+          </Suspense>
+        ),
       },
       {
         path: "/watch",
-        element: <WatchVideo />,
+        element: (
+          <Suspense>
+            <WatchVideo />
+          </Suspense>
+        ),
+        loader: watchVideoLoader,
+        errorElement: <div className="mt-14">Error loading video</div>,
       },
       {
-        path: "/channel",
-        element: <Channel />,
+        path: "/:channelName",
+        element: (
+          <Suspense>
+            <Channel />
+          </Suspense>
+        ),
       },
       {
         path: "*",
-        element: <NotFound />,
+        element: (
+          <Suspense>
+            <NotFound />
+          </Suspense>
+        ),
       },
     ],
   },

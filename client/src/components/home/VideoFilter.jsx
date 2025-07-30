@@ -1,14 +1,15 @@
 import { VIDEO_CATEGORY } from "../../constants/category";
-import { useState } from "react";
+
 import { Carousel } from "../ui";
 import { useFetchVideos } from "../../hooks";
 
 // This component renders a list of video categories
 // and provides navigation arrows for scrolling through the categories.
 // The categories are displayed in a carousel format.
+// It uses the `useFetchVideos` hook to get the active category and set it when a category is clicked.
+// The `categoryRef` is used to position the component correctly in the layout.
 const VideoFilter = ({ categoryRef }) => {
-  const [activeCategory, setActiveCategory] = useState(VIDEO_CATEGORY[0]);
-  const { isLoading } = useFetchVideos(activeCategory);
+  const { isLoading, activeCategory, setActiveCategory } = useFetchVideos();
 
   if (isLoading) return null;
 
