@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ video }) => {
+const Card = ({ video, styles, children }) => {
   const navigate = useNavigate();
 
   // Format view count and upload date for better readability
@@ -16,7 +16,7 @@ const Card = ({ video }) => {
     year: "numeric",
   });
 
-  const handleCardClick = () => {
+  const handleNavigateToWatch = () => {
     navigate(`/watch?v=${video.videoId}`);
   };
 
@@ -27,41 +27,47 @@ const Card = ({ video }) => {
   };
 
   return (
-    <div className="mb-10 px-2">
+    <div className={` ${styles.cardContainer}`}>
       <div
-        onClick={handleCardClick}
-        className="card  bg-neutral cursor-pointer"
+        onClick={handleNavigateToWatch}
+        className={`card  bg-base-300 cursor-pointer  ${styles.card}`}
       >
-        <figure>
+        {/* thumbnail */}
+        <figure className={styles.thumbnailContainer}>
           <img
             loading="lazy"
-            className="w-full aspect-video object-cover rounded-xl"
+            className={styles.thumbnail}
             src={video.thumbnailUrl}
             alt="Thumbnail"
           />
         </figure>
-        <div className="flex">
+        {/* showcase all the metadata about the video */}
+        <div className={styles.cardBody}>
+          {/* profile image */}
           <div>
-            <div className="mt-3 mr-3 w-9">
+            <div className={styles.profile}>
               <img
                 src={video.profile}
-                alt=""
-                className="bg-gray-300 h-9 w-full rounded-full object-fit"
+                alt="profileImage"
+                className={styles.profileImage}
               />
             </div>
           </div>
-          <div className="grow pr-6 pt-3">
-            <h2 className="font-semibold line-clamp-2">{video.title}</h2>
-            <p
-              onClick={handleNavigateToChannel}
-              className="text-sm text-base-content/50 hover:text-base-content"
-            >
+
+          {/* informations. e.g: title, view count, upload date */}
+          <div className={styles.metadataContainer}>
+            <h2 title={video.title} className={styles.title}>
+              {video.title}
+            </h2>
+            <p onClick={handleNavigateToChannel} className={styles.uploader}>
               {video.uploader}
             </p>
-            <p className="text-sm text-base-content/50">
-              {viewCount} - {uploadDate}
+            <p className={styles.metadata}>
+              {viewCount} views - {uploadDate}
             </p>
           </div>
+          {/* additional elements if needed */}
+          {children}
         </div>
       </div>
     </div>

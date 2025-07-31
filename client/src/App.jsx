@@ -6,21 +6,25 @@ import store from "./context/redux/store/store";
 
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
+import { useThemeContext } from "./context/ThemeProvider";
 
 const App = () => {
+  const { mainContentRef } = useThemeContext();
   return (
     <Provider store={store}>
       <main
-        data-theme={"dark"}
+        data-theme={"black"}
         className="h-screen overflow-hidden scroll-smooth"
       >
         <Header />
         <Sidebar />
+
         <div
+          ref={mainContentRef}
           className="
           scroll-mt-14 
           h-full 
-          bg-base-300 overflow-y-auto
+          overflow-y-auto 
           "
         >
           <Outlet />

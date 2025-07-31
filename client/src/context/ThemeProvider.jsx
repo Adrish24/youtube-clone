@@ -1,9 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const theme = localStorage.getItem("theme") || "light"; // Default theme
+
+  const mainContentRef = useRef(null);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to manage sidebar visibility for xl devices
 
@@ -17,6 +19,7 @@ export const ThemeProvider = ({ children }) => {
         isSidebarOpen,
         setIsSidebarOpen,
         toggleTheme,
+        mainContentRef,
       }}
     >
       {children}

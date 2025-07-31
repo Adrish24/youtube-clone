@@ -1,12 +1,25 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { Card } from "../components/ui";
 
-import { WatchMetaData } from "../components/watch";
+import {
+  CommentSection,
+  Suggestions,
+  WatchMetaData,
+} from "../components/watch";
+import { useThemeContext } from "../context/ThemeProvider";
 
 const WatchVideo = () => {
   const { currentVideo, suggestedVideos } = useLoaderData();
 
   const navigate = useNavigate();
+
+  const { mainContentRef } = useThemeContext();
+
+  if (mainContentRef.current) {
+    mainContentRef.current.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  }
 
   // If currentVid is not found, display a message
   if (!currentVideo)
@@ -31,37 +44,43 @@ const WatchVideo = () => {
       </div>
     );
 
-  // If currentVideo is found, display the video player and suggested videos
-  // Render the video player and suggested videos
+  // If currentVideo is found, Render the video player, metadata and suggested videos
+
   return (
-    <div className="mt-14 p-2 bg-neutral lg:flex">
-      <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
-        <iframe
-          className="w-full lg:w-[640px] xl:w-[800px] max-w-7xl h-50 md:h-[432px] lg:h-90 xl:h-[450px] max-h-[720px] rounded-2xl"
-          src={`${currentVideo.src}?autoplay=1&mute=1`}
-          title={currentVideo.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
-        <div className="py-4">
-          {/* Title of the video */}
-          <h2
+    <div className="mt-14 p-2 bg-base-300 flex justify-center cursor-pointer">
+      <div className="flex flex-col lg:flex-row w-full h-full 2xl:w-[90vw]">
+        <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
+          <iframe
+            className="
+            w-full lg:w-[640px] xl:w-[800px] 2xl:w-[1268px]
+            h-50 md:h-[432px] lg:h-90 xl:h-[450px] 2xl:h-[713px] 
+            rounded-2xl
+            "
+            src={`${currentVideo.src}?autoplay=1&mute=1`}
             title={currentVideo.title}
-            className="text-lg font-bold line-clamp-2"
-          >
-            {currentVideo.title}
-          </h2>
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+          <div className="py-4 lg:w-[640px] xl:w-[800px] 2xl:w-[1268px]">
+            {/* Title of the video */}
+            <h2
+              title={currentVideo.title}
+              className="text-lg font-bold line-clamp-2"
+            >
+              {currentVideo.title}
+            </h2>
 
-          {/* Top row of video metadata */}
-
-          <WatchMetaData currentVideo={currentVideo} />
+            {/* video metadata */}
+            <WatchMetaData currentVideo={currentVideo} />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:pr-6 lg:pt-6">
-        {suggestedVideos.length > 0 &&
-          suggestedVideos.map((vid) => <Card key={vid.videoId} video={vid} />)}
+        {/* showcase for suggested videos */}
+        <Suggestions suggestions={suggestedVideos} />
+
+        {/* Comment section */}
+        <CommentSection currentVideo={currentVideo} />
       </div>
     </div>
   );

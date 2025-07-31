@@ -24,7 +24,7 @@ const Carousel = ({ categories, activeCategory, setActiveCategory }) => {
               bg-base-100 rounded-lg
               ${
                 activeCategory === category
-                  ? "bg-base-content text-neutral"
+                  ? "bg-base-content text-base-300"
                   : ""
               }
               `}
@@ -42,7 +42,7 @@ const Carousel = ({ categories, activeCategory, setActiveCategory }) => {
             <button
               title="Next"
               onClick={handleScrollRight}
-              className="btn btn-circle btn-neutral hover:bg-base-content/30 fill-base-content"
+              className="btn btn-circle bg-black hover:bg-base-content/30 fill-base-content"
             >
               <div>
                 <svg
@@ -52,6 +52,7 @@ const Carousel = ({ categories, activeCategory, setActiveCategory }) => {
                   width="24"
                   focusable="false"
                   aria-hidden="true"
+                  className="fill-white"
                 >
                   <path d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z"></path>
                 </svg>
@@ -68,7 +69,7 @@ const Carousel = ({ categories, activeCategory, setActiveCategory }) => {
             <button
               title="Previous"
               onClick={handleScrollLeft}
-              className="btn btn-circle btn-neutral hover:bg-base-content/30 fill-base-content"
+              className="btn btn-circle bg-black hover:bg-base-content/30 fill-base-content"
             >
               <div>
                 <svg
@@ -78,6 +79,7 @@ const Carousel = ({ categories, activeCategory, setActiveCategory }) => {
                   width="24"
                   focusable="false"
                   aria-hidden="true"
+                  className="fill-white"
                 >
                   <path d="M14.96 18.96 8 12l6.96-6.96.71.71L9.41 12l6.25 6.25-.7.71z"></path>
                 </svg>
