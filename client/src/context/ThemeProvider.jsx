@@ -6,6 +6,7 @@ export const ThemeProvider = ({ children }) => {
   const theme = localStorage.getItem("theme") || "light"; // Default theme
 
   const mainContentRef = useRef(null);
+  const commentSectionRef = useRef(null);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to manage sidebar visibility for xl devices
 
@@ -20,6 +21,7 @@ export const ThemeProvider = ({ children }) => {
         setIsSidebarOpen,
         toggleTheme,
         mainContentRef,
+        commentSectionRef,
       }}
     >
       {children}

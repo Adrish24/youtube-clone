@@ -43,7 +43,7 @@ const WatchMetaData = ({ currentVideo }) => {
       <TopRowMetadata currentVideo={currentVideo} />
 
       {/* Video descriptions */}
-      <div className="bg-base-100  py-2 px-3 rounded-2xl ">
+      <div className="bg-base-100  py-2 px-3 rounded-2xl">
         <p className="text-sm font-semibold">
           {viewCount} views {uploadDate}
         </p>

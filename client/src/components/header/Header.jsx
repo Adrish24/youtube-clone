@@ -58,7 +58,7 @@ const Header = memo(() => {
       {/* This is not used for mobile view */}
 
       <SearchBar className="hidden sm:flex justify-center relative" />
-      
+
       <nav className="flex items-center space-x-2">
         <input
           onChange={toggleTheme}

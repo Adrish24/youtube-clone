@@ -6,7 +6,7 @@ import SidebarMenu from "./SidebarMenu";
 const Sidebar = memo(() => {
   return (
     <>
-      <div className="fixed  z-[100] bg-base-300">
+      <div className="fixed z-[100]">
         <Drawer />
       </div>
       <SidebarMenu />

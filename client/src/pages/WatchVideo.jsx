@@ -6,13 +6,28 @@ import {
   WatchMetaData,
 } from "../components/watch";
 import { useThemeContext } from "../context/ThemeProvider";
+import { useResizeWindow } from "../hooks";
+import { useEffect, useState } from "react";
 
 const WatchVideo = () => {
   const { currentVideo, suggestedVideos } = useLoaderData();
 
+  const [isSmallDevice, setIsSmallDevice] = useState(false);
+
   const navigate = useNavigate();
 
-  const { mainContentRef } = useThemeContext();
+  const { mainContentRef } = useThemeContext(); // Reference to the main content area
+
+  const windowWidth = useResizeWindow(); // Get the current window width
+
+  // Check if the device is small based on window width
+  useEffect(() => {
+    if (windowWidth < 1024) {
+      setIsSmallDevice(true);
+    } else {
+      setIsSmallDevice(false);
+    }
+  }, [windowWidth]);
 
   if (mainContentRef.current) {
     mainContentRef.current.scrollTo({
@@ -47,7 +62,7 @@ const WatchVideo = () => {
   // If currentVideo is found, Render the video player, metadata and suggested videos
 
   return (
-    <div className="mt-14 p-2 bg-base-300 flex justify-center cursor-pointer">
+    <div className="mt-14 p-2 bg-base-300 flex justify-center pb-20">
       <div className="flex flex-col lg:flex-row w-full h-full 2xl:w-[90vw]">
         <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
           <iframe
@@ -74,13 +89,16 @@ const WatchVideo = () => {
             {/* video metadata */}
             <WatchMetaData currentVideo={currentVideo} />
           </div>
+          {!isSmallDevice ? (
+            <CommentSection currentVideo={currentVideo} />
+          ) : null}
         </div>
 
         {/* showcase for suggested videos */}
-        <Suggestions suggestions={suggestedVideos} />
+        {/* <Suggestions suggestions={suggestedVideos} /> */}
 
         {/* Comment section */}
-        <CommentSection currentVideo={currentVideo} />
+        {isSmallDevice ? <CommentSection currentVideo={currentVideo} /> : null}
       </div>
     </div>
   );
