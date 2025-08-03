@@ -14,7 +14,7 @@ const App = () => {
     <Provider store={store}>
       <main
         data-theme={"black"}
-        className="h-screen overflow-hidden scroll-smooth bg-base-300"
+        className="h-screen overflow-hidden scroll-smooth bg-base-300 fill-base-content"
       >
         <Header />
         <Sidebar />

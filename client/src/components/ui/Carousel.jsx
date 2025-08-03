@@ -42,7 +42,7 @@ const Carousel = ({ categories, activeCategory, setActiveCategory }) => {
             <button
               title="Next"
               onClick={handleScrollRight}
-              className="btn btn-circle bg-black hover:bg-base-content/30 fill-base-content"
+              className="btn btn-circle bg-black hover:bg-base-content/30"
             >
               <div>
                 <svg
@@ -69,7 +69,7 @@ const Carousel = ({ categories, activeCategory, setActiveCategory }) => {
             <button
               title="Previous"
               onClick={handleScrollLeft}
-              className="btn btn-circle bg-black hover:bg-base-content/30 fill-base-content"
+              className="btn btn-circle bg-black hover:bg-base-content/30"
             >
               <div>
                 <svg

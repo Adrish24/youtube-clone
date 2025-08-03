@@ -64,7 +64,7 @@ const Drawer = () => {
 
         <div className="flex-nowrap bg-base-300 text-base-content h-screen  w-60  overflow-hidden">
           {/* Sidebar Menu */}
-          <div className="flex items-center pl-3 fill-base-content">
+          <div className="flex items-center pl-3">
             {/* Burger Menu Icon */}
             {/* This is used for mobile view to toggle sidebar */}
             <BurgerMenu />

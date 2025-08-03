@@ -1,7 +1,6 @@
 import { BiDislike, BiLike } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-
 const TopRowMetadata = ({ currentVideo }) => {
   const navigate = useNavigate();
 
@@ -89,7 +88,7 @@ const TopRowMetadata = ({ currentVideo }) => {
           title="Share this video"
           className="py-2 px-3 text-sm font-semibold cursor-pointer flex items-center bg-base-100 hover:bg-base-content/20  rounded-full"
         >
-          <div className=" fill-base-content mr-1">
+          <div className="mr-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"
@@ -109,7 +108,7 @@ const TopRowMetadata = ({ currentVideo }) => {
           title="Download Video"
           className="py-2 px-3 text-sm font-semibold cursor-pointer  items-center bg-base-100 hover:bg-base-content/20  rounded-full hidden md:flex lg:hidden xl:flex"
         >
-          <div className=" fill-base-content mr-1">
+          <div className="mr-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"
@@ -126,7 +125,7 @@ const TopRowMetadata = ({ currentVideo }) => {
 
         {/* Feedback button */}
         <button className="p-2  text-sm font-semibold cursor-pointer flex items-center bg-base-100 hover:bg-base-content/20  rounded-full">
-          <div className=" fill-base-content">
+          <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"

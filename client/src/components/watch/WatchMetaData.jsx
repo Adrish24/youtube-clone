@@ -28,6 +28,7 @@ const WatchMetaData = ({ currentVideo }) => {
     notation: "compact",
     compactDisplay: "short",
   }).format(currentVideo.views);
+  
   // Format the upload date to a more readable format
   const uploadDate = new Date(currentVideo.uploadDate).toLocaleDateString(
     "en-US",

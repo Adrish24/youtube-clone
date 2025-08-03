@@ -32,7 +32,6 @@ const Header = memo(() => {
      fixed top-0 left-0 
      right-4 
      flex items-center justify-between 
-     fill-base-content 
      px-4 
      z-50 
      bg-base-300/85

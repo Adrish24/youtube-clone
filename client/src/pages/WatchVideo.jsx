@@ -95,7 +95,7 @@ const WatchVideo = () => {
         </div>
 
         {/* showcase for suggested videos */}
-        {/* <Suggestions suggestions={suggestedVideos} /> */}
+        <Suggestions suggestions={suggestedVideos} />
 
         {/* Comment section */}
         {isSmallDevice ? <CommentSection currentVideo={currentVideo} /> : null}
