@@ -13,6 +13,8 @@ import { HomeLoader } from "./components/ui/Loader.jsx";
 
 // Importing data loaders
 import { watchVideoLoader } from "./utils";
+import store from "./context/redux/store/store.js";
+import { Provider } from "react-redux";
 
 // Importing pages
 const Home = lazy(() => import("./pages/Home.jsx"));
@@ -31,14 +33,6 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<HomeLoader />}>
             <Home />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/login",
-        element: (
-          <Suspense>
-            <Auth />
           </Suspense>
         ),
       },
@@ -70,12 +64,22 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/login",
+    element: (
+      <Suspense>
+        <Auth />
+      </Suspense>
+    ),
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </StrictMode>
 );

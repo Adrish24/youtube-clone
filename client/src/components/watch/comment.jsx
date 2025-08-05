@@ -1,4 +1,5 @@
 const Comment = ({ comment }) => {
+  
   // Format the upload date to a more readable format
   const commentDate = new Date(comment.timestamp).toLocaleDateString("en-US", {
     month: "short",
@@ -13,14 +14,16 @@ const Comment = ({ comment }) => {
           <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
         </div>
       </div>
-      <div>
+      <div className="w-full">
         <h2 className="flex items-center space-x-1">
           <span className="font-bold cursor-pointer"> @{comment.userId}</span>
           <span className="text-base-content/40 font-thin text-xs">
             {commentDate}
           </span>
         </h2>
-        <p className="w-full">{comment.text}</p>
+        <p className="">{comment.text}</p>
+
+        {/* like, dislike buttons with counts & reply button */}
         <div className="flex items-center space-x-2 mt-2">
           <button
             title="like"
@@ -63,6 +66,8 @@ const Comment = ({ comment }) => {
           </button>
         </div>
       </div>
+
+      {/* options button for the comment */}
       <div>
         <button className="btn btn-sm btn-ghost btn-circle">
           <svg

@@ -8,7 +8,7 @@ const CommentSection = ({ currentVideo }) => {
     currentVideo.comments.length > 0 ? currentVideo.comments : [];
 
   return (
-    <div className="w-full">
+    <div>
       <div className="mt-6 mb-8 flex flex-col  space-y-3 justify-center">
         <div className="flex space-x-6">
           <h2 className="text-xl font-bold">{comments.length} Comments</h2>
@@ -40,16 +40,7 @@ const CommentSection = ({ currentVideo }) => {
           <CommentForm />
         </div>
       </div>
-      <div className="flex flex-col space-y-4">
-        {comments?.map((comment) => (
-          <Comment key={comment.commentId} comment={comment} />
-        ))}
-        {comments?.map((comment) => (
-          <Comment key={comment.commentId} comment={comment} />
-        ))}
-        {comments?.map((comment) => (
-          <Comment key={comment.commentId} comment={comment} />
-        ))}
+      <div className="flex flex-col space-y-3 justify-center ">
         {comments?.map((comment) => (
           <Comment key={comment.commentId} comment={comment} />
         ))}

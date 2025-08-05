@@ -20,11 +20,11 @@ const Header = memo(() => {
     }
   }, [windowWidth]);
 
-  const toggleTheme = () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = currentTheme === "light" ? "black" : "light";
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
+  // const toggleTheme = () => {
+  //   const currentTheme = document.documentElement.getAttribute("data-theme");
+  //   const newTheme = currentTheme === "light" ? "black" : "light";
+  //   document.documentElement.setAttribute("data-theme", newTheme);
+  // };
 
   return (
     <header
@@ -59,12 +59,12 @@ const Header = memo(() => {
       <SearchBar className="hidden sm:flex justify-center relative" />
 
       <nav className="flex items-center space-x-2">
-        <input
+        {/* <input
           onChange={toggleTheme}
           type="checkbox"
           defaultChecked
           className="toggle"
-        />
+        /> */}
         {/* Profile Button Icon */}
         <ProfileButton />
       </nav>

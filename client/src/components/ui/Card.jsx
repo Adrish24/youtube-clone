@@ -27,13 +27,13 @@ const Card = ({ video, styles, children }) => {
   };
 
   return (
-    <div className={` ${styles.cardContainer}`}>
+    <div className={` ${styles?.cardContainer}`}>
       <div
         onClick={handleNavigateToWatch}
-        className={`card  bg-base-300 cursor-pointer  ${styles.card}`}
+        className={`card  bg-base-300 cursor-pointer  ${styles?.card}`}
       >
         {/* thumbnail */}
-        <figure className={styles.thumbnailContainer}>
+        <figure className={styles?.thumbnailContainer}>
           <img
             loading="lazy"
             className={styles.thumbnail}
@@ -42,27 +42,27 @@ const Card = ({ video, styles, children }) => {
           />
         </figure>
         {/* showcase all the metadata about the video */}
-        <div className={styles.cardBody}>
+        <div className={styles?.cardBody}>
           {/* profile image */}
           <div>
-            <div className={styles.profile}>
+            <div className={styles?.profile}>
               <img
                 src={video.profile}
                 alt="profileImage"
-                className={styles.profileImage}
+                className={styles?.profileImage}
               />
             </div>
           </div>
 
           {/* informations. e.g: title, view count, upload date */}
-          <div className={styles.metadataContainer}>
-            <h2 title={video.title} className={styles.title}>
+          <div className={styles?.metadataContainer}>
+            <h2 title={video.title} className={styles?.title}>
               {video.title}
             </h2>
-            <p onClick={handleNavigateToChannel} className={styles.uploader}>
+            <p onClick={handleNavigateToChannel} className={styles?.uploader}>
               {video.uploader}
             </p>
-            <p className={styles.metadata}>
+            <p className={styles?.metadata}>
               {viewCount} views - {uploadDate}
             </p>
           </div>
