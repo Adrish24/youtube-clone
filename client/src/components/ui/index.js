@@ -1,5 +1,5 @@
 import Modal from "./Modal";
-import Icon from "./Icon";
+import ClickableItem from "./ClickableItem";
 import Card from "./Card";
 import Carousel from "./Carousel";
 import Loader from "./Loader";
@@ -8,7 +8,7 @@ import InputField from "./InputField";
 
 export {
   Modal,
-  Icon,
+  ClickableItem,
   Card,
   Carousel,
   Loader,

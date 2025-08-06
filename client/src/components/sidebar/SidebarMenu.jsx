@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { Icon } from "../ui";
+import { ClickableItem } from "../ui";
 import { useEffect, useRef } from "react";
 
 const SidebarMenu = () => {
@@ -23,7 +23,7 @@ const SidebarMenu = () => {
       id="sidebar-menu"
       className="fixed left-0 top-14 bottom-0 px-1 hidden"
     >
-      <Icon
+      <ClickableItem
         path="/"
         className="py-4 text-xs flex flex-col items-center justify-center"
       >
@@ -45,9 +45,9 @@ const SidebarMenu = () => {
           </svg>
         </div>
         <span>Home</span>
-      </Icon>
+      </ClickableItem>
 
-      <Icon className="py-4 text-xs flex flex-col items-center justify-center">
+      <ClickableItem className="py-4 text-xs flex flex-col items-center justify-center">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,9 +66,9 @@ const SidebarMenu = () => {
           </svg>
         </div>
         <span>Shorts</span>
-      </Icon>
+      </ClickableItem>
 
-      <Icon className="py-4 text-xs flex flex-col items-center justify-center">
+      <ClickableItem className="py-4 text-xs flex flex-col items-center justify-center">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -87,9 +87,9 @@ const SidebarMenu = () => {
           </svg>
         </div>
         <span>Subscriptions</span>
-      </Icon>
+      </ClickableItem>
 
-      <Icon className="py-4 text-xs flex flex-col items-center justify-center">
+      <ClickableItem className="py-4 text-xs flex flex-col items-center justify-center">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@ const SidebarMenu = () => {
           </svg>
         </div>
         <span>You</span>
-      </Icon>
+      </ClickableItem>
     </div>
   );
 };

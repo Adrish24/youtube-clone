@@ -3,7 +3,7 @@
 
 import { CiDark } from "react-icons/ci";
 
-const profileMenu = [
+export const profileMenu = [
   {
     name: "Appearance",
     svg: <CiDark size={24} />,
@@ -39,6 +39,9 @@ const profileMenu = [
       </svg>
     ),
   },
+];
+
+export const ProfileMiscMenu = [
   {
     name: "Settings",
     svg: (
@@ -101,4 +104,4 @@ const profileMenu = [
   },
 ];
 
-export default profileMenu;
+
