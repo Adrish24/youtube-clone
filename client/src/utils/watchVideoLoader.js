@@ -6,7 +6,7 @@ export const watchVideoLoader = async ({ request }) => {
   const url = new URL(request.url);
   const videoId = url.searchParams.get("v");
 
-  const apiUrl = import.meta.env.VITE_API_URL | "http://localhost:5000";
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   try {
     const res = await axios.get(`${apiUrl}/watch/${videoId}`);
