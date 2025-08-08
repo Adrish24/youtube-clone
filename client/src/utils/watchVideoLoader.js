@@ -6,8 +6,10 @@ export const watchVideoLoader = async ({ request }) => {
   const url = new URL(request.url);
   const videoId = url.searchParams.get("v");
 
+  const apiUrl = import.meta.env.VITE_API_URL | "http://localhost:5000";
+
   try {
-    const res = await axios.get(`http://localhost:5000/watch/${videoId}`);
+    const res = await axios.get(`${apiUrl}/watch/${videoId}`);
     if (res.status === 200) {
       const { currentVideo, suggestedVideos } = res.data;
       return { currentVideo, suggestedVideos };

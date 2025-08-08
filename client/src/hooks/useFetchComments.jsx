@@ -6,11 +6,13 @@ const useFetchComments = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const apiUrl = import.meta.env.VITE_API_URL | "http://localhost:5000";
+
   const fetchComments = useCallback(async (videoId) => {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await axios.get(`http://localhost:5000/comments/${videoId}`);
+      const res = await axios.get(`${apiUrl}/comments/${videoId}`);
       if (res.status === 200) {
         setComments(res.data.comments);
       } else {

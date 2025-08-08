@@ -13,6 +13,8 @@ const useFetchVideos = () => {
   const isLoading = useSelector((state) => state.videos.isLoading);
   const error = useSelector((state) => state.videos.error);
 
+  const apiUrl = import.meta.env.VITE_API_URL | "http://localhost:5000";
+
   const [activeCategory, setActiveCategory] = useState(VIDEO_CATEGORY[0]);
 
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const useFetchVideos = () => {
     dispatch(setIsLoading(true));
     dispatch(setError(null));
     try {
-      const res = await axios.get("http://localhost:5000/");
+      const res = await axios.get(apiUrl);
       const filteredVideos = res.data.videos.filter(
         (video) =>
           video.category.includes(activeCategory) || activeCategory === "All"
