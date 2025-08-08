@@ -6,7 +6,7 @@ const useFetchComments = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const apiUrl = import.meta.env.VITE_API_URL | "http://localhost:5000";
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const fetchComments = useCallback(async (videoId) => {
     setIsLoading(true);

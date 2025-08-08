@@ -13,7 +13,9 @@ const useFetchVideos = () => {
   const isLoading = useSelector((state) => state.videos.isLoading);
   const error = useSelector((state) => state.videos.error);
 
-  const apiUrl = import.meta.env.VITE_API_URL | "http://localhost:5000";
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  
 
   const [activeCategory, setActiveCategory] = useState(VIDEO_CATEGORY[0]);
 
