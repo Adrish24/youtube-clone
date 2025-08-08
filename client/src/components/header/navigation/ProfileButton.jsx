@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 // Importing components for the profile menu
-import ProfileMenuList from "./profileMenuList";
+import ProfileMenuList from "./ProfileMenuList";
 import SwitchAccountMenu from "./SwitchAccountMenu";
 
 import { clearUserInfo } from "../../../context/redux/userSlice";

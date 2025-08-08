@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 // This component renders the profile menu list with user information and various options
 // It includes a toggle for appearance settings and a switch account option
 const ProfileMenuList = ({ handleMenuClick, handleNavigation }) => {
-  const userInfo = useSelector((state) => state.user.userInfo); 
+  const userInfo = useSelector((state) => state.user.userInfo);
 
   const toggleTheme = () => {
     console.log("Toggling theme"); // Debugging line to check theme toggle
