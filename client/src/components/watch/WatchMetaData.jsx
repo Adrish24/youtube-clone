@@ -56,6 +56,8 @@ const WatchMetaData = ({ currentVideo }) => {
         >
           {currentVideo.description}
 
+          {/* Show more/less link if description is long */}
+          {/* This will only show if the description is longer than 3 lines */}
           {isDescriptionLong ? (
             <span
               onClick={toggleShowMore}

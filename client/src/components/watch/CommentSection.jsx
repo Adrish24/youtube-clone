@@ -1,14 +1,48 @@
 import { useSelector } from "react-redux";
 import CommentForm from "./commentForm";
 import Comment from "./comment";
+import { useEffect, useRef } from "react";
+
+import { CommentSectionLoader } from "../ui/Loader";
+import { useFetchComments } from "../../hooks";
 
 const CommentSection = ({ currentVideo }) => {
   const isUserLoggedIn = useSelector((state) => state.user.userInfo); // Check if the user is logged in
-  const comments =
-    currentVideo.comments.length > 0 ? currentVideo.comments : [];
+
+  const { comments, error, isLoading, fetchComments } = useFetchComments();
+
+  const commentSectionRef = useRef(null);
+
+  useEffect(() => {
+    let wasIntersecting = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !wasIntersecting) {
+            fetchComments(currentVideo.videoId);
+            wasIntersecting = true; // Prevent multiple calls
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    const sectionNode = commentSectionRef.current;
+    if (sectionNode) {
+      observer.observe(sectionNode);
+    }
+
+    return () => {
+      if (sectionNode) observer.unobserve(sectionNode);
+    };
+  }, [currentVideo.videoId, fetchComments]);
+
+  if (isLoading) return <CommentSectionLoader />;
 
   return (
-    <div>
+    <div ref={commentSectionRef}>
       <div className="mt-6 mb-8 flex flex-col  space-y-3 justify-center">
         <div className="flex space-x-6">
           <h2 className="text-xl font-bold">{comments.length} Comments</h2>
@@ -41,9 +75,13 @@ const CommentSection = ({ currentVideo }) => {
         </div>
       </div>
       <div className="flex flex-col space-y-3 justify-center ">
-        {comments?.map((comment) => (
-          <Comment key={comment.commentId} comment={comment} />
-        ))}
+        {comments.length > 0 ? (
+          comments?.map((comment) => (
+            <Comment key={comment.commentId} comment={comment} />
+          ))
+        ) : (
+          <p>{error}</p>
+        )}
       </div>
     </div>
   );

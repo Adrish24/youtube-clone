@@ -1,5 +1,6 @@
-import { Card } from "../ui";
+
 import { useFetchVideos } from "../../hooks";
+import { Card } from "../ui";
 
 const VideoGrid = () => {
   const { isLoading, items } = useFetchVideos(); // Fetch videos from the custom hook
@@ -21,7 +22,7 @@ const VideoGrid = () => {
             title: "font-semibold line-clamp-2",
             uploader: "text-sm text-base-content/50 hover:text-base-content",
             metadata: "text-sm text-base-content/50",
-          }} 
+          }}
         />
       ))}
 

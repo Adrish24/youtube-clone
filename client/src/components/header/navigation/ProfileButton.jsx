@@ -2,8 +2,10 @@ import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// Importing components for the profile menu
 import ProfileMenuList from "./profileMenuList";
 import SwitchAccountMenu from "./SwitchAccountMenu";
+
 import { clearUserInfo } from "../../../context/redux/userSlice";
 
 const ProfileButton = memo(() => {

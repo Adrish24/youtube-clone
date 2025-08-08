@@ -1,16 +1,21 @@
-import { videos } from "../data/videos";
+import axios from "axios";
 
 // This function is used to load the video data for the WatchVideo page before rendering the component.
 // It is used in the router configuration to fetch the current video and suggested videos based on the video ID from the URL.
 export const watchVideoLoader = async ({ request }) => {
   const url = new URL(request.url);
   const videoId = url.searchParams.get("v");
-  if (!videoId) {
-    throw new Response("Video ID is required", { status: 400 });
+
+  try {
+    const res = await axios.get(`http://localhost:5000/watch/${videoId}`);
+    if (res.status === 200) {
+      const { currentVideo, suggestedVideos } = res.data;
+      return { currentVideo, suggestedVideos };
+    }
+    return { currentVideo: null, suggestedVideos: [] };
+  } catch (error) {
+    console.log(error);
+    // If there's an error, return an empty object or handle the error as needed
+    return { currentVideo: null, suggestedVideos: [] };
   }
-
-  const currentVideo = videos.find((vid) => vid.videoId === videoId);
-  const suggestedVideos = videos.filter((vid) => vid.videoId !== videoId);
-
-  return { currentVideo, suggestedVideos };
 };

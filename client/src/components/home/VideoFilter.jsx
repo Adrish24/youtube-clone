@@ -1,7 +1,9 @@
 import { VIDEO_CATEGORY } from "../../constants/category";
+import { useFetchVideos } from "../../hooks";
+
+
 
 import { Carousel } from "../ui";
-import { useFetchVideos } from "../../hooks";
 
 // This component renders a list of video categories
 // and provides navigation arrows for scrolling through the categories.

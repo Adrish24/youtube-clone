@@ -1,7 +1,8 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 import {
   CommentSection,
+  NoVideo,
   Suggestions,
   WatchMetaData,
 } from "../components/watch";
@@ -13,8 +14,6 @@ const WatchVideo = () => {
   const { currentVideo, suggestedVideos } = useLoaderData();
 
   const [isSmallDevice, setIsSmallDevice] = useState(false);
-
-  const navigate = useNavigate();
 
   const { mainContentRef } = useThemeContext(); // Reference to the main content area
 
@@ -37,27 +36,9 @@ const WatchVideo = () => {
   }
 
   // If currentVid is not found, display a message
-  if (!currentVideo)
-    return (
-      <div className="relative top-14 pt-36 flex flex-col items-center-safe">
-        <img
-          id="img"
-          draggable="false"
-          class=" w-60 h-40 object-cover"
-          alt=""
-          src="https://www.youtube.com/img/desktop/unavailable/unavailable_video_dark_theme.png"
-        ></img>
-        <p className="text-xl font-semibold m-auto my-6">
-          This video isn't available anymore
-        </p>
-        <button
-          onClick={() => navigate("/")}
-          className="btn btn-info btn-outline rounded-full"
-        >
-          Go To Home
-        </button>
-      </div>
-    );
+  // This is used to handle cases where the video ID is invalid or the video has been removed
+  // If currentVideo is null or undefined, return the NoVideo component
+  if (!currentVideo) return <NoVideo />;
 
   // If currentVideo is found, Render the video player, metadata and suggested videos
 

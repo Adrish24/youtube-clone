@@ -9,12 +9,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider.jsx";
 
 // Importing the UI loader & error componeents
-import { HomeLoader } from "./components/ui/Loader.jsx";
+import { HomeLoader, WatchVideoLoader } from "./components/ui/Loader.jsx";
 
 // Importing data loaders
 import { watchVideoLoader } from "./utils";
 import store from "./context/redux/store/store.js";
 import { Provider } from "react-redux";
+import NoVideo from "./components/watch/NoVideo.jsx";
 
 // Importing pages
 const Home = lazy(() => import("./pages/Home.jsx"));
@@ -39,12 +40,12 @@ const router = createBrowserRouter([
       {
         path: "/watch",
         element: (
-          <Suspense>
+          <Suspense fallback={<WatchVideoLoader />}>
             <WatchVideo />
           </Suspense>
         ),
         loader: watchVideoLoader,
-        errorElement: <div className="mt-14">Error loading video</div>,
+        errorElement: <NoVideo />,
       },
       {
         path: "/:channelName",

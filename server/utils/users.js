@@ -1,0 +1,603 @@
+export const users = [
+  {
+    _id: "user01",
+    username: "TechEnthusiast2024",
+    email: "tech.enthusiast@example.com",
+    password: "hashedPassword123",
+    avatar: "https://avatar.dicebear.com/api/avataaars/tech-enthusiast.png",
+    channels: [],
+    createdAt: new Date("2024-01-15T08:30:00Z"),
+    updatedAt: new Date("2024-09-21T08:30:00Z")
+  },
+  {
+    _id: "user02",
+    username: "CodeMaster",
+    email: "codemaster@example.com",
+    password: "hashedPassword456",
+    avatar: "https://avatar.dicebear.com/api/avataaars/code-master.png",
+    channels: [],
+    createdAt: new Date("2024-02-20T10:45:00Z"),
+    updatedAt: new Date("2024-09-22T10:45:00Z")
+  },
+  {
+    _id: "user03",
+    username: "DevGuru",
+    email: "devguru@example.com",
+    password: "hashedPassword789",
+    avatar: "https://avatar.dicebear.com/api/avataaars/dev-guru.png",
+    channels: [],
+    createdAt: new Date("2024-03-10T09:10:00Z"),
+    updatedAt: new Date("2024-09-23T09:10:00Z")
+  },
+  {
+    _id: "user04",
+    username: "WebDevPro",
+    email: "webdevpro@example.com",
+    password: "hashedPasswordABC",
+    avatar: "https://avatar.dicebear.com/api/avataaars/webdev-pro.png",
+    channels: [],
+    createdAt: new Date("2024-04-05T13:25:00Z"),
+    updatedAt: new Date("2024-09-24T13:25:00Z")
+  },
+  {
+    _id: "user05",
+    username: "CodingNinja",
+    email: "codingninja@example.com",
+    password: "hashedPasswordDEF",
+    avatar: "https://avatar.dicebear.com/api/avataaars/coding-ninja.png",
+    channels: [],
+    createdAt: new Date("2024-05-12T11:05:00Z"),
+    updatedAt: new Date("2024-09-25T11:05:00Z")
+  },
+  {
+    _id: "user06",
+    username: "ReactDeveloper",
+    email: "reactdev@example.com",
+    password: "hashedPasswordGHI",
+    avatar: "https://avatar.dicebear.com/api/avataaars/react-developer.png",
+    channels: [],
+    createdAt: new Date("2024-06-18T09:00:00Z"),
+    updatedAt: new Date("2024-10-06T09:00:00Z")
+  },
+  {
+    _id: "user07",
+    username: "JSExpert",
+    email: "jsexpert@example.com",
+    password: "hashedPasswordJKL",
+    avatar: "https://avatar.dicebear.com/api/avataaars/js-expert.png",
+    channels: [],
+    createdAt: new Date("2024-07-22T12:15:00Z"),
+    updatedAt: new Date("2024-10-07T12:15:00Z")
+  },
+  {
+    _id: "user08",
+    username: "FrontEndWiz",
+    email: "frontendwiz@example.com",
+    password: "hashedPasswordMNO",
+    avatar: "https://avatar.dicebear.com/api/avataaars/frontend-wiz.png",
+    channels: [],
+    createdAt: new Date("2024-08-14T15:45:00Z"),
+    updatedAt: new Date("2024-10-08T15:45:00Z")
+  },
+  {
+    _id: "user09",
+    username: "FullStackDev",
+    email: "fullstackdev@example.com",
+    password: "hashedPasswordPQR",
+    avatar: "https://avatar.dicebear.com/api/avataaars/fullstack-dev.png",
+    channels: [],
+    createdAt: new Date("2024-09-03T18:10:00Z"),
+    updatedAt: new Date("2024-10-09T18:10:00Z")
+  },
+  {
+    _id: "user10",
+    username: "APIBuilder",
+    email: "apibuilder@example.com",
+    password: "hashedPasswordSTU",
+    avatar: "https://avatar.dicebear.com/api/avataaars/api-builder.png",
+    channels: [],
+    createdAt: new Date("2024-09-28T20:30:00Z"),
+    updatedAt: new Date("2024-10-10T20:30:00Z")
+  },
+  {
+    _id: "user11",
+    username: "GameDevMaster",
+    email: "gamedevmaster@example.com",
+    password: "hashedPasswordVWX",
+    avatar: "https://avatar.dicebear.com/api/avataaars/gamedev-master.png",
+    channels: [],
+    createdAt: new Date("2024-10-15T08:00:00Z"),
+    updatedAt: new Date("2024-11-02T08:00:00Z")
+  },
+  {
+    _id: "user12",
+    username: "CPlusPlusGuru",
+    email: "cppguru@example.com",
+    password: "hashedPasswordYZA",
+    avatar: "https://avatar.dicebear.com/api/avataaars/cpp-guru.png",
+    channels: [],
+    createdAt: new Date("2024-10-20T10:30:00Z"),
+    updatedAt: new Date("2024-11-03T10:30:00Z")
+  },
+  {
+    _id: "user13",
+    username: "UnityDeveloper",
+    email: "unitydev@example.com",
+    password: "hashedPasswordBCD",
+    avatar: "https://avatar.dicebear.com/api/avataaars/unity-developer.png",
+    channels: [],
+    createdAt: new Date("2024-10-25T13:50:00Z"),
+    updatedAt: new Date("2024-11-04T13:50:00Z")
+  },
+  {
+    _id: "user14",
+    username: "UnrealExpert",
+    email: "unrealexpert@example.com",
+    password: "hashedPasswordEFG",
+    avatar: "https://avatar.dicebear.com/api/avataaars/unreal-expert.png",
+    channels: [],
+    createdAt: new Date("2024-10-30T16:15:00Z"),
+    updatedAt: new Date("2024-11-05T16:15:00Z")
+  },
+  {
+    _id: "user15",
+    username: "GodotFan",
+    email: "godotfan@example.com",
+    password: "hashedPasswordHIJ",
+    avatar: "https://avatar.dicebear.com/api/avataaars/godot-fan.png",
+    channels: [],
+    createdAt: new Date("2024-11-02T19:25:00Z"),
+    updatedAt: new Date("2024-11-06T19:25:00Z")
+  },
+  {
+    _id: "user16",
+    username: "IndieGameDev",
+    email: "indiegamedev@example.com",
+    password: "hashedPasswordKLM",
+    avatar: "https://avatar.dicebear.com/api/avataaars/indie-gamedev.png",
+    channels: [],
+    createdAt: new Date("2024-11-10T09:30:00Z"),
+    updatedAt: new Date("2024-11-16T09:30:00Z")
+  },
+  {
+    _id: "user17",
+    username: "HordeGameMaker",
+    email: "hordegamemaker@example.com",
+    password: "hashedPasswordNOP",
+    avatar: "https://avatar.dicebear.com/api/avataaars/horde-gamemaker.png",
+    channels: [],
+    createdAt: new Date("2024-11-12T11:50:00Z"),
+    updatedAt: new Date("2024-11-17T11:50:00Z")
+  },
+  {
+    _id: "user18",
+    username: "SurvivalGamePro",
+    email: "survivalgamepro@example.com",
+    password: "hashedPasswordQRS",
+    avatar: "https://avatar.dicebear.com/api/avataaars/survival-gamepro.png",
+    channels: [],
+    createdAt: new Date("2024-11-15T14:10:00Z"),
+    updatedAt: new Date("2024-11-18T14:10:00Z")
+  },
+  {
+    _id: "user19",
+    username: "GameEngineExplorer",
+    email: "gameengineexplorer@example.com",
+    password: "hashedPasswordTUV",
+    avatar: "https://avatar.dicebear.com/api/avataaars/gameengine-explorer.png",
+    channels: [],
+    createdAt: new Date("2024-11-18T16:40:00Z"),
+    updatedAt: new Date("2024-11-19T16:40:00Z")
+  },
+  {
+    _id: "user20",
+    username: "BattleGameCreator",
+    email: "battlegamecreator@example.com",
+    password: "hashedPasswordWXY",
+    avatar: "https://avatar.dicebear.com/api/avataaars/battle-gamecreator.png",
+    channels: [],
+    createdAt: new Date("2024-11-20T18:55:00Z"),
+    updatedAt: new Date("2024-11-20T18:55:00Z")
+  },
+  {
+    _id: "user21",
+    username: "SitarMelody",
+    email: "sitarmelody@example.com",
+    password: "hashedPasswordZAB",
+    avatar: "https://avatar.dicebear.com/api/avataaars/sitar-melody.png",
+    channels: [],
+    createdAt: new Date("2024-11-25T08:15:00Z"),
+    updatedAt: new Date("2024-12-02T08:15:00Z")
+  },
+  {
+    _id: "user22",
+    username: "IndianClassical",
+    email: "indianclassical@example.com",
+    password: "hashedPasswordCDE",
+    avatar: "https://avatar.dicebear.com/api/avataaars/indian-classical.png",
+    channels: [],
+    createdAt: new Date("2024-11-28T10:25:00Z"),
+    updatedAt: new Date("2024-12-03T10:25:00Z")
+  },
+  {
+    _id: "user23",
+    username: "BurningManFan",
+    email: "burningmanfan@example.com",
+    password: "hashedPasswordFGH",
+    avatar: "https://avatar.dicebear.com/api/avataaars/burningman-fan.png",
+    channels: [],
+    createdAt: new Date("2024-12-01T12:35:00Z"),
+    updatedAt: new Date("2024-12-04T12:35:00Z")
+  },
+  {
+    _id: "user24",
+    username: "MentalHealthAdvocate",
+    email: "mentalhealthadvocate@example.com",
+    password: "hashedPasswordIJK",
+    avatar: "https://avatar.dicebear.com/api/avataaars/mentalhealth-advocate.png",
+    channels: [],
+    createdAt: new Date("2024-12-03T14:45:00Z"),
+    updatedAt: new Date("2024-12-05T14:45:00Z")
+  },
+  {
+    _id: "user25",
+    username: "VaranasiLover",
+    email: "varanasilover@example.com",
+    password: "hashedPasswordLMN",
+    avatar: "https://avatar.dicebear.com/api/avataaars/varanasi-lover.png",
+    channels: [],
+    createdAt: new Date("2024-12-05T16:55:00Z"),
+    updatedAt: new Date("2024-12-06T16:55:00Z")
+  },
+  {
+    _id: "user26",
+    username: "PopMusicFan",
+    email: "popmusicfan@example.com",
+    password: "hashedPasswordOPQ",
+    avatar: "https://avatar.dicebear.com/api/avataaars/popmusic-fan.png",
+    channels: [],
+    createdAt: new Date("2024-12-08T09:10:00Z"),
+    updatedAt: new Date("2024-12-11T09:10:00Z")
+  },
+  {
+    _id: "user27",
+    username: "LadyGagaSupporter",
+    email: "ladygagasupporter@example.com",
+    password: "hashedPasswordRST",
+    avatar: "https://avatar.dicebear.com/api/avataaars/ladygaga-supporter.png",
+    channels: [],
+    createdAt: new Date("2024-12-10T11:20:00Z"),
+    updatedAt: new Date("2024-12-12T11:20:00Z")
+  },
+  {
+    _id: "user28",
+    username: "BrunoMarsFan",
+    email: "brunomarsfan@example.com",
+    password: "hashedPasswordUVW",
+    avatar: "https://avatar.dicebear.com/api/avataaars/brunomars-fan.png",
+    channels: [],
+    createdAt: new Date("2024-12-12T13:30:00Z"),
+    updatedAt: new Date("2024-12-13T13:30:00Z")
+  },
+  {
+    _id: "user29",
+    username: "CollabMusicLover",
+    email: "collabmusiclover@example.com",
+    password: "hashedPasswordXYZ",
+    avatar: "https://avatar.dicebear.com/api/avataaars/collabmusic-lover.png",
+    channels: [],
+    createdAt: new Date("2024-12-14T15:40:00Z"),
+    updatedAt: new Date("2024-12-14T15:40:00Z")
+  },
+  {
+    _id: "user30",
+    username: "SmileWithMusic",
+    email: "smilewithmusic@example.com",
+    password: "hashedPasswordABC1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/smile-withmusic.png",
+    channels: [],
+    createdAt: new Date("2024-12-15T17:50:00Z"),
+    updatedAt: new Date("2024-12-15T17:50:00Z")
+  },
+  {
+    _id: "user31",
+    username: "CricketEnthusiast",
+    email: "cricketenthusiast@example.com",
+    password: "hashedPasswordDEF1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/cricket-enthusiast.png",
+    channels: [],
+    createdAt: new Date("2024-12-18T08:25:00Z"),
+    updatedAt: new Date("2024-12-21T08:25:00Z")
+  },
+  {
+    _id: "user32",
+    username: "EnglandCricketFan",
+    email: "englandcricketfan@example.com",
+    password: "hashedPasswordGHI1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/england-cricketfan.png",
+    channels: [],
+    createdAt: new Date("2024-12-20T10:35:00Z"),
+    updatedAt: new Date("2024-12-22T10:35:00Z")
+  },
+  {
+    _id: "user33",
+    username: "SophieEcclestoneSupporter",
+    email: "sophieecclestone@example.com",
+    password: "hashedPasswordJKL1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/sophie-supporter.png",
+    channels: [],
+    createdAt: new Date("2024-12-22T12:45:00Z"),
+    updatedAt: new Date("2024-12-23T12:45:00Z")
+  },
+  {
+    _id: "user34",
+    username: "LordsGroundVisitor",
+    email: "lordsgroundvisitor@example.com",
+    password: "hashedPasswordMNO1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/lords-visitor.png",
+    channels: [],
+    createdAt: new Date("2024-12-23T14:55:00Z"),
+    updatedAt: new Date("2024-12-24T14:55:00Z")
+  },
+  {
+    _id: "user35",
+    username: "IndiaCricketSupporter",
+    email: "indiacricketsupporter@example.com",
+    password: "hashedPasswordPQR1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/india-cricketsupporter.png",
+    channels: [],
+    createdAt: new Date("2024-12-24T17:05:00Z"),
+    updatedAt: new Date("2024-12-25T17:05:00Z")
+  },
+  {
+    _id: "user36",
+    username: "ShaneWarneFan",
+    email: "shanewarnefan@example.com",
+    password: "hashedPasswordSTU1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/shanewarne-fan.png",
+    channels: [],
+    createdAt: new Date("2024-12-25T09:20:00Z"),
+    updatedAt: new Date("2024-12-26T09:20:00Z")
+  },
+  {
+    _id: "user37",
+    username: "AustraliaCricketAnalyst",
+    email: "australiacricketanalyst@example.com",
+    password: "hashedPasswordVWX1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/australia-analyst.png",
+    channels: [],
+    createdAt: new Date("2024-12-26T11:30:00Z"),
+    updatedAt: new Date("2024-12-27T11:30:00Z")
+  },
+  {
+    _id: "user38",
+    username: "CaptainshipExpert",
+    email: "captainshipexpert@example.com",
+    password: "hashedPasswordYZA1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/captainship-expert.png",
+    channels: [],
+    createdAt: new Date("2024-12-27T13:40:00Z"),
+    updatedAt: new Date("2024-12-28T13:40:00Z")
+  },
+  {
+    _id: "user39",
+    username: "TalkSportListener",
+    email: "talksportlistener@example.com",
+    password: "hashedPasswordBCD1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/talksport-listener.png",
+    channels: [],
+    createdAt: new Date("2024-12-28T15:50:00Z"),
+    updatedAt: new Date("2024-12-29T15:50:00Z")
+  },
+  {
+    _id: "user40",
+    username: "CricketPodcastFan",
+    email: "cricketpodcastfan@example.com",
+    password: "hashedPasswordEFG1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/cricket-podcastfan.png",
+    channels: [],
+    createdAt: new Date("2024-12-29T18:00:00Z"),
+    updatedAt: new Date("2024-12-30T18:00:00Z")
+  },
+  {
+    _id: "user41",
+    username: "SpaceExplorer",
+    email: "spaceexplorer@example.com",
+    password: "hashedPasswordHIJ1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/space-explorer.png",
+    channels: [],
+    createdAt: new Date("2025-01-01T09:35:00Z"),
+    updatedAt: new Date("2025-01-03T09:35:00Z")
+  },
+  {
+    _id: "user42",
+    username: "ISROEnthusiast",
+    email: "isroenthusiast@example.com",
+    password: "hashedPasswordKLM1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/isro-enthusiast.png",
+    channels: [],
+    createdAt: new Date("2025-01-02T11:45:00Z"),
+    updatedAt: new Date("2025-01-04T11:45:00Z")
+  },
+  {
+    _id: "user43",
+    username: "AxiomMissionFollower",
+    email: "axiommissionfollower@example.com",
+    password: "hashedPasswordNOP1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/axiom-follower.png",
+    channels: [],
+    createdAt: new Date("2025-01-03T13:55:00Z"),
+    updatedAt: new Date("2025-01-05T13:55:00Z")
+  },
+  {
+    _id: "user44",
+    username: "IndianAstronautSupporter",
+    email: "indianastronautsupporter@example.com",
+    password: "hashedPasswordQRS1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/indian-astronautsupporter.png",
+    channels: [],
+    createdAt: new Date("2025-01-04T16:05:00Z"),
+    updatedAt: new Date("2025-01-06T16:05:00Z")
+  },
+  {
+    _id: "user45",
+    username: "ISSWatcher",
+    email: "isswatcher@example.com",
+    password: "hashedPasswordTUV1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/iss-watcher.png",
+    channels: [],
+    createdAt: new Date("2025-01-05T18:15:00Z"),
+    updatedAt: new Date("2025-01-07T18:15:00Z")
+  },
+  {
+    _id: "user46",
+    username: "HealthAdvocate",
+    email: "healthadvocate@example.com",
+    password: "hashedPasswordWXY1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/health-advocate.png",
+    channels: [],
+    createdAt: new Date("2025-01-06T09:25:00Z"),
+    updatedAt: new Date("2025-01-08T09:25:00Z")
+  },
+  {
+    _id: "user47",
+    username: "JapaneseCultureLover",
+    email: "japaneseculturelover@example.com",
+    password: "hashedPasswordZAB1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/japanese-culturelover.png",
+    channels: [],
+    createdAt: new Date("2025-01-07T11:35:00Z"),
+    updatedAt: new Date("2025-01-09T11:35:00Z")
+  },
+  {
+    _id: "user48",
+    username: "LongevitySeeker",
+    email: "longevityseeker@example.com",
+    password: "hashedPasswordCDE1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/longevity-seeker.png",
+    channels: [],
+    createdAt: new Date("2025-01-08T13:45:00Z"),
+    updatedAt: new Date("2025-01-10T13:45:00Z")
+  },
+  {
+    _id: "user49",
+    username: "NutritionExpert",
+    email: "nutritionexpert@example.com",
+    password: "hashedPasswordFGH1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/nutrition-expert.png",
+    channels: [],
+    createdAt: new Date("2025-01-09T15:55:00Z"),
+    updatedAt: new Date("2025-01-11T15:55:00Z")
+  },
+  {
+    _id: "user50",
+    username: "WellnessGuru",
+    email: "wellnessguru@example.com",
+    password: "hashedPasswordIJK1",
+    avatar: "https://avatar.dicebear.com/api/avataaars/wellness-guru.png",
+    channels: [],
+    createdAt: new Date("2025-01-10T18:05:00Z"),
+    updatedAt: new Date("2025-01-12T18:05:00Z")
+  },
+  // Video Uploaders/Channel Owners
+  {
+    _id: "uploader01",
+    username: "6PackProgrammer",
+    email: "sixpackprogrammer@example.com",
+    password: "hashedPasswordUPL1",
+    avatar: "https://yt3.ggpht.com/8DHXGxqNVJuiT1bnxECydjk4bRfGRCVHuR0MyAxtkjxa0k0PC_uBU-jCOswGnd_5HaTQRHj_eg=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel01"],
+    createdAt: new Date("2020-03-15T10:00:00Z"),
+    updatedAt: new Date("2024-09-20T12:00:00Z")
+  },
+  {
+    _id: "uploader02",
+    username: "DaveGrayTeaches",
+    email: "davegray@example.com",
+    password: "hashedPasswordUPL2",
+    avatar: "https://yt3.ggpht.com/nv365KiAJyURPEBZyCh0SV3hSBnZXbvVXrzRwcNDfgUpXPn9-3_4PY0SkQrAJWnzQOxKqfUtrQ=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel02"],
+    createdAt: new Date("2019-01-20T08:30:00Z"),
+    updatedAt: new Date("2024-09-20T14:00:00Z")
+  },
+  {
+    _id: "uploader03",
+    username: "ThisIsGameDev",
+    email: "thisisgamedev@example.com",
+    password: "hashedPasswordUPL3",
+    avatar: "https://yt3.ggpht.com/FrPiiMsu6RDPDoV8rP_RtTNV_lOCSa5k-FWXtflTdqkHeDkZZaSsHnYIE0WQJcHRnZCuEsQO2SM=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel03"],
+    createdAt: new Date("2021-06-10T16:45:00Z"),
+    updatedAt: new Date("2024-09-20T18:30:00Z")
+  },
+  {
+    _id: "uploader04",
+    username: "GameDevTV",
+    email: "gamedevtv@example.com",
+    password: "hashedPasswordUPL4",
+    avatar: "https://yt3.ggpht.com/Yc8yE0uzd0bx08ir-xkPcvIsFy0WF1EK2JKjCYBaSXs4QNkqGtarI9hk0I5ymMPFC5YHFS-oaQ=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel04"],
+    createdAt: new Date("2018-11-05T12:20:00Z"),
+    updatedAt: new Date("2024-09-20T20:15:00Z")
+  },
+  {
+    _id: "uploader05",
+    username: "RishabRikhiramSharma",
+    email: "rishabsharma@example.com",
+    password: "hashedPasswordUPL5",
+    avatar: "https://yt3.ggpht.com/g1G8SyHMybBz6riIg9n9rAFmAeF7K_O9P7H-LLrr7Y80qLeXvM7x2RWiFI8BhBe0vG8paSgLEw=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel05"],
+    createdAt: new Date("2017-04-12T09:15:00Z"),
+    updatedAt: new Date("2024-09-20T22:00:00Z")
+  },
+  {
+    _id: "uploader06",
+    username: "LadyGagaOfficial",
+    email: "ladygaga@example.com",
+    password: "hashedPasswordUPL6",
+    avatar: "https://yt3.ggpht.com/lM8HHBd5BZtP_-Dh1i3n1Z4teVW8v2KTG-hsS83yXUiK0K6krkk1XNEFbho3uwH-CS-FQpnlHw=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel06"],
+    createdAt: new Date("2015-08-25T14:30:00Z"),
+    updatedAt: new Date("2024-09-20T23:45:00Z")
+  },
+  {
+    _id: "uploader07",
+    username: "EnglandWalesCricketBoard",
+    email: "ecb@example.com",
+    password: "hashedPasswordUPL7",
+    avatar: "https://yt3.ggpht.com/Kvp63X5q5rUFXpy73Nwj3HYhUnymjVJyZjRGDEhUii26M8Ufr-30l9yekzDPcIj7Hj3bELCSGA=s68-c-k-c0x00ffffff-no-rj",
+    channels: ["channel07"],
+    createdAt: new Date("2016-03-18T11:00:00Z"),
+    updatedAt: new Date("2024-09-21T08:00:00Z")
+  },
+  {
+    _id: "uploader08",
+    username: "TalkSportCricket",
+    email: "talksportcricket@example.com",
+    password: "hashedPasswordUPL8",
+    avatar: "https://yt3.ggpht.com/GI--0ywaFfHw_aknt9TtqXN892773ijUB3pugDcH5kUQ-M9nkqTk4zkf_HNTBB0RpNzKG-XQ=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel08"],
+    createdAt: new Date("2017-07-22T13:45:00Z"),
+    updatedAt: new Date("2024-09-21T10:30:00Z")
+  },
+  {
+    _id: "uploader09",
+    username: "IndiaTodayOfficial",
+    email: "indiatoday@example.com",
+    password: "hashedPasswordUPL9",
+    avatar: "https://yt3.ggpht.com/T2CFyCYOvSqnAJZL2HTDrLw-9Z48j97WXjHn41HoPXZ-ZaeH02WAFSBe2cDKRWNcjZR5lhtKcg=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel09"],
+    createdAt: new Date("2014-12-08T07:20:00Z"),
+    updatedAt: new Date("2024-09-21T12:15:00Z")
+  },
+  {
+    _id: "uploader10",
+    username: "HealthyLongLife",
+    email: "healthylonglife@example.com",
+    password: "hashedPasswordUPL10",
+    avatar: "https://yt3.ggpht.com/GHfOgy_asLxYSXRuCUNqIYUnfKWFsjCO0ibIHyWopaXFjY1ACoqWQeVICUmAQR1nlgjIDfTseg=s48-c-k-c0x00ffffff-no-rj",
+    channels: ["channel10"],
+    createdAt: new Date("2016-09-14T15:30:00Z"),
+    updatedAt: new Date("2024-09-21T14:00:00Z")
+  }
+]
