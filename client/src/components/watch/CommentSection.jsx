@@ -4,7 +4,7 @@ import { CommentSectionLoader } from "../ui/Loader";
 import { useFetchComments } from "../../hooks";
 
 import CommentItem from "./CommentItem";
-import CommentForm from "./CommentForm";
+import FormComment from "./FormComment";
 
 const CommentSection = ({ currentVideo }) => {
   const { comments, error, isLoading, fetchComments } = useFetchComments();
@@ -61,7 +61,7 @@ const CommentSection = ({ currentVideo }) => {
         </div>
 
         {/* Input field for adding a comment */}
-        <CommentForm />
+        <FormComment />
       </div>
       <div className="flex flex-col space-y-3 justify-center ">
         {comments.length > 0 ? (

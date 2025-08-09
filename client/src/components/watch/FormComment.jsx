@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Emojis } from "../features";
 
-const CommentForm = () => {
+const FormComment = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
 
   const location = useLocation();
@@ -133,4 +133,4 @@ const CommentForm = () => {
   );
 };
 
-export default CommentForm;
+export default FormComment;

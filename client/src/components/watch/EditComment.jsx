@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { Emojis } from "../features";
 
-const EditForm = ({ setIsEdit, text }) => {
+const EditComment = ({ setIsEdit, text }) => {
   const userInfo = useSelector((state) => state.user.userInfo);
 
   const [isInputActive, setIsInputActive] = useState(false);
@@ -113,4 +113,4 @@ const EditForm = ({ setIsEdit, text }) => {
   );
 };
 
-export default EditForm;
+export default EditComment;
