@@ -29,6 +29,7 @@ const ProfileButton = memo(() => {
   // This function handles the click on the profile menu items
   const handleMenuClick = (e, menuName) => {
     e.stopPropagation();
+    e.preventDefault();
     console.log("Menu clicked:", menuName);
     switch (menuName) {
       case "Switch Account":

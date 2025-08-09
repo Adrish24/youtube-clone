@@ -1,11 +1,22 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import EditComment from "./EditComment";
+
 const Comment = ({ comment }) => {
-  
+  const userInfo = useSelector((state) => state.user.userInfo);
+
+  const [isEdit, setIsEdit] = useState(false);
+
+  const handleDeleteComment = () => {};
+
   // Format the upload date to a more readable format
   const commentDate = new Date(comment.timestamp).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
+
+  if (isEdit) return <EditComment setIsEdit={setIsEdit} text={comment.text} />;
 
   return (
     <div className="flex text-sm">
@@ -21,7 +32,7 @@ const Comment = ({ comment }) => {
             {commentDate}
           </span>
         </h2>
-        <p className="">{comment.text}</p>
+        <p>{comment.text}</p>
 
         {/* like, dislike buttons with counts & reply button */}
         <div className="flex items-center space-x-2 mt-2">
@@ -68,8 +79,12 @@ const Comment = ({ comment }) => {
       </div>
 
       {/* options button for the comment */}
-      <div>
-        <button className="btn btn-sm btn-ghost btn-circle">
+      <div className="dropdown dropdown-end">
+        <button
+          tabIndex={0}
+          role="button"
+          className="btn btn-sm btn-ghost btn-circle"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             enable-background="new 0 0 24 24"
@@ -82,6 +97,36 @@ const Comment = ({ comment }) => {
             <path d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM10.5 12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm0-6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z"></path>
           </svg>
         </button>
+
+        {userInfo && userInfo.emil ? (
+          <div
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 shadow-lg rounded-xl w-40 py-2 px-0 z-50"
+          >
+            <button
+              onClick={() => setIsEdit(true)}
+              className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer"
+            >
+              Edit
+            </button>
+
+            <button className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer">
+              Delete
+            </button>
+          </div>
+        ) : (
+          <div
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 shadow-lg rounded-xl w-40 py-2 px-0 z-50"
+          >
+            <button
+              onClick={() => setIsEdit(true)}
+              className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer"
+            >
+              Report
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

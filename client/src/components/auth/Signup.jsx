@@ -1,10 +1,10 @@
 import { InputField } from "../ui";
-import { useForm } from "../../hooks";
+import { useAuthForm } from "../../hooks";
 import { validateForm } from "../../utils";
 import { useState } from "react";
 
 const Signup = () => {
-  const { formData, errors, handleInputChange, resetFrom } = useForm(
+  const { formData, errors, handleInputChange, resetFrom } = useAuthForm(
     { username: "", email: "", password: "" } // Initial form data
   );
 

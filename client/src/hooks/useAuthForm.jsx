@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { validateInput } from "../utils"; // Import validation functions
 
-const useForm = (initialData = {}, strictValidation = true) => {
+const useAuthForm = (initialData = {}, strictValidation = true) => {
   const [formData, setFormData] = useState(initialData);
 
   const [errors, setErrors] = useState({});
@@ -38,4 +38,4 @@ const useForm = (initialData = {}, strictValidation = true) => {
   };
 };
 
-export default useForm;
+export default useAuthForm;

@@ -1,14 +1,11 @@
-import { useSelector } from "react-redux";
-import CommentForm from "./commentForm";
-import Comment from "./comment";
+import CommentForm from "./CommentForm";
+import Comment from "./Comment";
 import { useEffect, useRef } from "react";
 
 import { CommentSectionLoader } from "../ui/Loader";
 import { useFetchComments } from "../../hooks";
 
 const CommentSection = ({ currentVideo }) => {
-  const isUserLoggedIn = useSelector((state) => state.user.userInfo); // Check if the user is logged in
-
   const { comments, error, isLoading, fetchComments } = useFetchComments();
 
   const commentSectionRef = useRef(null);
@@ -61,18 +58,9 @@ const CommentSection = ({ currentVideo }) => {
             <span>Sort by</span>
           </button>
         </div>
-        <div className="flex">
-          <div className="avatar mr-4">
-            <div className="w-10 h-10 rounded-full">
-              {!isUserLoggedIn ? (
-                <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
-              ) : null}
-            </div>
-          </div>
 
-          {/* Input field for adding a comment */}
-          <CommentForm />
-        </div>
+        {/* Input field for adding a comment */}
+        <CommentForm />
       </div>
       <div className="flex flex-col space-y-3 justify-center ">
         {comments.length > 0 ? (

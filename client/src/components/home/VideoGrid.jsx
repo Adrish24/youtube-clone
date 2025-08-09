@@ -13,7 +13,7 @@ const VideoGrid = () => {
           video={video}
           // Pass styles as props
           styles={{
-            cardContainer: "mb-10 px-2",
+            cardContainer: "mb-5 px-2",
             thumbnail: "w-full aspect-video object-cover rounded-xl",
             cardBody: "flex",
             profile: "mt-3 mr-3 w-9",

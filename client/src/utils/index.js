@@ -6,6 +6,7 @@ import {
   validateInput,
   validateForm,
 } from "./validation";
+import { searchResultLoader } from "./searchResultLoader";
 
 export {
   watchVideoLoader,
@@ -14,4 +15,5 @@ export {
   validateUsername,
   validateInput,
   validateForm,
+  searchResultLoader,
 };

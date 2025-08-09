@@ -12,7 +12,7 @@ import { ThemeProvider } from "./context/ThemeProvider.jsx";
 import { HomeLoader, WatchVideoLoader } from "./components/ui/Loader.jsx";
 
 // Importing data loaders
-import { watchVideoLoader } from "./utils";
+import { searchResultLoader, watchVideoLoader } from "./utils";
 import store from "./context/redux/store/store.js";
 import { Provider } from "react-redux";
 import NoVideo from "./components/watch/NoVideo.jsx";
@@ -22,6 +22,7 @@ const Home = lazy(() => import("./pages/Home.jsx"));
 const WatchVideo = lazy(() => import("./pages/WatchVideo.jsx"));
 const Auth = lazy(() => import("./pages/Auth.jsx"));
 const Channel = lazy(() => import("./pages/Channel.jsx"));
+const SearchResult = lazy(() => import("./pages/SearchResult.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 const router = createBrowserRouter([
@@ -54,6 +55,15 @@ const router = createBrowserRouter([
             <Channel />
           </Suspense>
         ),
+      },
+      {
+        path: "/results",
+        element: (
+          <Suspense>
+            <SearchResult />
+          </Suspense>
+        ),
+        loader: searchResultLoader,
       },
       {
         path: "*",

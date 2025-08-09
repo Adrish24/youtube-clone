@@ -36,7 +36,7 @@ const Card = ({ video, styles, children }) => {
         <figure className={styles?.thumbnailContainer}>
           <img
             loading="lazy"
-            className={styles.thumbnail}
+            className={styles?.thumbnail}
             src={video.thumbnailUrl}
             alt="Thumbnail"
           />

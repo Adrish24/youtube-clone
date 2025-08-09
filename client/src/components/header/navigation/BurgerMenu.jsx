@@ -26,12 +26,18 @@ const BurgerMenu = memo(() => {
     if (drawer && width >= 1280) {
       setIsSidebarOpen((prev) => !prev);
       const homePage = document.getElementById("home");
-      homePage.classList.toggle("xl:ml-60");
+      homePage?.classList?.toggle("xl:ml-60");
+
+      const searchResult = document.getElementById("search-result");
+      searchResult?.classList?.toggle("xl:ml-60");
+
       const categories = document.getElementById("categories");
-      categories.classList.toggle("xl:left-60");
+      categories?.classList?.toggle("xl:left-60");
+
       const sidebarMenu = document.getElementById("sidebar-menu");
-      sidebarMenu.classList.toggle("xl:hidden");
-      drawer.classList.toggle("xl:drawer-open");
+      sidebarMenu?.classList?.toggle("xl:hidden");
+
+      drawer?.classList?.toggle("xl:drawer-open");
       return;
     }
   };

@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useForm } from "../../hooks";
+import { useAuthForm } from "../../hooks";
 import { InputField } from "../ui";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../context/redux/userSlice";
 
 const Login = () => {
-  const { formData, errors, handleInputChange, resetFrom } = useForm(
+  const { formData, errors, handleInputChange, resetFrom } = useAuthForm(
     { email: "", password: "" }, // Initial form data
     false // disable strict validation
   );
@@ -40,8 +40,14 @@ const Login = () => {
     }
 
     console.log(formData);
+    const redirectPath = localStorage.getItem("redirectPath");
     dispatch(setUserInfo(formData)); // Dispatch the user info to the Redux store
-    navigate("/");
+    if (redirectPath) {
+      navigate(redirectPath);
+      localStorage.removeItem("redirectPath"); // Clear the redirect path after using it
+    } else {
+      navigate("/");
+    }
 
     resetFrom(); // Reset form after submission
   };

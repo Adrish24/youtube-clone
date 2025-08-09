@@ -34,7 +34,7 @@ const Header = memo(() => {
      flex items-center justify-between 
      px-4 
      z-50 
-     bg-base-300/85
+     bg-base-300/90
      "
     >
       <div className="flex items-center">

@@ -15,8 +15,6 @@ const useFetchVideos = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-  
-
   const [activeCategory, setActiveCategory] = useState(VIDEO_CATEGORY[0]);
 
   const dispatch = useDispatch();
@@ -25,21 +23,21 @@ const useFetchVideos = () => {
   const fetchVideos = useCallback(async () => {
     dispatch(setIsLoading(true));
     dispatch(setError(null));
+
+    // Fetching videos based on the active category
     try {
-      const res = await axios.get(apiUrl);
-      const filteredVideos = res.data.videos.filter(
-        (video) =>
-          video.category.includes(activeCategory) || activeCategory === "All"
+      const res = await axios.get(
+        `${apiUrl}/api/videos?category=${activeCategory}`
       );
       // Dispatching the fetched videos to the Redux store
-      dispatch(setVideos(filteredVideos));
+      dispatch(setVideos(res.data.filteredVideos));
     } catch (error) {
       console.log(error.message);
       dispatch(setError("No videos found"));
     } finally {
       dispatch(setIsLoading(false));
     }
-  }, [activeCategory, dispatch]);
+  }, [activeCategory, apiUrl, dispatch]);
 
   useEffect(() => {
     fetchVideos();

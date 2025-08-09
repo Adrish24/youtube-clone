@@ -2,7 +2,6 @@ import { videos } from "../utils/videos.js";
 
 export async function getWatchVideoData(req, res) {
   const { videoId } = req.params;
-  console.log(videoId);
 
   try {
     const currentVideo = videos.find((vid) => vid.videoId === videoId);
