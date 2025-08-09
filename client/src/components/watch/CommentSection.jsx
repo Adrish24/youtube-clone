@@ -3,8 +3,8 @@ import { useEffect, useRef } from "react";
 import { CommentSectionLoader } from "../ui/Loader";
 import { useFetchComments } from "../../hooks";
 
-import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
+import CommentForm from "./CommentForm";
 
 const CommentSection = ({ currentVideo }) => {
   const { comments, error, isLoading, fetchComments } = useFetchComments();
