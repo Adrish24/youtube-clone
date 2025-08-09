@@ -4,7 +4,7 @@ import { CommentSectionLoader } from "../ui/Loader";
 import { useFetchComments } from "../../hooks";
 
 import CommentForm from "./CommentForm";
-import Comment from "./Comment";
+
 import CommentItem from "./CommentItem";
 
 const CommentSection = ({ currentVideo }) => {
