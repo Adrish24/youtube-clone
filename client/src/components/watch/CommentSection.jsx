@@ -1,9 +1,11 @@
-import CommentForm from "./CommentForm";
-import Comment from "./Comment";
 import { useEffect, useRef } from "react";
 
 import { CommentSectionLoader } from "../ui/Loader";
 import { useFetchComments } from "../../hooks";
+
+import CommentForm from "./CommentForm";
+import Comment from "./Comment";
+import CommentItem from "./CommentItem";
 
 const CommentSection = ({ currentVideo }) => {
   const { comments, error, isLoading, fetchComments } = useFetchComments();
@@ -65,7 +67,7 @@ const CommentSection = ({ currentVideo }) => {
       <div className="flex flex-col space-y-3 justify-center ">
         {comments.length > 0 ? (
           comments?.map((comment) => (
-            <Comment key={comment.commentId} comment={comment} />
+            <CommentItem key={comment.commentId} comment={comment} />
           ))
         ) : (
           <p>{error}</p>

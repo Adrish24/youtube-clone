@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import EditComment from "./EditComment";
 
-const Comment = ({ comment }) => {
+const CommentItem = ({ comment }) => {
   const userInfo = useSelector((state) => state.user.userInfo);
 
   const [isEdit, setIsEdit] = useState(false);
 
-  const handleDeleteComment = () => {};
+  // const handleDeleteComment = () => {};
 
   // Format the upload date to a more readable format
   const commentDate = new Date(comment.timestamp).toLocaleDateString("en-US", {
@@ -132,4 +132,4 @@ const Comment = ({ comment }) => {
   );
 };
 
-export default Comment;
+export default CommentItem;
