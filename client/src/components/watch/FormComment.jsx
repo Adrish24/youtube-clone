@@ -2,29 +2,57 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Emojis } from "../features";
+import { CreateChannel } from "../channel";
+import axios from "axios";
 
-const FormComment = () => {
+const FormComment = ({ videoId, fetchComments }) => {
   const userInfo = useSelector((state) => state.user.userInfo);
+  const activeChannel = userInfo?.ownedChannels?.find(
+    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
+  );
 
   const location = useLocation();
 
   const [isCommentFormActive, setIsCommentFormActive] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
   const [showEomjiPicker, setShowEmojiPicker] = useState(false);
+
   const [commentText, setCommentText] = useState("");
+  const [postingComment, setPostingComment] = useState(false);
+
+  const [showCreateChannel, setShowCreateChannel] = useState(false);
 
   const navigate = useNavigate();
 
   // Handle form submission
   // This function will be called when the user submits the comment form
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setPostingComment(true);
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    try {
+      const res = await axios.post(`${apiUrl}/api/comments`, {
+        videoId,
+        userId: userInfo?.currentUser?.userId,
+        handle: activeChannel?.handle,
+        text: commentText,
+      });
+      console.log(res.data.comments);
+      await fetchComments(videoId);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setPostingComment(false);
+      setCommentText("");
+      e.target.blur();
+    }
   };
 
   // Handle input click to show comment form
   // If user is not logged in, redirect to login page
-  const handleInputClick = () => {
-    if (!userInfo || !userInfo.email) {
+  const handleInputClick = (e) => {
+    e.preventDefault();
+    if (!userInfo || !userInfo.currentUser?.email) {
       localStorage.setItem(
         "redirectPath",
         `${location.pathname}${location.search}` // Save the current path to redirect after login
@@ -32,6 +60,13 @@ const FormComment = () => {
       navigate("/login");
       return;
     }
+
+    if (!activeChannel || !activeChannel.channelId) {
+      setShowCreateChannel(true);
+      e.target.blur(); // Prevents the input from gaining focus
+      return;
+    }
+
     setIsCommentFormActive(true);
   };
 
@@ -51,11 +86,27 @@ const FormComment = () => {
     <div className="flex">
       <div className="avatar mr-4">
         <div className="w-10 h-10 rounded-full">
+          {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
+
           {!userInfo ? (
             <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
+          ) : activeChannel ? (
+            activeChannel.avatar ? (
+              <img src={activeChannel.avatar} alt="" />
+            ) : (
+              <div className="btn  btn-circle avatar btn-primary">
+                <h2 className="text-2xl text-white">
+                  {activeChannel.channelName.charAt(0).toUpperCase()}
+                </h2>
+              </div>
+            )
+          ) : userInfo?.currentUser?.avatar ? (
+            <img src={userInfo?.currentUser?.avatar} alt="" />
           ) : (
             <div className="btn  btn-circle avatar btn-primary">
-              <h2 className="text-2xl text-white">A</h2>
+              <h2 className="text-2xl text-white">
+                {userInfo?.currentUser?.username?.charAt(0).toUpperCase()}
+              </h2>
             </div>
           )}
         </div>
@@ -65,6 +116,9 @@ const FormComment = () => {
           <input
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
+            onKeyDown={(e) => {
+              if (!activeChannel) e.preventDefault();
+            }}
             onClick={handleInputClick}
             onFocus={() => setIsInputActive(true)}
             onBlur={() => setIsInputActive(false)}
@@ -120,7 +174,9 @@ const FormComment = () => {
               {/* Submit comment */}
               <button
                 type="submit"
-                disabled={commentText.trim() === "" ? true : false}
+                disabled={
+                  commentText.trim() === "" ? true : false | postingComment
+                }
                 className="btn bg-info hover:bg-info/90 rounded-full"
               >
                 Comment
@@ -129,6 +185,12 @@ const FormComment = () => {
           </div>
         ) : null}
       </form>
+
+      {/* Create channel modal */}
+      {/* This modal allows users to create a new channel */}
+      {showCreateChannel ? (
+        <CreateChannel cancel={setShowCreateChannel} />
+      ) : null}
     </div>
   );
 };

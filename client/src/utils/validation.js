@@ -1,5 +1,10 @@
 // Import regex patterns from constants folder
-import { usernameRegex, emailRegex, passwordRegex } from "../constants/regex";
+import {
+  usernameRegex,
+  emailRegex,
+  passwordRegex,
+  handleRegex,
+} from "../constants/regex";
 
 // Validate form data
 export const validateEmail = (email) => {
@@ -12,6 +17,10 @@ export const validatePassword = (password) => {
 
 export const validateUsername = (username) => {
   return usernameRegex.test(username);
+};
+
+export const validateHandle = (handle) => {
+  return handleRegex.test(handle);
 };
 
 // Validate input based on field type
@@ -27,6 +36,9 @@ export const validateInput = (field, value) => {
       break;
     case "password":
       isValid = validatePassword(value);
+      break;
+    case "handle":
+      isValid = validateHandle(value);
       break;
     default:
       isValid = true; // If field is not recognized, assume valid

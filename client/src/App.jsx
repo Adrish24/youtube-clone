@@ -6,6 +6,7 @@ import { useThemeContext } from "./context/ThemeProvider";
 
 const App = () => {
   const { mainContentRef } = useThemeContext();
+
   return (
     <main
       data-theme={"black"}

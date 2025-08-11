@@ -14,12 +14,8 @@ const useFetchComments = () => {
       setError(null);
       try {
         const res = await axios.get(`${apiUrl}/api/comments/${videoId}`);
-        if (res.status === 200) {
-          setComments(res.data.comments);
-        } else {
-          setComments([]);
-          setError("No comments found");
-        }
+        console.log(res.data.comments);
+        setComments(res.data.comments);
       } catch (error) {
         console.log(error.message);
         setError("No comments found");
@@ -30,7 +26,7 @@ const useFetchComments = () => {
     [apiUrl]
   );
 
-  return { comments, isLoading, error, fetchComments };
+  return { comments, setComments, isLoading, error, fetchComments };
 };
 
 export default useFetchComments;

@@ -1,38 +1,74 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import EditComment from "./EditComment";
+import axios from "axios";
 
-const CommentItem = ({ comment }) => {
+const CommentItem = ({ comment, fetchComments }) => {
   const userInfo = useSelector((state) => state.user.userInfo);
+  const activeChannel = userInfo?.ownedChannels?.find(
+    (channel) => channel?.channelId === userInfo.currentUser?.activeChannel
+  );
 
   const [isEdit, setIsEdit] = useState(false);
 
-  // const handleDeleteComment = () => {};
+  const handleDeleteComment = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    try {
+      const res = await axios.delete(
+        `${apiUrl}/api/comments/${comment?.videoId}?commentId=${comment?.commentId}`
+      );
+      console.log(res.data.comments);
+      await fetchComments(comment?.videoId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Format the upload date to a more readable format
-  const commentDate = new Date(comment.timestamp).toLocaleDateString("en-US", {
+  const commentDate = new Date(comment?.timestamp).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 
-  if (isEdit) return <EditComment setIsEdit={setIsEdit} text={comment.text} />;
+  if (isEdit)
+    return (
+      <EditComment
+        setIsEdit={setIsEdit}
+        text={comment?.text}
+        fetchComments={fetchComments}
+      />
+    );
 
   return (
     <div className="flex text-sm">
       <div className="avatar mr-4">
         <div className="w-10 h-10 rounded-full">
-          <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
+          {comment?.handle === activeChannel?.handle ? (
+            <div className="btn  btn-circle avatar btn-primary">
+              <h2 className="text-2xl text-white">
+                {activeChannel.channelName.charAt(0).toUpperCase()}
+              </h2>
+            </div>
+          ) : (
+            <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
+          )}
         </div>
       </div>
       <div className="w-full">
         <h2 className="flex items-center space-x-1">
-          <span className="font-bold cursor-pointer"> @{comment.userId}</span>
+          <span className="font-bold cursor-pointer">
+            {comment?.handle === activeChannel?.handle
+              ? activeChannel?.handle
+              : comment?.handle}
+          </span>
           <span className="text-base-content/40 font-thin text-xs">
             {commentDate}
           </span>
         </h2>
-        <p>{comment.text}</p>
+        <p>{comment?.text}</p>
 
         {/* like, dislike buttons with counts & reply button */}
         <div className="flex items-center space-x-2 mt-2">
@@ -98,7 +134,7 @@ const CommentItem = ({ comment }) => {
           </svg>
         </button>
 
-        {userInfo && userInfo.emil ? (
+        {comment?.handle === activeChannel?.handle ? (
           <div
             tabIndex={0}
             className="dropdown-content menu bg-base-100 shadow-lg rounded-xl w-40 py-2 px-0 z-50"
@@ -110,7 +146,10 @@ const CommentItem = ({ comment }) => {
               Edit
             </button>
 
-            <button className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer">
+            <button
+              onClick={handleDeleteComment}
+              className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer"
+            >
               Delete
             </button>
           </div>
@@ -119,10 +158,7 @@ const CommentItem = ({ comment }) => {
             tabIndex={0}
             className="dropdown-content menu bg-base-100 shadow-lg rounded-xl w-40 py-2 px-0 z-50"
           >
-            <button
-              onClick={() => setIsEdit(true)}
-              className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer"
-            >
+            <button className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer">
               Report
             </button>
           </div>

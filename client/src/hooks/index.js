@@ -5,6 +5,7 @@ import useFetchVideos from "./useFetchVideos";
 import useFetchComments from "./useFetchComments";
 import useDebouncer from "./useDebouncer";
 import useSearch from "./useSearch";
+import useCreateChannel from "./useCreateChannel";
 
 export {
   useResizeWindow,
@@ -14,4 +15,5 @@ export {
   useFetchVideos,
   useDebouncer,
   useSearch,
+  useCreateChannel,
 };

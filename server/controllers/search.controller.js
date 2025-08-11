@@ -2,11 +2,10 @@ import { videos } from "../utils/videos.js";
 
 export async function searchVideos(req, res) {
   const { q } = req.query;
+  if (!q || q === "") {
+    return res.status(400).json({ message: "Search query cannot be empty" });
+  }
   try {
-    if (!q || q === "") {
-      return res.status(400).json({ message: "Search query cannot be empty" });
-    }
-    
     const results = videos.filter((vid) =>
       vid.title.toLowerCase().includes(q.toLowerCase())
     );

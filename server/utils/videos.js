@@ -196,6 +196,3 @@ export const videos = [
   },
 ];
 
-{
-  /* <iframe width="1268" height="713" src="https://www.youtube.com/embed/_h7Pc1woq-I?autoplay=1&mute=1" title="Learn Socket.IO for Real-time Chat App, private and group chat with Authentication and Middleware" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */
-}

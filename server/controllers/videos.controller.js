@@ -10,7 +10,7 @@ export async function getVideos(req, res) {
     const filteredVideos = videos.filter(
       (video) => video.category.includes(category) || category === "All"
     );
-    console.log(filteredVideos);
+
     if (filteredVideos.length === 0) {
       return res.status(404).json({ message: "No videos found" });
     }
@@ -18,6 +18,6 @@ export async function getVideos(req, res) {
     res.status(200).json({ filteredVideos });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 }

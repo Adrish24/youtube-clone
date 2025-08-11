@@ -159,7 +159,7 @@ const SearchBar = ({ className }) => {
         lg:w-lg 
         absolute 
         top-12
-        left-0 z-[200px] overflow-hidden
+        left-0 z-[51] overflow-hidden
         "
         >
           {!inputValue

@@ -3,3 +3,10 @@
   themes: light --default, dark --prefersdark;
   exclude: rootscrollgutter;
 }
+
+@media (width >= 1730px) {
+  #video-player {
+    width: 1268px;
+    height: 713px;
+  }
+}

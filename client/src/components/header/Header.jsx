@@ -59,12 +59,6 @@ const Header = memo(() => {
       <SearchBar className="hidden sm:flex justify-center relative" />
 
       <nav className="flex items-center space-x-2">
-        {/* <input
-          onChange={toggleTheme}
-          type="checkbox"
-          defaultChecked
-          className="toggle"
-        /> */}
         {/* Profile Button Icon */}
         <ProfileButton />
       </nav>

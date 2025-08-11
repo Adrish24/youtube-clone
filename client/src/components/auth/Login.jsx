@@ -4,9 +4,10 @@ import { InputField } from "../ui";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../context/redux/userSlice";
+import axios from "axios";
 
 const Login = () => {
-  const { formData, errors, handleInputChange, resetFrom } = useAuthForm(
+  const { formData, errors, handleInputChange } = useAuthForm(
     { email: "", password: "" }, // Initial form data
     false // disable strict validation
   );
@@ -29,27 +30,31 @@ const Login = () => {
 
   // Handle login form submission
   // This function will be called when the user submits the login form
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
-      setAlert({
-        success: false,
-        message: "Please fill in all required fields correctly.",
-      });
-      return;
-    }
+    setIsLoggingIn(true);
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    try {
+      const res = await axios.post(`${apiUrl}/api/auth/login`, formData);
+      setAlert({ success: true, message: "login successfull. Redirecting..." });
+      dispatch(setUserInfo(res.data)); // Dispatch the user info to the Redux store
 
-    console.log(formData);
-    const redirectPath = localStorage.getItem("redirectPath");
-    dispatch(setUserInfo(formData)); // Dispatch the user info to the Redux store
-    if (redirectPath) {
-      navigate(redirectPath);
-      localStorage.removeItem("redirectPath"); // Clear the redirect path after using it
-    } else {
-      navigate("/");
+      // redirect to the previous page or home page after a short delay
+      setTimeout(() => {
+        const redirectPath = localStorage.getItem("redirectPath");
+        if (redirectPath) {
+          navigate(redirectPath);
+          localStorage.removeItem("redirectPath"); // Clear the redirect path after using it
+        } else {
+          navigate("/");
+        }
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+      setAlert({ success: false, message: error.response?.data?.message });
+    } finally {
+      setIsLoggingIn(false);
     }
-
-    resetFrom(); // Reset form after submission
   };
 
   return (

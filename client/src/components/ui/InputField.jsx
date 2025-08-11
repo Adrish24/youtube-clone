@@ -11,6 +11,7 @@ const InputField = ({
   value,
   onChange,
   required = true,
+  autocomplete,
 }) => {
   return (
     <div className={styles?.container}>
@@ -28,6 +29,7 @@ const InputField = ({
         value={value}
         onChange={onChange}
         required={required}
+        autoComplete={autocomplete}
       />
       {children}
     </div>

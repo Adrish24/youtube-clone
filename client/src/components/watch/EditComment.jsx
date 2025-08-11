@@ -3,8 +3,12 @@ import { useSelector } from "react-redux";
 
 import { Emojis } from "../features";
 
-const EditComment = ({ setIsEdit, text }) => {
+const EditComment = ({ setIsEdit, text, fetchComments }) => {
   const userInfo = useSelector((state) => state.user.userInfo);
+
+  const activeChannel = userInfo?.ownedChannels?.find(
+    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
+  );
 
   const [isInputActive, setIsInputActive] = useState(false);
   const [showEomjiPicker, setShowEmojiPicker] = useState(false);
@@ -33,12 +37,14 @@ const EditComment = ({ setIsEdit, text }) => {
     <div className="flex">
       <div className="avatar mr-4">
         <div className="w-10 h-10 rounded-full">
-          {!userInfo ? (
-            <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
-          ) : (
+          {activeChannel?.handle ? (
             <div className="btn  btn-circle avatar btn-primary">
-              <h2 className="text-2xl text-white">A</h2>
+              <h2 className="text-2xl text-white">
+                {activeChannel.channelName.charAt(0).toUpperCase()}
+              </h2>
             </div>
+          ) : (
+            <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
           )}
         </div>
       </div>

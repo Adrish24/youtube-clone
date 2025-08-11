@@ -1,6 +1,9 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ClickableItem } from "../../ui";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { setUserInfo } from "../../../context/redux/userSlice";
 
 // This component renders the switch account menu with user information and options
 // It allows users to switch between different accounts
@@ -10,10 +13,43 @@ const SwitchAccountMenu = ({
   handleNavigation,
 }) => {
   const userInfo = useSelector((state) => state.user.userInfo);
+  const activeChannel = userInfo?.ownedChannels?.find(
+    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
+  );
+
+  const dispatch = useDispatch();
+
+  const [isSwitchingChannel, setIsSwitchingChannel] = useState(false);
+
+  // This function handles the switching of accounts
+  // It updates the active channel for the user and dispatches the updated user info to the Redux store
+  const handleSwitchAccount = async (e, userId, channelId) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsSwitchingChannel(true);
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    try {
+      const res = await axios.post(`${apiUrl}/api/auth/switch-channel`, {
+        userId,
+        channelId,
+      });
+
+      dispatch(setUserInfo(res.data)); // Dispatch the user info to the Redux store
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSwitchingChannel(false);
+    }
+  };
 
   return (
     <ul className="absolute right-0 menu menu-sm  bg-base-100 rounded-box z-1 mt-3 w-60 p-0 py-2">
-        
+      {/* Overlay for switching channel */}
+      {/* This is used to prevent clicks on the background while switching accounts */}
+      {isSwitchingChannel ? (
+        <div className="fixed bg-transparent top-0 left-0 right-0 bottom-0"></div>
+      ) : null}
+
       {/* go back */}
       <div className="flex items-center px-3 space-x-2">
         <ClickableItem
@@ -41,57 +77,115 @@ const SwitchAccountMenu = ({
 
       {/* User information */}
       <div className="px-3 flex flex-col">
-        <h2>Adrish Ghosh</h2>
-        <p className="text-xs text-base-content/40">{userInfo.email}</p>
+        <h2>
+          {activeChannel
+            ? activeChannel.channelName
+            : userInfo?.currentUser?.username}
+        </h2>
+        <p className="text-xs text-base-content/40">
+          {userInfo.currentUser.email}
+        </p>
       </div>
 
       <hr className="border-base-content/20 mt-2" />
 
       {/* List of accounts */}
+      {/* If the user has owned channels, display them */}
+      {/* Otherwise, display the current user's information */}
       <div>
-        <ClickableItem className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none">
-          <div className="bg-primary px-3 py-1 rounded-full mr-3">
-            <h2 className="text-2xl text-white">A</h2>
-          </div>
-          <div className="flex flex-col w-full">
-            <p className=" font-semibold">Adrish Ghosh</p>
-            <p className="text-xs text-base-content/40">@channelName</p>
-          </div>
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-              focusable="false"
-              aria-hidden="true"
+        {userInfo?.ownedChannels && userInfo?.ownedChannels.length > 0 ? (
+          userInfo?.ownedChannels.map((channel) => (
+            <ClickableItem
+              key={channel.channelId}
+              onClick={(e) =>
+                handleSwitchAccount(
+                  e,
+                  userInfo.currentUser.userId,
+                  channel.channelId
+                )
+              }
+              className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
             >
-              <path d="m9 18.7-5.4-5.4.7-.7L9 17.3 20.6 5.6l.7.7L9 18.7z"></path>
-            </svg>
-          </div>
-        </ClickableItem>
-        <ClickableItem className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none">
-          <div className="bg-primary px-3 py-1 rounded-full mr-3">
-            <h2 className="text-2xl text-white">A</h2>
-          </div>
-          <div className="flex flex-col">
-            <p className=" font-semibold">Adrish Ghosh</p>
-            <p className="text-xs text-base-content/40">@channelName</p>
-          </div>
-        </ClickableItem>
-        <Link
-          className="px-3 py-2 text-info hover:text-info/80"
-          onClick={handleNavigation}
-        >
-          View all channels
-        </Link>
+              <div className="bg-primary px-3 py-1 rounded-full mr-3">
+                {channel.avatar ? (
+                  <img src={channel.avatar} alt="" />
+                ) : (
+                  <h2 className="text-2xl text-white">
+                    {channel.channelName.charAt(0).toUpperCase()}
+                  </h2>
+                )}
+              </div>
+              <div className="flex flex-col w-full">
+                <p className=" font-semibold">{channel.channelName}</p>
+                <p className="text-xs text-base-content/40">{channel.handle}</p>
+              </div>
+              {userInfo.currentUser.activeChannel === channel.channelId ? (
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    focusable="false"
+                    aria-hidden="true"
+                  >
+                    <path d="m9 18.7-5.4-5.4.7-.7L9 17.3 20.6 5.6l.7.7L9 18.7z"></path>
+                  </svg>
+                </div>
+              ) : null}
+            </ClickableItem>
+          ))
+        ) : (
+          <ClickableItem
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
+          >
+            <div className="bg-primary px-3 py-1 rounded-full mr-3">
+              {userInfo.currentUser?.avatar ? (
+                <img src={userInfo.currentUser?.avatar} alt="" />
+              ) : (
+                <h2 className="text-2xl text-white">
+                  {userInfo.currentUser?.username?.charAt(0).toUpperCase()}
+                </h2>
+              )}
+            </div>
+            <div className="flex flex-col">
+              <p className=" font-semibold">
+                {userInfo?.currentUser?.username}
+              </p>
+              <p className="text-xs text-base-content/40">
+                {userInfo?.currentUser?.email}
+              </p>
+              <p className="text-xs text-base-content/40">No channels</p>
+            </div>
+          </ClickableItem>
+        )}
+
+        {userInfo?.currentUser?.channels?.length > 0 ? (
+          <Link
+            className="px-3 py-2 text-info hover:text-info/80"
+            onClick={handleNavigation}
+          >
+            View All channels
+          </Link>
+        ) : (
+          <Link
+            onClick={(e) => handleMenuClick(e, "Create channel")}
+            className="px-3 py-2 text-info hover:text-info/80"
+          >
+            Create your channel
+          </Link>
+        )}
       </div>
 
       <hr className="border-base-content/20 my-2" />
 
       {/* Add account */}
       <ClickableItem
-        onClick={(e) => handleMenuClick(e, "Add account")}
+        // onClick={(e) => handleMenuClick(e, "Add account")}
         className="py-2 px-3 flex items-center space-x-1 text-sm hover:bg-base-content/20 rounded-none"
       >
         <div>

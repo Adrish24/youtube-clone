@@ -1,18 +1,27 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Importing components for the profile menu
 import ProfileMenuList from "./ProfileMenuList";
 import SwitchAccountMenu from "./SwitchAccountMenu";
 
 import { clearUserInfo } from "../../../context/redux/userSlice";
+import { CreateChannel } from "../../channel";
 
 const ProfileButton = memo(() => {
+  const location = useLocation();
+
   const userInfo = useSelector((state) => state.user.userInfo); // Check if the user is logged in
+  const activeChannel = userInfo?.ownedChannels?.find(
+    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
+  );
+  console.log(userInfo, activeChannel);
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showSwitchAccount, setShowSwitchAccount] = useState(false);
+
+  const [showCreateChannel, setShowCreateChannel] = useState(false);
 
   const profileButtonRef = useRef(null);
 
@@ -44,7 +53,15 @@ const ProfileButton = memo(() => {
         navigate("/login");
         setShowProfileMenu(false);
         setShowSwitchAccount(false);
+        localStorage.setItem(
+          "redirectPath",
+          `${location.pathname}${location.search}` // Save the current path to redirect after login
+        );
         break;
+      case "Create channel":
+        setShowCreateChannel(true);
+        setShowProfileMenu(false);
+        setShowSwitchAccount(false);
     }
   };
 
@@ -81,6 +98,12 @@ const ProfileButton = memo(() => {
     <div className="py-2 ml-2">
       {userInfo ? (
         <div ref={profileButtonRef} className="relative">
+          {/* Create channel modal */}
+          {/* This modal allows users to create a new channel */}
+          {showCreateChannel ? (
+            <CreateChannel cancel={setShowCreateChannel} />
+          ) : null}
+
           <div
             onClick={() => {
               setShowProfileMenu((prev) => !prev);
@@ -89,7 +112,23 @@ const ProfileButton = memo(() => {
             role="button"
             className="btn  btn-circle avatar btn-primary"
           >
-            <h2 className="text-2xl text-white">A</h2>
+            {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
+
+            {activeChannel ? (
+              activeChannel.avatar ? (
+                <img src={activeChannel.avatar} alt="" />
+              ) : (
+                <h2 className="text-2xl text-white">
+                  {activeChannel.channelName.charAt(0).toUpperCase()}
+                </h2>
+              )
+            ) : userInfo.currentUser?.avatar ? (
+              <img src={userInfo.currentUser?.avatar} alt="" />
+            ) : (
+              <h2 className="text-2xl text-white">
+                {userInfo.currentUser?.username?.charAt(0).toUpperCase()}
+              </h2>
+            )}
           </div>
 
           {/* Profile Menu List */}
@@ -114,7 +153,13 @@ const ProfileButton = memo(() => {
         </div>
       ) : (
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => {
+            navigate("/login");
+            localStorage.setItem(
+              "redirectPath",
+              `${location.pathname}${location.search}` // Save the current path to redirect after login
+            );
+          }}
           className="btn btn-outline btn-info rounded-full whitespace-nowrap"
         >
           Sign in

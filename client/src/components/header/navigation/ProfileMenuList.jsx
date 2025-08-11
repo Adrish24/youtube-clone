@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 // This component renders the profile menu list with user information and various options
 // It includes a toggle for appearance settings and a switch account option
 const ProfileMenuList = ({ handleMenuClick, handleNavigation }) => {
-  const userInfo = useSelector((state) => state.user.userInfo);
+  const userInfo = useSelector((state) => state.user.userInfo); // Check if the user is logged in
+  const activeChannel = userInfo?.ownedChannels?.find(
+    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
+  );
 
   const toggleTheme = () => {
     console.log("Toggling theme"); // Debugging line to check theme toggle
@@ -16,27 +19,59 @@ const ProfileMenuList = ({ handleMenuClick, handleNavigation }) => {
   };
 
   return (
-    <ul className="absolute right-0 menu menu-sm  bg-base-100 rounded-box z-1 mt-3 w-60 p-0 py-2">
+    <ul className="absolute right-0 menu menu-sm  bg-base-100 rounded-box z-1 mt-3 w-64 p-0 py-2 ">
       {/* User informations */}
-      <div className="px-3 py-2 flex items-start">
-        <div className="bg-primary px-3 py-1 rounded-full mr-3">
-          <h2 className="text-2xl text-white">A</h2>
+      <div className="px-3 py-2 flex items-start w-full">
+        <div className="bg-primary w-10 h-10 px-3 py-1 rounded-full mr-3">
+          {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
+
+          {activeChannel ? (
+            activeChannel.avatar ? (
+              <img src={activeChannel.avatar} alt="" />
+            ) : (
+              <h2 className="text-2xl text-white">
+                {activeChannel.channelName.charAt(0).toUpperCase()}
+              </h2>
+            )
+          ) : userInfo.currentUser?.avatar ? (
+            <img src={userInfo.currentUser?.avatar} alt="" />
+          ) : (
+            <h2 className="text-2xl text-white">
+              {userInfo.currentUser?.username?.charAt(0).toUpperCase()}
+            </h2>
+          )}
         </div>
-        <div className="flex flex-col">
-          <p className=" font-semibold">Adrish Ghosh</p>
-          <p className=" font-semibold">{userInfo.email}</p>
-          {/* <Link
-                    className="text-info"
-                    onClick={navigateToCurrentUserChannel}
-                  >
-                    View your channel
-                  </Link> */}
-          <Link
-            className="text-info hover:text-info/80"
-            onClick={handleNavigation}
+        <div className="flex flex-col w-full ">
+          <p className="font-semibold truncate w-46">
+            {activeChannel
+              ? activeChannel.channelName
+              : userInfo?.currentUser?.username}
+          </p>
+          <p
+            title={
+              activeChannel
+                ? activeChannel.handle
+                : userInfo?.currentUser?.email
+            }
+            className="font-semibold truncate w-46"
           >
-            Create your channel
-          </Link>
+            {activeChannel
+              ? activeChannel.handle
+              : userInfo?.currentUser?.email}
+          </p>
+
+          {userInfo?.channels?.length > 0 ? (
+            <Link className="text-info" onClick={handleNavigation}>
+              View your channel
+            </Link>
+          ) : (
+            <Link
+              onClick={(e) => handleMenuClick(e, "Create channel")}
+              className="text-info hover:text-info/80"
+            >
+              Create your channel
+            </Link>
+          )}
         </div>
       </div>
 

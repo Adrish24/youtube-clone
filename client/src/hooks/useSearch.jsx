@@ -2,6 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import useDebouncer from "./useDebouncer";
 import axios from "axios";
 
+// Custom hook to handle search functionality
+// It fetches search results based on the debounced search term
+// Returns search results, loading state, and error state
+// Uses an AbortController to cancel previous requests if a new search is initiated
 const useSearch = (searchTerm) => {
   const [searchList, setSearchList] = useState([]);
   const [isSearching, setIsSearching] = useState(false);

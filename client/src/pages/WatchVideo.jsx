@@ -47,9 +47,11 @@ const WatchVideo = () => {
       <div className="flex flex-col lg:flex-row w-full h-full 2xl:w-[90vw]">
         <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
           <iframe
+            id="video-player"
+            loading="lazy"
             className="
-            w-full lg:w-[640px] xl:w-[800px] 2xl:w-[1268px]
-            h-50 md:h-[432px] lg:h-90 xl:h-[450px] 2xl:h-[713px] 
+            w-full lg:w-[640px] xl:w-[800px] 2xl:w-[1062px]
+            h-50 md:h-[432px] lg:h-90 xl:h-[450px] 2xl:h-[597px] 
             rounded-2xl
             "
             src={`${currentVideo.src}?autoplay=1&mute=1`}
@@ -58,7 +60,7 @@ const WatchVideo = () => {
             referrerpolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-          <div className="py-4 lg:w-[640px] xl:w-[800px] 2xl:w-[1268px]">
+          <div className="py-4 lg:w-[640px] xl:w-[800px] 2xl:w-[1062px]">
             {/* Title of the video */}
             <h2
               title={currentVideo.title}

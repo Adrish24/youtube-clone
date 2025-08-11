@@ -61,13 +61,23 @@ const CommentSection = ({ currentVideo }) => {
         </div>
 
         {/* Input field for adding a comment */}
-        <FormComment />
+        <FormComment
+          videoId={currentVideo.videoId}
+          fetchComments={fetchComments}
+        />
       </div>
       <div className="flex flex-col space-y-3 justify-center ">
         {comments.length > 0 ? (
-          comments?.map((comment) => (
-            <CommentItem key={comment.commentId} comment={comment} />
-          ))
+          comments
+            ?.slice()
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .map((comment) => (
+              <CommentItem
+                key={comment.commentId}
+                comment={comment}
+                fetchComments={fetchComments}
+              />
+            ))
         ) : (
           <p>{error}</p>
         )}

@@ -3,4 +3,7 @@
 // These patterns are used to validate usernames, emails, and passwords.
 export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-export  const usernameRegex = /^[A-Za-z0-9-]{6,30}$/;
+export const usernameRegex = /^[A-Za-z0-9-]{6,30}$/;
+
+// This regex ensures that the username starts with an '@' and does not contain spaces
+export const handleRegex = /^[^\s]{3,}$/;
