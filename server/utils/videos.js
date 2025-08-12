@@ -10,7 +10,8 @@ export const videos = [
       "Ready to build your own real-time chat app with private and group chat options? This Socket.IO tutorial will teach you everything you need to know, including authentication and middleware. Get started now!",
     channelId: "channel01",
     src: "https://www.youtube.com/embed/_h7Pc1woq-I",
-    uploader: "6 Pack Programmer",
+    channelName: "6 Pack Programmer",
+    handle: "@6packprogrammer",
     profile:
       "https://yt3.ggpht.com/8DHXGxqNVJuiT1bnxECydjk4bRfGRCVHuR0MyAxtkjxa0k0PC_uBU-jCOswGnd_5HaTQRHj_eg=s48-c-k-c0x00ffffff-no-rj",
     views: 250000,
@@ -29,7 +30,8 @@ export const videos = [
       "In this React Redux Toolkit Query tutorial, you will build a CRUD example app with RTK Query and React. RTK Query abstracts API logic from your code and creates custom React hooks for easy implementation.",
     channelId: "channel02",
     src: "https://www.youtube.com/embed/HyZzCHgG3AY",
-    uploader: "Dave Gray",
+    channelName: "Dave Gray",
+    handle: "@DaveGrayTeachesCode",
     profile:
       "https://yt3.ggpht.com/nv365KiAJyURPEBZyCh0SV3hSBnZXbvVXrzRwcNDfgUpXPn9-3_4PY0SkQrAJWnzQOxKqfUtrQ=s48-c-k-c0x00ffffff-no-rj",
     views: 143000,
@@ -48,7 +50,8 @@ export const videos = [
       "This code made Half Life, Team Fortress, Counter Strikes. DOTA, and  more!",
     channelId: "channel03",
     src: "https://www.youtube.com/embed/J39xY9JvF80",
-    uploader: "This is GameDev",
+    channelName: "This is GameDev",
+    handle: "@this-is-gamedev",
     profile:
       "https://yt3.ggpht.com/FrPiiMsu6RDPDoV8rP_RtTNV_lOCSa5k-FWXtflTdqkHeDkZZaSsHnYIE0WQJcHRnZCuEsQO2SM=s48-c-k-c0x00ffffff-no-rj",
     views: 180000,
@@ -68,7 +71,8 @@ export const videos = [
       "Godot vs Unity vs Unreal: Watch as three game devs—Bram using Godot, Michael with Unreal, and Stephen on Unity—go head-to-head to create a wave-based survival game in just one hour!",
     channelId: "channel04",
     src: "https://www.youtube.com/embed/JxVeyjwgcdk",
-    uploader: "GameDev.tv",
+    channelName: "GameDev.tv",
+    handle: "@Gdevtv",
     profile:
       "https://yt3.ggpht.com/Yc8yE0uzd0bx08ir-xkPcvIsFy0WF1EK2JKjCYBaSXs4QNkqGtarI9hk0I5ymMPFC5YHFS-oaQ=s48-c-k-c0x00ffffff-no-rj",
     views: 83000,
@@ -88,7 +92,8 @@ export const videos = [
       "The Burning Ghat’ is Rishab Rikhiram Sharma’s heartfelt tribute to the eternal flame of Manikarnika Ghat in Varanasi - a sacred site where the cycle of life ends and the soul finds Moksh (liberation). This evocative soundscape blends traditional Indian instruments with electronic synths, symbolizing the bridge between the ancient and the new. Inspired by his journey to Burning Man in the US — where a ceremonial fire marks the end of the festival, releasing emotions and grief — this composition channels the transformative power of fire, both spiritual and symbolic.",
     channelId: "channel05",
     src: "https://www.youtube.com/embed/iChaC_Trtto",
-    uploader: "Rishab Rikhiram Sharma",
+    channelName: "Rishab Rikhiram Sharma",
+    handle: "@Rishabsmusic",
     profile:
       "https://yt3.ggpht.com/g1G8SyHMybBz6riIg9n9rAFmAeF7K_O9P7H-LLrr7Y80qLeXvM7x2RWiFI8BhBe0vG8paSgLEw=s48-c-k-c0x00ffffff-no-rj",
     views: 2800000,
@@ -106,7 +111,8 @@ export const videos = [
     description: "Die With A Smile · Lady Gaga · Bruno Mars",
     channelId: "channel06",
     src: "https://www.youtube.com/embed/RVDCeVG90Rg",
-    uploader: "Lady Gaga",
+    channelName: "Lady Gaga",
+    handle: "@LadyGaga",
     profile:
       "https://yt3.ggpht.com/lM8HHBd5BZtP_-Dh1i3n1Z4teVW8v2KTG-hsS83yXUiK0K6krkk1XNEFbho3uwH-CS-FQpnlHw=s48-c-k-c0x00ffffff-no-rj",
     views: 381000000,
@@ -125,7 +131,8 @@ export const videos = [
       "Watch Sophie Ecclestone take a 3 wicket haul against India in the 2nd ODI.",
     channelId: "channel07",
     src: "https://www.youtube.com/embed/xwRo-i54ehE",
-    uploader: "England and Wales Cricket Board",
+    channelName: "England and Wales Cricket Board",
+    handle: "@officialenglandcricket",
     profile:
       "https://yt3.ggpht.com/Kvp63X5q5rUFXpy73Nwj3HYhUnymjVJyZjRGDEhUii26M8Ufr-30l9yekzDPcIj7Hj3bELCSGA=s68-c-k-c0x00ffffff-no-rj",
     views: 18191,
@@ -145,7 +152,8 @@ export const videos = [
       "talkSPORT's Cricket editor and presenter Jon Norman sits down with former England cricket player, umpire, coach and commentator David 'Bumble' Lloyd and cricket writer Jarrod Kimber to discuss all things cricket.",
     channelId: "channel08",
     src: "https://www.youtube.com/embed/hi-qLQUZyq8",
-    uploader: "talkSPORT Cricket",
+    channelName: "talkSPORT Cricket",
+    handle: "@talkSPORTCricket",
     profile:
       "https://yt3.ggpht.com/GI--0ywaFfHw_aknt9TtqXN892773ijUB3pugDcH5kUQ-M9nkqTk4zkf_HNTBB0RpNzKG-XQ=s48-c-k-c0x00ffffff-no-rj",
     views: 45000,
@@ -165,7 +173,8 @@ export const videos = [
       "The Axiom 4 mission successfully launched, carrying Indian astronaut Shubhanshu Shukla to the International Space Station. Shukla becomes the second Indian to travel to space and the first to visit the ISS. He shared a message from space, saying, 'This is not the beginning of a space station journey, it is the beginning of India's human space program.' Shukla will conduct 60 space experiments during his mission.",
     channelId: "channel09",
     src: "https://www.youtube.com/embed/RP5UQdLPDg0",
-    uploader: "India Today",
+    channelName: "India Today",
+    handle: "@indiatoday",
     profile:
       "https://yt3.ggpht.com/T2CFyCYOvSqnAJZL2HTDrLw-9Z48j97WXjHn41HoPXZ-ZaeH02WAFSBe2cDKRWNcjZR5lhtKcg=s48-c-k-c0x00ffffff-no-rj",
     views: 109649,
@@ -184,8 +193,10 @@ export const videos = [
     description:
       "Ready to build your own real-time chat app with private and group chat options? This Socket.IO tutorial will teach you everything you need to know, including authentication and middleware. Get started now!",
     channelId: "channel10",
+
     src: "https://www.youtube.com/embed/FEsl2xNDrmg",
-    uploader: "Healthy Long Life",
+    channelName: "Healthy Long Life",
+    handle: "@healthlonglife",
     profile:
       "https://yt3.ggpht.com/GHfOgy_asLxYSXRuCUNqIYUnfKWFsjCO0ibIHyWopaXFjY1ACoqWQeVICUmAQR1nlgjIDfTseg=s48-c-k-c0x00ffffff-no-rj",
     views: 2300000,
@@ -195,4 +206,3 @@ export const videos = [
     comments: ["comment46", "comment47", "comment48", "comment49", "comment50"],
   },
 ];
-

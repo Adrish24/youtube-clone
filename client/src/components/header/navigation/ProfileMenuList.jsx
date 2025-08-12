@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 import { profileMenu, ProfileMiscMenu } from "../../../constants/profileMenu";
-import { ClickableItem } from "../../ui";
-import { useSelector } from "react-redux";
+import { Avatar, ClickableItem } from "../../ui";
+import { useActiveChannel } from "../../../hooks";
 
 // This component renders the profile menu list with user information and various options
 // It includes a toggle for appearance settings and a switch account option
-const ProfileMenuList = ({ handleMenuClick, handleNavigation }) => {
-  const userInfo = useSelector((state) => state.user.userInfo); // Check if the user is logged in
-  const activeChannel = userInfo?.ownedChannels?.find(
-    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
-  );
+const ProfileMenuList = ({ handleMenuClick }) => {
+  const { activeChannel, userInfo } = useActiveChannel();
 
   const toggleTheme = () => {
     console.log("Toggling theme"); // Debugging line to check theme toggle
@@ -22,23 +19,19 @@ const ProfileMenuList = ({ handleMenuClick, handleNavigation }) => {
     <ul className="absolute right-0 menu menu-sm  bg-base-100 rounded-box z-1 mt-3 w-64 p-0 py-2 ">
       {/* User informations */}
       <div className="px-3 py-2 flex items-start w-full">
-        <div className="bg-primary w-10 h-10 px-3 py-1 rounded-full mr-3">
+        <div className="bg-primary w-10 h-10 px-3 py-1 rounded-full mr-3 text-center">
           {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
 
           {activeChannel ? (
-            activeChannel.avatar ? (
-              <img src={activeChannel.avatar} alt="" />
-            ) : (
-              <h2 className="text-2xl text-white">
-                {activeChannel.channelName.charAt(0).toUpperCase()}
-              </h2>
-            )
-          ) : userInfo.currentUser?.avatar ? (
-            <img src={userInfo.currentUser?.avatar} alt="" />
+            <Avatar
+              avatar={activeChannel.avatar}
+              name={activeChannel.channelName}
+            />
           ) : (
-            <h2 className="text-2xl text-white">
-              {userInfo.currentUser?.username?.charAt(0).toUpperCase()}
-            </h2>
+            <Avatar
+              avatar={userInfo.currentUser?.avatar}
+              name={userInfo.currentUser?.username}
+            />
           )}
         </div>
         <div className="flex flex-col w-full ">
@@ -60,8 +53,11 @@ const ProfileMenuList = ({ handleMenuClick, handleNavigation }) => {
               : userInfo?.currentUser?.email}
           </p>
 
-          {userInfo?.channels?.length > 0 ? (
-            <Link className="text-info" onClick={handleNavigation}>
+          {userInfo?.currentUser?.channels?.length > 0 ? (
+            <Link
+              className="text-info"
+              onClick={(e) => handleMenuClick(e, "My channel")}
+            >
               View your channel
             </Link>
           ) : (

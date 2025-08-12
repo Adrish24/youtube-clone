@@ -1,28 +1,37 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 import { Emojis } from "../features";
+import { useActiveChannel } from "../../hooks";
+import axios from "axios";
 
-const EditComment = ({ setIsEdit, text, fetchComments }) => {
-  const userInfo = useSelector((state) => state.user.userInfo);
-
-  const activeChannel = userInfo?.ownedChannels?.find(
-    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
-  );
+const EditComment = ({ setIsEdit, comment, fetchComments }) => {
+  const { activeChannel } = useActiveChannel();
 
   const [isInputActive, setIsInputActive] = useState(false);
   const [showEomjiPicker, setShowEmojiPicker] = useState(false);
-  const [editText, setEditText] = useState(text || "");
+  const [editText, setEditText] = useState(comment?.text || "");
 
   // Handle form submission
   // This function will be called when the user submits the comment form
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    try {
+      const res = await axios.put(
+        `${apiUrl}/api/comments/${comment?.videoId}?commentId=${comment?.commentId}`,
+        { text: editText }
+      );
+      console.log(res.data.comments);
+      await fetchComments(comment?.videoId);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Handle cancel button click
   // This will reset the form and hide the comment input
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    e.preventDefault();
     console.log("Cancel clicked");
     setIsEdit(false);
     setEditText("");
@@ -72,7 +81,10 @@ const EditComment = ({ setIsEdit, text, fetchComments }) => {
         <div className="flex items-center justify-between mt-2 relative">
           {/* Emoji picker button */}
           <button
-            onClick={() => setShowEmojiPicker((prev) => !prev)}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowEmojiPicker((prev) => !prev);
+            }}
             className="btn btn-circle bg-base-100 hover:bg-base-content/20"
           >
             <svg

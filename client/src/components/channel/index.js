@@ -1,3 +1,5 @@
 import CreateChannel from "./CreateChannel";
+import ChannelBanner from "./ChannelBanner";
+import ChannelMetadata from "./ChannelMetadata";
 
-export { CreateChannel };
+export { CreateChannel, ChannelBanner, ChannelMetadata };

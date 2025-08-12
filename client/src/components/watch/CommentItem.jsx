@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import EditComment from "./EditComment";
 import axios from "axios";
+import { useActiveChannel } from "../../hooks";
 
 const CommentItem = ({ comment, fetchComments }) => {
-  const userInfo = useSelector((state) => state.user.userInfo);
-  const activeChannel = userInfo?.ownedChannels?.find(
-    (channel) => channel?.channelId === userInfo.currentUser?.activeChannel
-  );
+  const { activeChannel } = useActiveChannel();
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -37,7 +34,7 @@ const CommentItem = ({ comment, fetchComments }) => {
     return (
       <EditComment
         setIsEdit={setIsEdit}
-        text={comment?.text}
+        comment={comment}
         fetchComments={fetchComments}
       />
     );

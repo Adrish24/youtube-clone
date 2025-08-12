@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Emojis } from "../features";
 import { CreateChannel } from "../channel";
 import axios from "axios";
+import { useActiveChannel } from "../../hooks";
+import { Avatar } from "../ui";
 
 const FormComment = ({ videoId, fetchComments }) => {
-  const userInfo = useSelector((state) => state.user.userInfo);
-  const activeChannel = userInfo?.ownedChannels?.find(
-    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
-  );
-
   const location = useLocation();
+
+  const { activeChannel, userInfo } = useActiveChannel(); // Get the active channel and user info from the custom hook
 
   const [isCommentFormActive, setIsCommentFormActive] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
@@ -84,33 +82,32 @@ const FormComment = ({ videoId, fetchComments }) => {
 
   return (
     <div className="flex">
+      {/* User avatar and comment input form */}
       <div className="avatar mr-4">
-        <div className="w-10 h-10 rounded-full">
-          {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
+        {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
 
-          {!userInfo ? (
+        {!userInfo ? (
+          <div className="w-10 h-10 rounded-full">
             <img src="https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj" />
-          ) : activeChannel ? (
-            activeChannel.avatar ? (
-              <img src={activeChannel.avatar} alt="" />
+          </div>
+        ) : (
+          <div className="bg-primary w-10 h-10 px-3 py-1 rounded-full text-center">
+            {activeChannel ? (
+              <Avatar
+                avatar={activeChannel.avatar}
+                name={activeChannel.channelName}
+              />
             ) : (
-              <div className="btn  btn-circle avatar btn-primary">
-                <h2 className="text-2xl text-white">
-                  {activeChannel.channelName.charAt(0).toUpperCase()}
-                </h2>
-              </div>
-            )
-          ) : userInfo?.currentUser?.avatar ? (
-            <img src={userInfo?.currentUser?.avatar} alt="" />
-          ) : (
-            <div className="btn  btn-circle avatar btn-primary">
-              <h2 className="text-2xl text-white">
-                {userInfo?.currentUser?.username?.charAt(0).toUpperCase()}
-              </h2>
-            </div>
-          )}
-        </div>
+              <Avatar
+                avatar={userInfo.currentUser?.avatar}
+                name={userInfo.currentUser?.username}
+              />
+            )}
+          </div>
+        )}
       </div>
+
+      {/* submit comment form */}
       <form onSubmit={handleFormSubmit} className="w-full mr-4">
         <div className="relative">
           <input
@@ -139,7 +136,10 @@ const FormComment = ({ videoId, fetchComments }) => {
           <div className="flex items-center justify-between mt-2 relative">
             {/* Emoji picker button */}
             <button
-              onClick={() => setShowEmojiPicker((prev) => !prev)}
+              onClick={(e) => {
+                e.preventDefault();
+                setShowEmojiPicker((prev) => !prev);
+              }}
               className="btn btn-circle bg-base-100 hover:bg-base-content/20"
             >
               <svg

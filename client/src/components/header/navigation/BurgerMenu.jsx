@@ -28,6 +28,9 @@ const BurgerMenu = memo(() => {
       const homePage = document.getElementById("home");
       homePage?.classList?.toggle("xl:ml-60");
 
+      const channelPage = document.getElementById("channel");
+      channelPage?.classList?.toggle("xl:ml-60");
+
       const searchResult = document.getElementById("search-result");
       searchResult?.classList?.toggle("xl:ml-60");
 

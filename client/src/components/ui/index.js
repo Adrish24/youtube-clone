@@ -5,6 +5,7 @@ import Carousel from "./Carousel";
 import Loader from "./Loader";
 import { CardLoader, HomeLoader } from "./Loader";
 import InputField from "./InputField";
+import Avatar from "./Avatar";
 
 export {
   Modal,
@@ -15,4 +16,5 @@ export {
   CardLoader,
   HomeLoader,
   InputField,
+  Avatar,
 };

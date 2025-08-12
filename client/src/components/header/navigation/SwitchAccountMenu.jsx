@@ -1,9 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { ClickableItem } from "../../ui";
+import { useDispatch } from "react-redux";
+import { Avatar, ClickableItem } from "../../ui";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { setUserInfo } from "../../../context/redux/userSlice";
+import { useActiveChannel } from "../../../hooks";
 
 // This component renders the switch account menu with user information and options
 // It allows users to switch between different accounts
@@ -12,10 +13,7 @@ const SwitchAccountMenu = ({
   handleMenuClick,
   handleNavigation,
 }) => {
-  const userInfo = useSelector((state) => state.user.userInfo);
-  const activeChannel = userInfo?.ownedChannels?.find(
-    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
-  );
+  const { activeChannel, userInfo } = useActiveChannel();
 
   const dispatch = useDispatch();
 
@@ -94,6 +92,7 @@ const SwitchAccountMenu = ({
       {/* Otherwise, display the current user's information */}
       <div>
         {userInfo?.ownedChannels && userInfo?.ownedChannels.length > 0 ? (
+          // Display owned channels
           userInfo?.ownedChannels.map((channel) => (
             <ClickableItem
               key={channel.channelId}
@@ -106,14 +105,8 @@ const SwitchAccountMenu = ({
               }
               className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
             >
-              <div className="bg-primary px-3 py-1 rounded-full mr-3">
-                {channel.avatar ? (
-                  <img src={channel.avatar} alt="" />
-                ) : (
-                  <h2 className="text-2xl text-white">
-                    {channel.channelName.charAt(0).toUpperCase()}
-                  </h2>
-                )}
+              <div className="bg-primary px-3 py-1 rounded-full mr-3 text-center">
+                <Avatar avatar={channel.avatar} name={channel.channelName} />
               </div>
               <div className="flex flex-col w-full">
                 <p className=" font-semibold">{channel.channelName}</p>
@@ -136,6 +129,7 @@ const SwitchAccountMenu = ({
             </ClickableItem>
           ))
         ) : (
+          // If no owned channels, display the current user's information
           <ClickableItem
             onClick={(e) => {
               e.preventDefault();
@@ -143,14 +137,11 @@ const SwitchAccountMenu = ({
             }}
             className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
           >
-            <div className="bg-primary px-3 py-1 rounded-full mr-3">
-              {userInfo.currentUser?.avatar ? (
-                <img src={userInfo.currentUser?.avatar} alt="" />
-              ) : (
-                <h2 className="text-2xl text-white">
-                  {userInfo.currentUser?.username?.charAt(0).toUpperCase()}
-                </h2>
-              )}
+            <div className="bg-primary px-3 py-1 rounded-full mr-3 text-center">
+              <Avatar
+                avatar={userInfo.currentUser?.avatar}
+                name={userInfo.currentUser?.username}
+              />
             </div>
             <div className="flex flex-col">
               <p className=" font-semibold">
@@ -164,6 +155,8 @@ const SwitchAccountMenu = ({
           </ClickableItem>
         )}
 
+        {/* If the user has channels, show the option to view all channels */}
+        {/* Otherwise, show the option to create a new channel */}
         {userInfo?.currentUser?.channels?.length > 0 ? (
           <Link
             className="px-3 py-2 text-info hover:text-info/80"

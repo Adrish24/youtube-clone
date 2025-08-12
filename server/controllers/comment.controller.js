@@ -23,7 +23,7 @@ export async function createComment(req, res) {
   }
 }
 
-export async function getComments(req, res) {
+export async function getCommentsById(req, res) {
   const { videoId } = req.params;
   try {
     const filtredComments = comments.filter(
@@ -71,4 +71,35 @@ export async function deleteComment(req, res) {
   }
 }
 
-export async function updateComment(req, res) {}
+export async function updateComment(req, res) {
+  const { videoId } = req.params;
+  const { commentId } = req.query;
+  const { text } = req.body;
+
+  if (!commentId) {
+    return res.status(400).json({ message: "commentId requried" });
+  }
+
+  try {
+    const commentFound = comments.find(
+      (comment) => comment.commentId == commentId && comment.videoId === videoId
+    );
+    if (!commentFound) {
+      return res.status(404).json({ message: "Comment not found" });
+    }
+
+    commentFound.text = text;
+
+    // Return the updated list for the video
+    const filtredComments = comments.filter(
+      (comment) => comment.videoId === videoId
+    );
+
+    res.status(200).json({ comments: filtredComments });
+  } catch (error) {
+    console.log("Error fetching comments:", error);
+    return res
+      .status(500)
+      .json({ error: "Something went wrong!. Try again later." });
+  }
+}

@@ -4,6 +4,7 @@ import {
   CommentSection,
   NoVideo,
   Suggestions,
+  VideoPlayer,
   WatchMetaData,
 } from "../components/watch";
 import { useThemeContext } from "../context/ThemeProvider";
@@ -46,20 +47,7 @@ const WatchVideo = () => {
     <div className="mt-14 p-2 bg-base-300 flex justify-center pb-20">
       <div className="flex flex-col lg:flex-row w-full h-full 2xl:w-[90vw]">
         <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
-          <iframe
-            id="video-player"
-            loading="lazy"
-            className="
-            w-full lg:w-[640px] xl:w-[800px] 2xl:w-[1062px]
-            h-50 md:h-[432px] lg:h-90 xl:h-[450px] 2xl:h-[597px] 
-            rounded-2xl
-            "
-            src={`${currentVideo.src}?autoplay=1&mute=1`}
-            title={currentVideo.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe>
+          <VideoPlayer src={currentVideo?.src} title={currentVideo?.title} />
           <div className="py-4 lg:w-[640px] xl:w-[800px] 2xl:w-[1062px]">
             {/* Title of the video */}
             <h2

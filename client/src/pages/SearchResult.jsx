@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 import { Card } from "../components/ui";
 
 const SearchResult = () => {
-  const { results } = useLoaderData();
+  const { results } = useLoaderData(); // Load search results from the loader
 
   const searchResultRef = useRef(null);
 
@@ -338,7 +338,7 @@ const SearchResult = () => {
     <div
       id="search-result"
       ref={searchResultRef}
-      className="flex px-2 mt-24 md:ml-20 min-h-screen"
+      className="flex px-2 mt-14 md:ml-20 min-h-screen"
     >
       <div className="lg:w-1/2 mx-auto">
         {results.length > 0 &&

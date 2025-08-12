@@ -14,7 +14,7 @@ const Suggestions = ({ suggestions }) => {
               card: "lg:card-side lg:h-24",
               thumbnailContainer: "flex lg:w-44 lg:pr-2",
               thumbnail: "w-full h-full aspect-video object-cover rounded-xl",
-              cardBody: "flex lg:flex-1",
+              cardBody: "flex lg:flex-1 relative",
               profile: "hidden",
               profileImage: "bg-gray-300 h-9 w-full rounded-full object-fit",
               metadataContainer: "grow pr-6 pt-3 lg:p-0",
@@ -26,7 +26,7 @@ const Suggestions = ({ suggestions }) => {
           >
             {/* addtional menu button for the card ui */}
             {/* this button only shows when device width is large */}
-            <div className="hidden lg:block absolute top-0 right-0">
+            <div className="absolute lg:top-0 lg:right-0 right-0 top-2">
               <button
                 onClick={(e) => e.stopPropagation()}
                 className="btn btn-sm btn-circle btn-ghost hover:bg-base-content/20"

@@ -22,8 +22,7 @@ const Card = ({ video, styles, children }) => {
 
   const handleNavigateToChannel = (e) => {
     e.stopPropagation(); // Prevent the card click event
-    const channelName = video.uploader.replace(/\s+/g, "").toLowerCase();
-    navigate(`/@${channelName}`);
+    navigate(`/${video.handle}`);
   };
 
   return (
@@ -59,8 +58,11 @@ const Card = ({ video, styles, children }) => {
             <h2 title={video.title} className={styles?.title}>
               {video.title}
             </h2>
-            <p onClick={handleNavigateToChannel} className={styles?.uploader}>
-              {video.uploader}
+            <p
+              onClick={handleNavigateToChannel}
+              className={styles?.channelName}
+            >
+              {video.channelName}
             </p>
             <p className={styles?.metadata}>
               {viewCount} views - {uploadDate}

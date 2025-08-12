@@ -7,17 +7,17 @@ const TopRowMetadata = ({ currentVideo }) => {
   const likes = new Intl.NumberFormat("en-US", {
     notation: "compact",
     compactDisplay: "short",
-  }).format(currentVideo.likes);
+  }).format(currentVideo?.likes);
 
   const dislikes = new Intl.NumberFormat("en-US", {
     notation: "compact",
     compactDisplay: "short",
-  }).format(currentVideo.dislikes);
+  }).format(currentVideo?.dislikes);
 
   const handleNavigateToChannel = (e) => {
-    e.stopPropagation(); // Prevent the card click event
-    const channleName = currentVideo.uploader.replace(/\s+/g, "").toLowerCase();
-    navigate(`/@${channleName}`);
+    e.stopPropagation();
+
+    navigate(`/${currentVideo?.handle}`);
   };
   return (
     <div className="flex flex-wrap lg:flex-nowrap">
@@ -27,7 +27,7 @@ const TopRowMetadata = ({ currentVideo }) => {
         <div className="flex items-center">
           <div className="w-10 h-10 mr-3">
             <img
-              src={currentVideo.profile}
+              src={currentVideo?.profile}
               alt=""
               className="bg-gray-300 h-full w-full rounded-full object-fit"
             />
@@ -35,9 +35,9 @@ const TopRowMetadata = ({ currentVideo }) => {
           <div className="flex flex-col mr-6 ">
             <p
               onClick={handleNavigateToChannel}
-              className="font-bold truncate w-16 xl:w-20 2xl:w-50"
+              className="font-bold truncate w-16 xl:w-20 2xl:w-50 cursor-pointer"
             >
-              {currentVideo.uploader}
+              {currentVideo?.channelName}
             </p>
             <p className="text-sm text-base-content/60 truncate w-16 xl:w-20 2xl:w-50">
               1k subscribers

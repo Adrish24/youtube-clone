@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Importing components for the profile menu
@@ -8,15 +8,13 @@ import SwitchAccountMenu from "./SwitchAccountMenu";
 
 import { clearUserInfo } from "../../../context/redux/userSlice";
 import { CreateChannel } from "../../channel";
+import { useActiveChannel } from "../../../hooks";
+import { Avatar } from "../../ui";
 
 const ProfileButton = memo(() => {
   const location = useLocation();
 
-  const userInfo = useSelector((state) => state.user.userInfo); // Check if the user is logged in
-  const activeChannel = userInfo?.ownedChannels?.find(
-    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
-  );
-  console.log(userInfo, activeChannel);
+  const { activeChannel, userInfo } = useActiveChannel();
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showSwitchAccount, setShowSwitchAccount] = useState(false);
@@ -62,6 +60,10 @@ const ProfileButton = memo(() => {
         setShowCreateChannel(true);
         setShowProfileMenu(false);
         setShowSwitchAccount(false);
+        break;
+      case "My channel":
+        handleNavigation(`/${activeChannel.handle}`);
+        break;
     }
   };
 
@@ -110,24 +112,19 @@ const ProfileButton = memo(() => {
               setShowSwitchAccount(false);
             }}
             role="button"
-            className="btn  btn-circle avatar btn-primary"
+            className="btn  btn-circle avatar btn-primary text-center"
           >
             {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
-
             {activeChannel ? (
-              activeChannel.avatar ? (
-                <img src={activeChannel.avatar} alt="" />
-              ) : (
-                <h2 className="text-2xl text-white">
-                  {activeChannel.channelName.charAt(0).toUpperCase()}
-                </h2>
-              )
-            ) : userInfo.currentUser?.avatar ? (
-              <img src={userInfo.currentUser?.avatar} alt="" />
+              <Avatar
+                avatar={activeChannel.avatar}
+                name={activeChannel.channelName}
+              />
             ) : (
-              <h2 className="text-2xl text-white">
-                {userInfo.currentUser?.username?.charAt(0).toUpperCase()}
-              </h2>
+              <Avatar
+                avatar={userInfo.currentUser?.avatar}
+                name={userInfo.currentUser?.username}
+              />
             )}
           </div>
 
@@ -135,10 +132,7 @@ const ProfileButton = memo(() => {
           {/* This menu appears when the user clicks on the profile button */}
           {/* It contains user information and various options */}
           {showProfileMenu && !showSwitchAccount ? (
-            <ProfileMenuList
-              handleMenuClick={handleMenuClick}
-              handleNavigation={handleNavigation}
-            />
+            <ProfileMenuList handleMenuClick={handleMenuClick} />
           ) : null}
 
           {/* Switch Account Menu */}

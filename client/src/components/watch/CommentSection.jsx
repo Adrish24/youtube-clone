@@ -17,6 +17,7 @@ const CommentSection = ({ currentVideo }) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !wasIntersecting) {
+            console.log(wasIntersecting );
             fetchComments(currentVideo.videoId);
             wasIntersecting = true; // Prevent multiple calls
           }

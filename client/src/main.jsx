@@ -29,6 +29,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -49,12 +50,13 @@ const router = createBrowserRouter([
         errorElement: <NoVideo />,
       },
       {
-        path: "/:channelName",
+        path: "/:handle",
         element: (
           <Suspense>
             <Channel />
           </Suspense>
         ),
+        errorElement: <NotFound />
       },
       {
         path: "/results",
@@ -64,14 +66,6 @@ const router = createBrowserRouter([
           </Suspense>
         ),
         loader: searchResultLoader,
-      },
-      {
-        path: "*",
-        element: (
-          <Suspense>
-            <NotFound />
-          </Suspense>
-        ),
       },
     ],
   },

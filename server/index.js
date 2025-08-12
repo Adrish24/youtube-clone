@@ -7,6 +7,7 @@ import watchRoute from "./routes/watch.route.js";
 import commentRoute from "./routes/comment.route.js";
 import searchRoute from "./routes/search.route.js";
 import authRoute from "./routes/auth.route.js";
+import channelRoute from "./routes/channel.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/videos", videoRoute);
 app.use("/api/watch", watchRoute);
+app.use("/api/channel", channelRoute);
 
 app.use("/api/auth", authRoute);
 

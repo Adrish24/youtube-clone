@@ -6,6 +6,8 @@ import useFetchComments from "./useFetchComments";
 import useDebouncer from "./useDebouncer";
 import useSearch from "./useSearch";
 import useCreateChannel from "./useCreateChannel";
+import useActiveChannel from "./useActiveChannel";
+import useFetchChannelData from "./useFetchChannelData";
 
 export {
   useResizeWindow,
@@ -16,4 +18,6 @@ export {
   useDebouncer,
   useSearch,
   useCreateChannel,
+  useActiveChannel,
+  useFetchChannelData,
 };
