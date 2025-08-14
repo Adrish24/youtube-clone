@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import {
   CommentSection,
@@ -8,11 +8,17 @@ import {
   WatchMetaData,
 } from "../components/watch";
 import { useThemeContext } from "../context/ThemeProvider";
-import { useResizeWindow } from "../hooks";
+import { useFetchVideoById, useResizeWindow } from "../hooks";
 import { useEffect, useState } from "react";
+import { WatchVideoLoader } from "../components/ui/Loader";
 
 const WatchVideo = () => {
-  const { currentVideo, suggestedVideos } = useLoaderData();
+  const [searchParams] = useSearchParams();
+
+  const videoId = searchParams.get("v");
+
+  const { currentVideo, suggestedVideos, isLoading, error } =
+    useFetchVideoById(videoId);
 
   const [isSmallDevice, setIsSmallDevice] = useState(false);
 
@@ -36,15 +42,14 @@ const WatchVideo = () => {
     });
   }
 
-  // If currentVid is not found, display a message
-  // This is used to handle cases where the video ID is invalid or the video has been removed
-  // If currentVideo is null or undefined, return the NoVideo component
-  if (!currentVideo) return <NoVideo />;
+  if (isLoading) return <WatchVideoLoader />;
+
+  // if there is an error show NoVideo component
+  if (error) return <NoVideo />;
 
   // If currentVideo is found, Render the video player, metadata and suggested videos
-
   return (
-    <div className="mt-14 p-2 bg-base-300 flex justify-center pb-20">
+    <div className="mt-16 p-2 bg-base-300 flex justify-center pb-20">
       <div className="flex flex-col lg:flex-row w-full h-full 2xl:w-[90vw]">
         <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
           <VideoPlayer src={currentVideo?.src} title={currentVideo?.title} />

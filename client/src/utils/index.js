@@ -1,4 +1,3 @@
-import { watchVideoLoader } from "./watchVideoLoader";
 import {
   validateEmail,
   validatePassword,
@@ -9,7 +8,6 @@ import {
 import { searchResultLoader } from "./searchResultLoader";
 
 export {
-  watchVideoLoader,
   validateEmail,
   validatePassword,
   validateUsername,

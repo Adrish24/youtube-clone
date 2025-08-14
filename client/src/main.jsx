@@ -12,7 +12,7 @@ import { ThemeProvider } from "./context/ThemeProvider.jsx";
 import { HomeLoader, WatchVideoLoader } from "./components/ui/Loader.jsx";
 
 // Importing data loaders
-import { searchResultLoader, watchVideoLoader } from "./utils";
+import { searchResultLoader } from "./utils";
 import store from "./context/redux/store/store.js";
 import { Provider } from "react-redux";
 import NoVideo from "./components/watch/NoVideo.jsx";
@@ -46,7 +46,6 @@ const router = createBrowserRouter([
             <WatchVideo />
           </Suspense>
         ),
-        loader: watchVideoLoader,
         errorElement: <NoVideo />,
       },
       {
@@ -56,7 +55,7 @@ const router = createBrowserRouter([
             <Channel />
           </Suspense>
         ),
-        errorElement: <NotFound />
+        errorElement: <NotFound />,
       },
       {
         path: "/results",

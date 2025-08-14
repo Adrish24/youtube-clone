@@ -8,6 +8,8 @@ const useFetchComments = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+  // Function to fetch comments for a specific video
+  // This function can be called with the video ID to fetch comments
   const fetchComments = useCallback(
     async (videoId) => {
       setIsLoading(true);

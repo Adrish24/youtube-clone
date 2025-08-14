@@ -9,9 +9,9 @@ import {
 
 const router = express.Router();
 
-router.post("/", createComment);
+router.post("/create", createComment);
 router.get("/:videoId", getCommentsById);
-router.put("/:videoId", updateComment);
-router.delete("/:videoId", deleteComment);
+router.put("/update/:videoId", updateComment);
+router.delete("/delete/:videoId", deleteComment);
 
 export default router;

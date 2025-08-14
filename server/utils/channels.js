@@ -3,7 +3,7 @@ export const channels = [
     channelId: "channel99",
     handle: "@adrishtech",
     channelName: "Code with Adrish",
-    owner: "user99",
+    owner: "adrishghosh23@gmail.com",
     description: "Coding tutorials and tech reviews by Adrish.",
     channelBanner: "https://example.com/banners/john_banner.png",
     avatar: "",
@@ -14,7 +14,7 @@ export const channels = [
     channelId: "channel100",
     handle: "@techwithadrish",
     channelName: "Tech with Adrish",
-    owner: "user99",
+    owner: "adrishghosh23@gmail.com",
     description: "Latest tech news and gadget reviews.",
     channelBanner: "https://example.com/banners/jane_banner.png",
     avatar: "",
@@ -25,7 +25,7 @@ export const channels = [
     channelId: "channel01",
     handle: "@6packprogrammer",
     channelName: "6 Pack Programmer",
-    owner: "uploader01",
+    owner: "sixpackprogrammer@example.com",
     description: "Welcome to the 6 Pack Programmer!",
     channelBanner:
       "https://yt3.googleusercontent.com/dbKUfGXfuoTF6l6g8r4Hvl_tPEahc_ecey9UIdcZqImvJShXR2Zm7S3RsuYqJ2ZS9XKaKJCnjw=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
@@ -38,7 +38,7 @@ export const channels = [
     channelId: "channel02",
     handle: "@DaveGrayTeachesCode",
     channelName: "Dave Gray",
-    owner: "uploader02",
+    owner: "davegray@example.com",
     description:
       "Web Development tutorials with full courses on HTML, CSS, JavaScript, React, Node.js and more! ",
     channelBanner:
@@ -52,7 +52,7 @@ export const channels = [
     channelId: "channel03",
     handle: "@this-is-gamedev",
     channelName: "This is GameDev",
-    owner: "uploader03",
+    owner: "thisisgamedev@example.com",
     description: "Let's learn to make games!",
     channelBanner:
       "https://yt3.googleusercontent.com/WI1b2eGJ4zddJogntCksI4n55fxtuOVwCgMs-yiWxLBCrIOPxAN0ACW75rod_7Hxx4u-0cm_o0w=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
@@ -65,7 +65,7 @@ export const channels = [
     channelId: "channel04",
     handle: "@Gdevtv",
     channelName: "GameDev.tv",
-    owner: "uploader04",
+    owner: "gamedevtv@example.com",
     description:
       "If you've ever dreamt of making video games, want to become a better game developer, 3D artist or programmer then you're in the right place. 👾",
     channelBanner:
@@ -79,7 +79,7 @@ export const channels = [
     channelId: "channel05",
     handle: "@Rishabsmusic",
     channelName: "Rishab Rikhiram Sharma",
-    owner: "uploader05",
+    owner: "rishabsharma@example.com",
     description:
       "Rishab Sharma is a sitarist and a music producer from India living in New York City, the youngest disciple of the legendary Ravi Shankar. Exposed to music in his formative years, Rishab Sharma had a chance to learn from great improvisers from across the world. His musical journey began with playing small gatherings and he has now gone on to perform solos for TV and world renowned concert spaces.",
     channelBanner:
@@ -93,7 +93,7 @@ export const channels = [
     channelId: "channel06",
     handle: "@LadyGaga",
     channelName: "Lady Gaga",
-    owner: "uploader06",
+    owner: "ladygaga@example.com",
     description: "ladygaga.com",
     channelBanner:
       "https://yt3.googleusercontent.com/5bAr7QAdjUkTfwEDpIBc-YFJZUToN4DZdv1XQz6APHDHjZA4WXCoRnHlL93Mc43VtkoKgV1dPw=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
@@ -106,7 +106,7 @@ export const channels = [
     channelId: "channel07",
     handle: "@officialenglandcricket",
     channelName: "England and Wales Cricket Board",
-    owner: "uploader07",
+    owner: "ecb@example.com",
     description:
       "Welcome to the England and Wales Cricket Board's official YouTube channel - bringing you the best content from across the game of cricket!",
     channelBanner:
@@ -120,7 +120,7 @@ export const channels = [
     channelId: "channel08",
     handle: "@talkSPORTCricket",
     channelName: "talkSPORT Cricket",
-    owner: "uploader08",
+    owner: "talksportcricket@example.com",
     description: "talkSPORT's home for all things Cricket.",
     channelBanner:
       "https://yt3.googleusercontent.com/KNmiwm54KYbMEI93JiWslJl1CPh3JVy2u-4vRERBK2g4TpM1B_FvgbZ2ZZD1CwRDBOcH1oDd7Q=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
@@ -133,7 +133,7 @@ export const channels = [
     channelId: "channel09",
     handle: "@indiatoday",
     channelName: "India Today",
-    owner: "uploader09",
+    owner: "indiatoday@example.com",
     description:
       "India Today TV is India's leading English News Channel. India Today YouTube channel offers latest news videos on Politics, Business, Cricket, Bollywood, Lifestyle, Auto, Technology, Travel, Entertainment and a lot more. ",
     channelBanner:
@@ -147,7 +147,7 @@ export const channels = [
     channelId: "channel10",
     handle: "@healthlonglife",
     channelName: "Healthy Long Life",
-    owner: "uploader10",
+    owner: "healthylonglife@example.com",
     description:
       "The Mission of this Channel is to Inspire All Ages on living a Healthy Long Life!",
     channelBanner:

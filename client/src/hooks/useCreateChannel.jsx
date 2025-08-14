@@ -21,14 +21,12 @@ const useCreateChannel = ({ initialData }) => {
   const resetFrom = () => {
     setTimeout(() => {
       setFormData(initialData);
-      setInvalidHandle(false);
     }, 100); // Reset form data and errors after a short delay
   };
 
   return {
     formData,
     invalidHandle,
-    setInvalidHandle,
     handleInputChange,
     resetFrom,
   };

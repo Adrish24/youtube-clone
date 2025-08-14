@@ -338,7 +338,7 @@ const SearchResult = () => {
     <div
       id="search-result"
       ref={searchResultRef}
-      className="flex px-2 mt-14 md:ml-20 min-h-screen"
+      className="flex px-2 mt-16 md:ml-20 min-h-screen"
     >
       <div className="lg:w-1/2 mx-auto">
         {results.length > 0 &&

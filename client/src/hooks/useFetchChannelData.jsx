@@ -8,8 +8,8 @@ const useFetchChannelData = (handle) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
     async function fetchChannelData() {
+      setIsLoading(true);
       const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
       try {

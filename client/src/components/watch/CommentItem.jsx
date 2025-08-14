@@ -2,11 +2,14 @@ import { useState } from "react";
 import EditComment from "./EditComment";
 import axios from "axios";
 import { useActiveChannel } from "../../hooks";
+import { useNavigate } from "react-router-dom";
 
 const CommentItem = ({ comment, fetchComments }) => {
   const { activeChannel } = useActiveChannel();
 
   const [isEdit, setIsEdit] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDeleteComment = async (e) => {
     e.preventDefault();
@@ -14,7 +17,7 @@ const CommentItem = ({ comment, fetchComments }) => {
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
     try {
       const res = await axios.delete(
-        `${apiUrl}/api/comments/${comment?.videoId}?commentId=${comment?.commentId}`
+        `${apiUrl}/api/comments/delete/${comment?.videoId}?commentId=${comment?.commentId}`
       );
       console.log(res.data.comments);
       await fetchComments(comment?.videoId);
@@ -29,6 +32,11 @@ const CommentItem = ({ comment, fetchComments }) => {
     day: "numeric",
     year: "numeric",
   });
+
+  const handleNavigateToChannel = (e) => {
+    e.stopPropagation(); // Prevent the card click event
+    navigate(`/${comment.handle}`);
+  };
 
   if (isEdit)
     return (
@@ -55,7 +63,10 @@ const CommentItem = ({ comment, fetchComments }) => {
         </div>
       </div>
       <div className="w-full">
-        <h2 className="flex items-center space-x-1">
+        <h2
+          onClick={handleNavigateToChannel}
+          className="flex items-center space-x-1"
+        >
           <span className="font-bold cursor-pointer">
             {comment?.handle === activeChannel?.handle
               ? activeChannel?.handle

@@ -1,26 +1,58 @@
 import { useState } from "react";
-import { useCreateChannel } from "../../hooks";
+import { useActiveChannel, useCreateChannel } from "../../hooks";
 import { validateForm } from "../../utils";
 
 import { InputField } from "../ui";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../context/redux/userSlice";
 
-const CreateChannel = ({ cancel }) => {
-  const { formData, invalidHandle, setInvalidHandle, handleInputChange } =
-    useCreateChannel({
-      name: "",
-      handle: "",
-    });
+const CreateChannel = ({ close }) => {
+  const { userInfo } = useActiveChannel();
+
+  // Custom hook to manage form data and validation
+  // It initializes form data and provides a function to handle input changes
+  const { formData, invalidHandle, handleInputChange } = useCreateChannel({
+    name: "",
+    handle: "",
+  });
 
   const [isCreating, setIsCreating] = useState(false);
+  const [alert, setAlert] = useState({ success: null, message: "" });
 
-  const [alert, setAlert] = useState({ success: null, message: "" }); // Alert state for feedback
+  const dispatch = useDispatch();
 
+  // Function to handle channel creation
+  // It validates the form data and sends a POST request to create a new channel
+  // If successful, it updates the user info in the Redux store and local storage
+  // If there's an error, it sets an alert message
   const handleCreateChannel = async (e) => {
     e.preventDefault();
+
+    setIsCreating(true);
     if (!validateForm(formData, ["name", "handle"])) {
-      setInvalidHandle(true);
-    } else {
-      setInvalidHandle(false);
+      setAlert({
+        success: false,
+        message: "Please fill all required fields correctly.",
+      });
+      return;
+    }
+
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+    try {
+      const res = await axios.post(`${apiUrl}/api/channel/create`, {
+        ...formData,
+        email: userInfo?.currentUser?.email,
+      });
+      dispatch(setUserInfo(res.data));
+      localStorage.setItem("userInfo", JSON.stringify(res.data));
+      close();
+    } catch (error) {
+      console.log(error);
+      setAlert({ success: false, message: error.response?.data?.message });
+    } finally {
+      setIsCreating(false);
     }
   };
 
@@ -28,9 +60,23 @@ const CreateChannel = ({ cancel }) => {
     <div className="fixed left-0 top-0 right-0 bottom-0 bg-base-300/60 z-[101] grid justify-center items-center">
       <div className="bg-base-100 py-4 px-5 rounded-2xl">
         <h2 className="text-2xl font-bold mb-10">How You will appear</h2>
+
+        {/* Error message */}
+        {alert.message ? (
+          <div
+            role="alert"
+            className={`alert ${
+              alert.success ? "alert-success" : "alert-error"
+            } alert-outline mb-4`}
+          >
+            <span>{alert.message}</span>
+          </div>
+        ) : null}
+
+        {/* Form for creating a channel */}
         <form
           onSubmit={handleCreateChannel}
-          className="flex flex-col space-y-4 w-60 sm:w-sm md:w-md lg:w-lg  max-w-xl "
+          className="flex flex-col space-y-4 w-full sm:w-sm md:w-md lg:w-lg  max-w-xl "
         >
           <div className="flex flex-col items-center space-y-2">
             <img
@@ -88,18 +134,19 @@ const CreateChannel = ({ cancel }) => {
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                cancel(false);
+                close();
               }}
+              disabled={isCreating}
               className="btn btn-ghost rounded-full"
             >
               Cancel
             </button>
             <button
               type="submit"
-              disabled={invalidHandle}
+              disabled={invalidHandle | isCreating}
               className="btn btn-ghost rounded-full btn-info"
             >
-              Create channle
+              {isCreating ? "Creating..." : "Create channel"}
             </button>
           </div>
         </form>

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Avatar from "./Avatar";
 
 const Card = ({ video, styles, children }) => {
   const navigate = useNavigate();
@@ -45,10 +46,12 @@ const Card = ({ video, styles, children }) => {
           {/* profile image */}
           <div>
             <div className={styles?.profile}>
-              <img
-                src={video.profile}
-                alt="profileImage"
-                className={styles?.profileImage}
+              <Avatar
+                avatar={video.profile}
+                name={video.channelName}
+                styles={{
+                  avatar: styles?.profileImage,
+                }}
               />
             </div>
           </div>

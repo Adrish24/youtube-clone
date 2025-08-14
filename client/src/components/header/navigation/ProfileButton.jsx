@@ -1,12 +1,10 @@
 import { memo, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Importing components for the profile menu
 import ProfileMenuList from "./ProfileMenuList";
 import SwitchAccountMenu from "./SwitchAccountMenu";
 
-import { clearUserInfo } from "../../../context/redux/userSlice";
 import { CreateChannel } from "../../channel";
 import { useActiveChannel } from "../../../hooks";
 import { Avatar } from "../../ui";
@@ -24,7 +22,6 @@ const ProfileButton = memo(() => {
   const profileButtonRef = useRef(null);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // This function navigates to the current user's channel
   const handleNavigation = (path) => {
@@ -44,23 +41,16 @@ const ProfileButton = memo(() => {
         break;
       case "Sign out":
         console.log("Signing out...");
-        dispatch(clearUserInfo());
-        handleNavigation("/");
+        localStorage.removeItem("userInfo");
+        window.location.reload();
         break;
-      case "Add account":
-        navigate("/login");
-        setShowProfileMenu(false);
-        setShowSwitchAccount(false);
-        localStorage.setItem(
-          "redirectPath",
-          `${location.pathname}${location.search}` // Save the current path to redirect after login
-        );
-        break;
+
       case "Create channel":
         setShowCreateChannel(true);
         setShowProfileMenu(false);
         setShowSwitchAccount(false);
         break;
+
       case "My channel":
         handleNavigation(`/${activeChannel.handle}`);
         break;
@@ -103,7 +93,7 @@ const ProfileButton = memo(() => {
           {/* Create channel modal */}
           {/* This modal allows users to create a new channel */}
           {showCreateChannel ? (
-            <CreateChannel cancel={setShowCreateChannel} />
+            <CreateChannel close={() => setShowCreateChannel(false)} />
           ) : null}
 
           <div
@@ -112,7 +102,7 @@ const ProfileButton = memo(() => {
               setShowSwitchAccount(false);
             }}
             role="button"
-            className="btn  btn-circle avatar btn-primary text-center"
+            className="btn  btn-circle avatar  text-center"
           >
             {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
             {activeChannel ? (

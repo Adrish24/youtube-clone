@@ -33,6 +33,10 @@ const SwitchAccountMenu = ({
       });
 
       dispatch(setUserInfo(res.data)); // Dispatch the user info to the Redux store
+
+      localStorage.setItem("userInfo", JSON.stringify(res.data)); // Update local storage with new user info
+
+      window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {
@@ -105,7 +109,7 @@ const SwitchAccountMenu = ({
               }
               className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
             >
-              <div className="bg-primary px-3 py-1 rounded-full mr-3 text-center">
+              <div className="rounded-full mr-3 text-center">
                 <Avatar avatar={channel.avatar} name={channel.channelName} />
               </div>
               <div className="flex flex-col w-full">
@@ -137,10 +141,13 @@ const SwitchAccountMenu = ({
             }}
             className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
           >
-            <div className="bg-primary px-3 py-1 rounded-full mr-3 text-center">
+            <div className="bg-primary  rounded-full mr-3 text-center">
               <Avatar
                 avatar={userInfo.currentUser?.avatar}
                 name={userInfo.currentUser?.username}
+                styles={{
+                  textContainer: "",
+                }}
               />
             </div>
             <div className="flex flex-col">
@@ -178,7 +185,7 @@ const SwitchAccountMenu = ({
 
       {/* Add account */}
       <ClickableItem
-        // onClick={(e) => handleMenuClick(e, "Add account")}
+        onClick={(e) => handleMenuClick(e, "Add account")}
         className="py-2 px-3 flex items-center space-x-1 text-sm hover:bg-base-content/20 rounded-none"
       >
         <div>

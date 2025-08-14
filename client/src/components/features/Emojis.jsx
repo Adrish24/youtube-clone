@@ -5,7 +5,7 @@ import { emojiGroups } from "../../constants/emojis";
 
 const Emojis = ({ onClick }) => {
   return (
-    <div className="w-sm h-full bg-neutral p-4 rounded-xl flex flex-col space-y-2">
+    <div className="w-70 h-full bg-neutral p-4 rounded-xl flex flex-col space-y-2 z-50">
       {emojiGroups.map((group) => (
         <div key={group.label}>
           <h1>{group.label}</h1>
@@ -16,7 +16,7 @@ const Emojis = ({ onClick }) => {
                   e.stopPropagation();
                   onClick(emoji.symbol);
                 }}
-                className="text-2xl cursor-pointer hover:bg-base-content/20 rounded"
+                className="text-xl cursor-pointer hover:bg-base-content/20 rounded"
                 title={emoji.name}
                 key={emoji.name}
               >

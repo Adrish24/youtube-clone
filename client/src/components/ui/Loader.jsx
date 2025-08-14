@@ -1,7 +1,11 @@
-import { useLoaderData } from "react-router-dom";
-
-const Loader = () => {
-  return <div></div>;
+const Loader = ({ style }) => {
+  return (
+    <div className={style?.container}>
+      <span
+        className={`loading loading-spinner loading-xl ${style?.loader}`}
+      ></span>
+    </div>
+  );
 };
 
 export default Loader;
@@ -61,21 +65,15 @@ export const CardLoader = () => {
 // Placeholder for WatchVideoLoader component
 // This component will be used to show loading state in the WatchVideo page.
 export const WatchVideoLoader = () => {
-  const { currentVideo } = useLoaderData();
-
   return (
     <div className="mt-14 p-2 bg-base-300 flex justify-center pb-20">
       <div className="flex flex-col lg:flex-row w-full h-full 2xl:w-[90vw]">
         <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
           <div
-            className="w-full lg:w-[640px] xl:w-[800px] 2xl:w-[1268px]
-            h-50 md:h-[432px] lg:h-90 xl:h-[450px] 2xl:h-[713px] 
-            rounded-2xl overflow-hidden relative"
+            className="animate-pulse bg-base-content/40 w-full  lg:w-[640px] xl:w-[800px] 2xl:w-[1062px]
+            h-60 sm:h-90 md:h-[432px] lg:h-90 xl:h-[450px] 2xl:h-[597px] 
+            rounded-2xl relative"
           >
-            <img
-              className="w-full h-full object-fit"
-              src={currentVideo.thumbnailUrl}
-            />
             <span className="loading loading-spinner loading-xl bg-neutral absolute top-1/2 right-1/2"></span>
           </div>
 

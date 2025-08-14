@@ -19,7 +19,7 @@ const ProfileMenuList = ({ handleMenuClick }) => {
     <ul className="absolute right-0 menu menu-sm  bg-base-100 rounded-box z-1 mt-3 w-64 p-0 py-2 ">
       {/* User informations */}
       <div className="px-3 py-2 flex items-start w-full">
-        <div className="bg-primary w-10 h-10 px-3 py-1 rounded-full mr-3 text-center">
+        <div className="flexw-10 h-10  rounded-full mr-3 text-center">
           {/* if user has active channel show the channels profile image. else show the actual user's profile image */}
 
           {activeChannel ? (
@@ -34,7 +34,7 @@ const ProfileMenuList = ({ handleMenuClick }) => {
             />
           )}
         </div>
-        <div className="flex flex-col w-full ">
+        <div className="flex flex-col w-[80%]">
           <p className="font-semibold truncate w-46">
             {activeChannel
               ? activeChannel.channelName

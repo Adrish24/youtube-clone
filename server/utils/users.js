@@ -17,6 +17,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-01-15T08:30:00Z"),
     updatedAt: new Date("2024-09-21T08:30:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user02",
@@ -27,6 +28,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-02-20T10:45:00Z"),
     updatedAt: new Date("2024-09-22T10:45:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user03",
@@ -37,6 +39,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-03-10T09:10:00Z"),
     updatedAt: new Date("2024-09-23T09:10:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user04",
@@ -47,6 +50,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-04-05T13:25:00Z"),
     updatedAt: new Date("2024-09-24T13:25:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user05",
@@ -57,6 +61,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-05-12T11:05:00Z"),
     updatedAt: new Date("2024-09-25T11:05:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user06",
@@ -67,6 +72,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-06-18T09:00:00Z"),
     updatedAt: new Date("2024-10-06T09:00:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user07",
@@ -77,6 +83,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-07-22T12:15:00Z"),
     updatedAt: new Date("2024-10-07T12:15:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user08",
@@ -87,6 +94,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-08-14T15:45:00Z"),
     updatedAt: new Date("2024-10-08T15:45:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user09",
@@ -97,6 +105,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-09-03T18:10:00Z"),
     updatedAt: new Date("2024-10-09T18:10:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user10",
@@ -107,6 +116,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-09-28T20:30:00Z"),
     updatedAt: new Date("2024-10-10T20:30:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user11",
@@ -117,6 +127,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-10-15T08:00:00Z"),
     updatedAt: new Date("2024-11-02T08:00:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user12",
@@ -127,6 +138,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-10-20T10:30:00Z"),
     updatedAt: new Date("2024-11-03T10:30:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user13",
@@ -137,6 +149,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-10-25T13:50:00Z"),
     updatedAt: new Date("2024-11-04T13:50:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user14",
@@ -147,6 +160,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-10-30T16:15:00Z"),
     updatedAt: new Date("2024-11-05T16:15:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user15",
@@ -157,6 +171,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-02T19:25:00Z"),
     updatedAt: new Date("2024-11-06T19:25:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user16",
@@ -167,6 +182,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-10T09:30:00Z"),
     updatedAt: new Date("2024-11-16T09:30:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user17",
@@ -177,6 +193,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-12T11:50:00Z"),
     updatedAt: new Date("2024-11-17T11:50:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user18",
@@ -187,6 +204,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-15T14:10:00Z"),
     updatedAt: new Date("2024-11-18T14:10:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user19",
@@ -197,6 +215,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-18T16:40:00Z"),
     updatedAt: new Date("2024-11-19T16:40:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user20",
@@ -207,6 +226,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-20T18:55:00Z"),
     updatedAt: new Date("2024-11-20T18:55:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user21",
@@ -217,6 +237,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-25T08:15:00Z"),
     updatedAt: new Date("2024-12-02T08:15:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user22",
@@ -227,6 +248,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-11-28T10:25:00Z"),
     updatedAt: new Date("2024-12-03T10:25:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user23",
@@ -237,6 +259,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-01T12:35:00Z"),
     updatedAt: new Date("2024-12-04T12:35:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user24",
@@ -248,6 +271,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-03T14:45:00Z"),
     updatedAt: new Date("2024-12-05T14:45:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user25",
@@ -258,6 +282,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-05T16:55:00Z"),
     updatedAt: new Date("2024-12-06T16:55:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user26",
@@ -268,6 +293,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-08T09:10:00Z"),
     updatedAt: new Date("2024-12-11T09:10:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user27",
@@ -278,6 +304,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-10T11:20:00Z"),
     updatedAt: new Date("2024-12-12T11:20:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user28",
@@ -288,6 +315,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-12T13:30:00Z"),
     updatedAt: new Date("2024-12-13T13:30:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user29",
@@ -298,6 +326,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-14T15:40:00Z"),
     updatedAt: new Date("2024-12-14T15:40:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user30",
@@ -308,6 +337,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-15T17:50:00Z"),
     updatedAt: new Date("2024-12-15T17:50:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user31",
@@ -318,6 +348,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-18T08:25:00Z"),
     updatedAt: new Date("2024-12-21T08:25:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user32",
@@ -328,6 +359,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-20T10:35:00Z"),
     updatedAt: new Date("2024-12-22T10:35:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user33",
@@ -338,6 +370,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-22T12:45:00Z"),
     updatedAt: new Date("2024-12-23T12:45:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user34",
@@ -348,6 +381,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-23T14:55:00Z"),
     updatedAt: new Date("2024-12-24T14:55:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user35",
@@ -359,6 +393,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-24T17:05:00Z"),
     updatedAt: new Date("2024-12-25T17:05:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user36",
@@ -369,6 +404,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-25T09:20:00Z"),
     updatedAt: new Date("2024-12-26T09:20:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user37",
@@ -379,6 +415,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-26T11:30:00Z"),
     updatedAt: new Date("2024-12-27T11:30:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user38",
@@ -389,6 +426,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-27T13:40:00Z"),
     updatedAt: new Date("2024-12-28T13:40:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user39",
@@ -399,6 +437,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-28T15:50:00Z"),
     updatedAt: new Date("2024-12-29T15:50:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user40",
@@ -409,6 +448,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2024-12-29T18:00:00Z"),
     updatedAt: new Date("2024-12-30T18:00:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user41",
@@ -419,6 +459,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-01T09:35:00Z"),
     updatedAt: new Date("2025-01-03T09:35:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user42",
@@ -429,6 +470,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-02T11:45:00Z"),
     updatedAt: new Date("2025-01-04T11:45:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user43",
@@ -439,6 +481,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-03T13:55:00Z"),
     updatedAt: new Date("2025-01-05T13:55:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user44",
@@ -450,6 +493,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-04T16:05:00Z"),
     updatedAt: new Date("2025-01-06T16:05:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user45",
@@ -460,6 +504,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-05T18:15:00Z"),
     updatedAt: new Date("2025-01-07T18:15:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user46",
@@ -470,6 +515,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-06T09:25:00Z"),
     updatedAt: new Date("2025-01-08T09:25:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user47",
@@ -481,6 +527,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-07T11:35:00Z"),
     updatedAt: new Date("2025-01-09T11:35:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user48",
@@ -491,6 +538,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-08T13:45:00Z"),
     updatedAt: new Date("2025-01-10T13:45:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user49",
@@ -501,6 +549,7 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-09T15:55:00Z"),
     updatedAt: new Date("2025-01-11T15:55:00Z"),
+    activeChannel: "",
   },
   {
     _id: "user50",
@@ -511,8 +560,9 @@ export const users = [
     channels: [],
     createdAt: new Date("2025-01-10T18:05:00Z"),
     updatedAt: new Date("2025-01-12T18:05:00Z"),
+    activeChannel: "",
   },
-  // Video Uploaders/Channel Owners
+
   {
     _id: "uploader01",
     username: "6PackProgrammer",
@@ -523,6 +573,7 @@ export const users = [
     channels: ["channel01"],
     createdAt: new Date("2020-03-15T10:00:00Z"),
     updatedAt: new Date("2024-09-20T12:00:00Z"),
+    activeChannel: "channel01",
   },
   {
     _id: "uploader02",
@@ -534,6 +585,7 @@ export const users = [
     channels: ["channel02"],
     createdAt: new Date("2019-01-20T08:30:00Z"),
     updatedAt: new Date("2024-09-20T14:00:00Z"),
+    activeChannel: "channel02",
   },
   {
     _id: "uploader03",
@@ -545,6 +597,7 @@ export const users = [
     channels: ["channel03"],
     createdAt: new Date("2021-06-10T16:45:00Z"),
     updatedAt: new Date("2024-09-20T18:30:00Z"),
+    activeChannel: "channel03",
   },
   {
     _id: "uploader04",
@@ -556,6 +609,7 @@ export const users = [
     channels: ["channel04"],
     createdAt: new Date("2018-11-05T12:20:00Z"),
     updatedAt: new Date("2024-09-20T20:15:00Z"),
+    activeChannel: "channel04",
   },
   {
     _id: "uploader05",
@@ -567,6 +621,7 @@ export const users = [
     channels: ["channel05"],
     createdAt: new Date("2017-04-12T09:15:00Z"),
     updatedAt: new Date("2024-09-20T22:00:00Z"),
+    activeChannel: "channel05",
   },
   {
     _id: "uploader06",
@@ -578,6 +633,7 @@ export const users = [
     channels: ["channel06"],
     createdAt: new Date("2015-08-25T14:30:00Z"),
     updatedAt: new Date("2024-09-20T23:45:00Z"),
+    activeChannel: "channel06",
   },
   {
     _id: "uploader07",
@@ -589,6 +645,7 @@ export const users = [
     channels: ["channel07"],
     createdAt: new Date("2016-03-18T11:00:00Z"),
     updatedAt: new Date("2024-09-21T08:00:00Z"),
+    activeChannel: "channel07",
   },
   {
     _id: "uploader08",
@@ -600,6 +657,7 @@ export const users = [
     channels: ["channel08"],
     createdAt: new Date("2017-07-22T13:45:00Z"),
     updatedAt: new Date("2024-09-21T10:30:00Z"),
+    activeChannel: "channel08",
   },
   {
     _id: "uploader09",
@@ -611,6 +669,7 @@ export const users = [
     channels: ["channel09"],
     createdAt: new Date("2014-12-08T07:20:00Z"),
     updatedAt: new Date("2024-09-21T12:15:00Z"),
+    activeChannel: "channel09",
   },
   {
     _id: "uploader10",
@@ -622,5 +681,6 @@ export const users = [
     channels: ["channel10"],
     createdAt: new Date("2016-09-14T15:30:00Z"),
     updatedAt: new Date("2024-09-21T14:00:00Z"),
+    activeChannel: "channel10",
   },
 ];

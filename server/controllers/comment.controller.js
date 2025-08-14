@@ -67,7 +67,7 @@ export async function deleteComment(req, res) {
     console.log("Error fetching comments:", error);
     return res
       .status(500)
-      .json({ error: "Something went wrong!. Try again later." });
+      .json({ message: "Something went wrong!. Try again later." });
   }
 }
 
@@ -100,6 +100,6 @@ export async function updateComment(req, res) {
     console.log("Error fetching comments:", error);
     return res
       .status(500)
-      .json({ error: "Something went wrong!. Try again later." });
+      .json({ message: "Something went wrong!. Try again later." });
   }
 }
