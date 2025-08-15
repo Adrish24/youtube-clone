@@ -30,7 +30,7 @@ const useFetchVideos = () => {
         `${apiUrl}/api/videos?category=${activeCategory}`
       );
       // Dispatching the fetched videos to the Redux store
-      dispatch(setVideos(res.data.filteredVideos));
+      dispatch(setVideos(res.data.videos));
     } catch (error) {
       console.log(error.message);
       dispatch(setError("No videos found"));

@@ -17,8 +17,8 @@ const CommentSection = ({ currentVideo }) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !wasIntersecting) {
-            console.log(wasIntersecting );
-            fetchComments(currentVideo.videoId);
+            console.log(wasIntersecting);
+            fetchComments(currentVideo._id);
             wasIntersecting = true; // Prevent multiple calls
           }
         });
@@ -36,7 +36,7 @@ const CommentSection = ({ currentVideo }) => {
     return () => {
       if (sectionNode) observer.unobserve(sectionNode);
     };
-  }, [currentVideo.videoId, fetchComments]);
+  }, [currentVideo._id, fetchComments]);
 
   if (isLoading) return <CommentSectionLoader />;
 
@@ -63,7 +63,7 @@ const CommentSection = ({ currentVideo }) => {
 
         {/* Input field for adding a comment */}
         <FormComment
-          videoId={currentVideo.videoId}
+          videoId={currentVideo._id}
           fetchComments={fetchComments}
         />
       </div>
@@ -74,7 +74,7 @@ const CommentSection = ({ currentVideo }) => {
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
             .map((comment) => (
               <CommentItem
-                key={comment.commentId}
+                key={comment._id}
                 comment={comment}
                 fetchComments={fetchComments}
               />

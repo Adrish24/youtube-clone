@@ -8,22 +8,22 @@ const Card = ({ video, styles, children }) => {
   const viewCount = new Intl.NumberFormat("en-US", {
     notation: "compact",
     compactDisplay: "short",
-  }).format(video.views);
+  }).format(video?.views);
 
   // Format the upload date to a more readable format
-  const uploadDate = new Date(video.uploadDate).toLocaleDateString("en-US", {
+  const uploadDate = new Date(video?.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 
   const handleNavigateToWatch = () => {
-    navigate(`/watch?v=${video.videoId}`);
+    navigate(`/watch?v=${video?._id}`);
   };
 
   const handleNavigateToChannel = (e) => {
     e.stopPropagation(); // Prevent the card click event
-    navigate(`/${video.handle}`);
+    navigate(`/${video?.handle}`);
   };
 
   return (
@@ -37,7 +37,7 @@ const Card = ({ video, styles, children }) => {
           <img
             loading="lazy"
             className={styles?.thumbnail}
-            src={video.thumbnailUrl}
+            src={video?.thumbnail}
             alt="Thumbnail"
           />
         </figure>
@@ -47,8 +47,8 @@ const Card = ({ video, styles, children }) => {
           <div>
             <div className={styles?.profile}>
               <Avatar
-                avatar={video.profile}
-                name={video.channelName}
+                avatar={video?.avatar}
+                name={video?.channelName}
                 styles={{
                   avatar: styles?.profileImage,
                 }}
@@ -58,14 +58,14 @@ const Card = ({ video, styles, children }) => {
 
           {/* informations. e.g: title, view count, upload date */}
           <div className={styles?.metadataContainer}>
-            <h2 title={video.title} className={styles?.title}>
-              {video.title}
+            <h2 title={video?.title} className={styles?.title}>
+              {video?.title}
             </h2>
             <p
               onClick={handleNavigateToChannel}
               className={styles?.channelName}
             >
-              {video.channelName}
+              {video?.channelName}
             </p>
             <p className={styles?.metadata}>
               {viewCount} views - {uploadDate}

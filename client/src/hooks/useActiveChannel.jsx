@@ -4,7 +4,7 @@ const useActiveChannel = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
 
   const activeChannel = userInfo?.ownedChannels?.find(
-    (channel) => channel.channelId === userInfo.currentUser?.activeChannel
+    (channel) => channel._id === userInfo.currentUser?.activeChannel
   );
 
   return { userInfo, activeChannel };

@@ -36,9 +36,15 @@ const Login = () => {
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
     try {
       const res = await axios.post(`${apiUrl}/api/auth/login`, formData);
+
       setAlert({ success: true, message: "login successfull. Redirecting..." });
-      dispatch(setUserInfo(res.data)); // Dispatch the user info to the Redux store
-      localStorage.setItem("userInfo", JSON.stringify(res.data));
+
+      const { token, ...userInfo } = res.data;
+
+      dispatch(setUserInfo(userInfo)); // Dispatch the user info to the Redux store
+
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      localStorage.setItem("token", token);
 
       // redirect to the previous page or home page after a short delay
       setTimeout(() => {

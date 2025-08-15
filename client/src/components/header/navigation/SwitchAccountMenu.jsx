@@ -99,12 +99,12 @@ const SwitchAccountMenu = ({
           // Display owned channels
           userInfo?.ownedChannels.map((channel) => (
             <ClickableItem
-              key={channel.channelId}
+              key={channel._id}
               onClick={(e) =>
                 handleSwitchAccount(
                   e,
                   userInfo.currentUser.userId,
-                  channel.channelId
+                  channel._id
                 )
               }
               className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
@@ -116,7 +116,7 @@ const SwitchAccountMenu = ({
                 <p className=" font-semibold">{channel.channelName}</p>
                 <p className="text-xs text-base-content/40">{channel.handle}</p>
               </div>
-              {userInfo.currentUser.activeChannel === channel.channelId ? (
+              {userInfo.currentUser.activeChannel === channel._Id ? (
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

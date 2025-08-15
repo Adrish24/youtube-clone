@@ -27,7 +27,7 @@ const TopRowMetadata = ({ currentVideo }) => {
         <div className="flex items-center">
           <div className="w-10 h-10 mr-3">
             <img
-              src={currentVideo?.profile}
+              src={currentVideo?.avatar}
               alt=""
               className="bg-gray-300 h-full w-full rounded-full object-fit"
             />

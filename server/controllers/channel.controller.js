@@ -1,90 +1,78 @@
-import { channels } from "../utils/channels.js";
-import { videos } from "../utils/videos.js";
-import { users } from "../utils/users.js";
+import User from "../models/User.model.js";
+import Channel from "../models/Channel.model.js";
+import Video from "../models/Video.model.js";
 
 export async function createMyChannel(req, res) {
-  const { name, handle, email } = req.body;
+  const { name, handle } = req.body;
+  const { user } = req;
 
-  if (!name || !handle || !email) {
+  if (!name || !handle) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   try {
-    const userFound = users.find((user) => user.email === email);
-
-    if (!userFound) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    const existingChannel = channels.find(
-      (channel) => channel.handle === handle
-    );
-
-    if (existingChannel) {
-      return res
-        .status(400)
-        .json({ message: "Channel already exists with this handle" });
-    }
-
-    const newChannel = {
-      channelId:  Math.floor(1000000 + Math.random() * 9000000).toString(),
-      handle:`@${handle}`,
+    // create a new channel
+    // it will automatically throw an error if the channelName or handle already exists
+    const createdChannel = await Channel.create({
       channelName: name,
-      owner: email,
-      description: "",
-      channelBanner: "",
-      avatar: "",
-      subscribers: 0,
-      videos: [],
-    };
+      handle: `@${handle}`,
+      owner: user._id,
+    });
 
-    channels.push(newChannel);
+    // update the user with the new channel
+    // and set the active channel to the newly created channel
+    const updatedUser = await User.findByIdAndUpdate(
+      user._id,
+      {
+        $push: {
+          channels: createdChannel._id,
+        },
+        $set: {
+          activeChannel: createdChannel._id,
+        },
+      },
+      { new: true }
+    ).select("-password");
 
-    userFound.channels.push(newChannel.channelId);
-    userFound.activeChannel = newChannel.channelId;
+    // fetch the owned channels to return in the response
+    const ownedChannels = await Channel.find({
+      _id: { $in: updatedUser.channels },
+    }).select("channelName handle avatar subscribers");
 
-    const ownedChannels = channels
-      .filter((channel) => userFound.channels.includes(channel.channelId))
-      .map((channel) => ({
-        channelId: channel.channelId,
-        channelName: channel.channelName,
-        handle: channel.handle,
-        avatar: channel.avatar,
-        subscribers: channel.subscribers,
-      }));
-
-    const currentUser = {
-      userId: userFound.userId,
-      username: userFound.username,
-      email: userFound.email,
-      avatar: userFound.avatar,
-      channels: userFound.channels,
-      activeChannel: userFound.activeChannel,
-    };
-
-    res.status(201).json({ currentUser, ownedChannels });
+    res.status(201).json({ currentUser: updatedUser, ownedChannels });
   } catch (error) {
     console.log(error);
+
+    // Handle duplicate key error
+    // This means the channelName or handle already exists
+    if (error.code === 11000) {
+      return res.status(409).json({
+        message:
+          "Channel already exists with this name or handle. Try different name or handle.",
+      });
+    }
     return res
       .status(500)
       .json({ message: "Something went wrong!. Try again later." });
   }
 }
 
+// Function to get channel by handle
 export async function getChannelByhandle(req, res) {
   const { handle } = req.params;
-  console.log(handle);
 
   try {
-    const channel = channels.find((channel) => channel.handle === handle);
+    // Find the channel by handle
+    const channel = await Channel.findOne({ handle });
 
     if (!channel) {
       return res.status(404).json({ message: "Channel not found" });
     }
 
-    const channelVideos = videos.filter((video) =>
-      channel.videos.includes(video.videoId)
-    );
+    // Fetch the videos associated with the channel
+    const channelVideos = await Video.find({
+      _id: { $in: channel.videos },
+    }).sort({ createdAt: -1 });
 
     res.status(200).json({ channel, channelVideos });
   } catch (error) {

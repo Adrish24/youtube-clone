@@ -1,11 +1,13 @@
-import { videos } from "../utils/videos.js";
+import Video from "../models/Video.model.js";
 
 export async function getWatchVideoData(req, res) {
   const { videoId } = req.params;
 
   try {
-    const currentVideo = videos.find((vid) => vid.videoId === videoId);
-    const suggestedVideos = videos.filter((vid) => vid.videoId !== videoId);
+    const currentVideo = await Video.findById(videoId);
+    const suggestedVideos = await Video.find({
+      _id: { $ne: videoId }, // Exclude the current video
+    });
 
     if (!currentVideo) {
       return res.status(404).json({ message: "video not found" });

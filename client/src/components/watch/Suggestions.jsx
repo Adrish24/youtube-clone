@@ -6,7 +6,7 @@ const Suggestions = ({ suggestions }) => {
       {suggestions.length > 0 &&
         suggestions.map((vid) => (
           <Card
-            key={vid.videoId}
+            key={vid._id}
             video={vid}
             // Pass styles as props
             styles={{

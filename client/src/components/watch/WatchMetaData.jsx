@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import TopRowMetadata from "./TopRowMetadata";
-import CommentSection from "./CommentSection";
 
 const WatchMetaData = ({ currentVideo }) => {
   const descriptionRef = useRef(null);
@@ -27,10 +26,10 @@ const WatchMetaData = ({ currentVideo }) => {
   const viewCount = new Intl.NumberFormat("en-US", {
     notation: "compact",
     compactDisplay: "short",
-  }).format(currentVideo.views);
-  
+  }).format(currentVideo?.views);
+
   // Format the upload date to a more readable format
-  const uploadDate = new Date(currentVideo.uploadDate).toLocaleDateString(
+  const uploadDate = new Date(currentVideo?.createdAt).toLocaleDateString(
     "en-US",
     {
       month: "short",

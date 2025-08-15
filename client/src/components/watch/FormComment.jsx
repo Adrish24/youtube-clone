@@ -58,7 +58,7 @@ const FormComment = ({ videoId, fetchComments }) => {
       return;
     }
 
-    if (!activeChannel || !activeChannel.channelId) {
+    if (!activeChannel || !activeChannel._id) {
       setShowCreateChannel(true);
       e.target.blur(); // Prevents the input from gaining focus
       return;

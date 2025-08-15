@@ -1,19 +1,19 @@
 import { InputField, SelectField, TextareaField } from "../ui";
-import { useActiveChannel, useVideoForm } from "../../hooks";
+import { useVideoForm } from "../../hooks";
 import { useState } from "react";
 import axios from "axios";
 
 const UploadVideo = ({ close, type, video }) => {
-  const { activeChannel } = useActiveChannel();
-
+  // Custom hook to manage form state and validation
+  // It initializes form data based on the type (upload or edit)
   const { formData, formNotValid, handleInputChange } = useVideoForm(
     type === "edit"
       ? {
           title: video?.title || "",
           description: video?.description || "",
           category: video?.category || [],
-          videoUrl: video?.src || "",
-          thumbnailUrl: video?.thumbnailUrl || "",
+          videoUrl: video?.video || "",
+          thumbnailUrl: video?.thumbnail || "",
         }
       : {
           title: "",
@@ -30,18 +30,42 @@ const UploadVideo = ({ close, type, video }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsUploading(true);
+
+    // API URL and token for authentication
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const token = localStorage.getItem("token");
 
     try {
+      // If the type is "edit", we update the existing video
+      // Otherwise, we create a new video
       if (type === "edit") {
-        await axios.put(`${apiUrl}/api/videos/update/${video.videoId}`, {
-          ...formData,
-        });
+        // Sending a PUT request to update the video
+        // with form data and authentication token
+        await axios.put(
+          `${apiUrl}/api/videos/update/${video?._id}`,
+          {
+            ...formData,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
       } else {
-        await axios.post(`${apiUrl}/api/videos/upload`, {
-          ...formData,
-          channelId: activeChannel?.channelId,
-        });
+        // Sending a POST request to create a new video
+        // with form data and authentication token
+        await axios.post(
+          `${apiUrl}/api/videos/upload`,
+          {
+            ...formData,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
       }
       window.location.reload();
     } catch (error) {
@@ -98,9 +122,8 @@ const UploadVideo = ({ close, type, video }) => {
             label={"Description"}
             placeholder={"Write description about the video"}
             styles={{
-              container: "relative",
               label: "text-sm mb-1",
-              textarea: "w-full h-40",
+              textarea: "w-full h-20",
             }}
             value={formData?.description}
             onChange={(e) => handleInputChange("description", e.target.value)}
@@ -112,9 +135,9 @@ const UploadVideo = ({ close, type, video }) => {
             label={"Category"}
             placeholder={"Pick a category"}
             styles={{
-              container: "relative",
+              container: "relative flex flex-col space-y-1",
               label: "text-sm mb-1",
-              input: "w-full",
+              select: "w-full",
             }}
             value={formData?.category}
             onChange={(e) => handleInputChange("category", e.target.value)}

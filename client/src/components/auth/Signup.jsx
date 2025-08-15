@@ -3,6 +3,8 @@ import { useAuthForm } from "../../hooks";
 import { validateForm } from "../../utils";
 import { useState } from "react";
 
+import axios from "axios";
+
 const Signup = () => {
   const { formData, errors, handleInputChange, resetFrom } = useAuthForm(
     { username: "", email: "", password: "" } // Initial form data
@@ -22,7 +24,7 @@ const Signup = () => {
 
   // Handle signup form submission
   // This function will be called when the user submits the signup form
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     if (!validateForm(formData, ["username", "email", "password"])) {
       setAlert({
@@ -31,13 +33,18 @@ const Signup = () => {
       });
       return;
     }
-
-    console.log(formData);
+    setIsSigningUp(true);
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    try {
+      await axios.post(`${apiUrl}/api/auth/register`, formData);
+      setAlert({ success: true, message: "Registration successfull. " });
+    } catch (error) {
+      console.log(error);
+      setAlert({ success: false, message: error.response?.data?.message }); // Handle error response
+    } finally {
+      setIsSigningUp(false);
+    }
     resetFrom(); // Reset form after submission
-    setAlert({
-      success: true,
-      message: "Signup successful!",
-    });
   };
 
   return (

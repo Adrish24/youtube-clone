@@ -344,7 +344,7 @@ const SearchResult = () => {
         {results.length > 0 &&
           results.map((video) => (
             <Card
-              key={video.videoId}
+              key={video._id}
               video={video}
               styles={{
                 cardContainer: "max-w-2xl w-full overflow-hidden mb-4",

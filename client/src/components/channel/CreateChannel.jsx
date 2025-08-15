@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useActiveChannel, useCreateChannel } from "../../hooks";
+import { useCreateChannel } from "../../hooks";
 import { validateForm } from "../../utils";
 
 import { InputField } from "../ui";
@@ -8,8 +8,6 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../context/redux/userSlice";
 
 const CreateChannel = ({ close }) => {
-  const { userInfo } = useActiveChannel();
-
   // Custom hook to manage form data and validation
   // It initializes form data and provides a function to handle input changes
   const { formData, invalidHandle, handleInputChange } = useCreateChannel({
@@ -38,13 +36,22 @@ const CreateChannel = ({ close }) => {
       return;
     }
 
+    // API URL and token for authentication
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const token = localStorage.getItem("token");
 
     try {
-      const res = await axios.post(`${apiUrl}/api/channel/create`, {
-        ...formData,
-        email: userInfo?.currentUser?.email,
-      });
+      // Sending a POST request to create a new channel
+      // The request includes the form data and the authorization token in the headers
+      const res = await axios.post(
+        `${apiUrl}/api/channel/create`,
+        { ...formData },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       dispatch(setUserInfo(res.data));
       localStorage.setItem("userInfo", JSON.stringify(res.data));
       close();

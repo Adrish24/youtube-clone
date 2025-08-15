@@ -42,6 +42,7 @@ const ProfileButton = memo(() => {
       case "Sign out":
         console.log("Signing out...");
         localStorage.removeItem("userInfo");
+        localStorage.removeItem("token");
         window.location.reload();
         break;
 
@@ -52,7 +53,7 @@ const ProfileButton = memo(() => {
         break;
 
       case "My channel":
-        handleNavigation(`/${activeChannel.handle}`);
+        handleNavigation(`/${activeChannel?.handle}`);
         break;
     }
   };

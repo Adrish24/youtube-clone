@@ -18,9 +18,17 @@ const ChannelVideos = ({ channelVideos, channel }) => {
     e.stopPropagation();
     document.activeElement.blur();
     setProccessing(true);
+
+    // API URL and token for authentication
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const token = localStorage.getItem("token");
+
     try {
-      const res = await axios.delete(`${apiUrl}/api/videos/delete/${videoId}`);
+      const res = await axios.delete(`${apiUrl}/api/videos/delete/${videoId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(res.data.comments);
       window.location.reload();
     } catch (error) {
@@ -41,7 +49,7 @@ const ChannelVideos = ({ channelVideos, channel }) => {
       {channelVideos && channelVideos.length > 0 ? (
         channelVideos.map((vid) => (
           <Card
-            key={vid.videoId}
+            key={vid._id}
             video={vid}
             // Pass styles as props
             styles={{
@@ -91,7 +99,7 @@ const ChannelVideos = ({ channelVideos, channel }) => {
                   </button>
 
                   <button
-                    onClick={(e) => handleDeleteVideo(e, vid.videoId)}
+                    onClick={(e) => handleDeleteVideo(e, vid._id)}
                     className="block px-4 py-2 text-sm hover:bg-base-content/20 w-full text-left cursor-pointer"
                   >
                     Delete

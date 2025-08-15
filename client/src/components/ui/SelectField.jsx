@@ -77,7 +77,7 @@ const SelectField = ({
       {showCategories ? (
         <div
           ref={menuRef}
-          className="absolute bg-base-300 z-50 py-2 w-full h-50 overflow-y-auto"
+          className="absolute top-16 bg-base-300 z-50 py-2 w-full h-50 overflow-y-auto rounded-b-lg"
         >
           {VIDEO_CATEGORY
             // Filter out unwanted categories
@@ -96,7 +96,7 @@ const SelectField = ({
             // category that can be clicked to add it to the input
             .map((category) => (
               <div
-                className="hover:bg-base-100 cursor-pointer px-2 py-1"
+                className="hover:bg-base-100 cursor-pointer px-3 py-1"
                 key={category}
                 onClick={() => handleAddCategory(category)}
               >

@@ -1,38 +1,45 @@
-import { channels } from "../utils/channels.js";
-import { videos } from "../utils/videos.js";
+import Video from "../models/Video.model.js";
+import Channel from "../models/Channel.model.js";
 
 export async function uploadVideo(req, res) {
-  const { title, category, description, videoUrl, thumbnailUrl, channelId } =
-    req.body;
+  const { title, category, description, videoUrl, thumbnailUrl } = req.body;
+
+  if (!title || !category || !description || !videoUrl || !thumbnailUrl) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
   try {
-    const channelFound = channels.find(
-      (channel) => channel.channelId === channelId
-    );
-    if (!channelFound) {
+    // find the channel by channelId
+    const activeChannel = await Channel.findById(req.body?.activeChannel);
+
+    if (!activeChannel) {
       return res.status(404).json({ message: "Channel not found" });
     }
 
-    const newVideo = {
-      videoId: Math.floor(1000000 + Math.random() * 9000000).toString(),
+    // Check if the user is the owner of the channel
+    if (activeChannel.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        messahe: "You are not authorize to upload video to this channel",
+      });
+    }
+
+    const newVideo = await Video.create({
       title,
       category,
       description,
-      src: videoUrl,
-      thumbnailUrl,
-      channelId: channelFound.channelId,
+      video: videoUrl,
+      thumbnail: thumbnailUrl,
       channelName: channelFound.channelName,
-      channelAvatar: channelFound.avatar,
+      channelId: channelFound._id,
+      avatar: channelFound.avatar,
       handle: channelFound.handle,
-      views: 0,
-      likes: 0,
-      dislikes: 0,
-      comments: [],
-      uploadDate: "2024-09-20",
-    };
+      uploader: req.user._id,
+    });
 
-    videos.push(newVideo);
-
-    channelFound.videos.push(newVideo.videoId);
+    // Add the new video to the channel's videos array
+    await Channel.findByIdAndUpdate(channelId, {
+      $push: { videos: newVideo._id },
+    });
 
     res.status(201).json({ message: "Video uploaded successfully" });
   } catch (error) {
@@ -43,44 +50,78 @@ export async function uploadVideo(req, res) {
   }
 }
 
-export async function getVideos(req, res) {
+// Function to get videos by category
+export async function getVideosByCategory(req, res) {
   const { category } = req.query;
   try {
     if (!category || category === "") {
       return res.status(400).json({ message: "category is empty" });
     }
 
-    const filteredVideos = videos.filter(
-      (video) => video.category.includes(category) || category === "All"
-    );
+    let videos;
 
-    if (filteredVideos.length === 0) {
+    // If category is "All", fetch all videos
+    // Otherwise, fetch videos by the specified category
+    if (category === "All") {
+      videos = await Video.find().sort({
+        createdAt: -1,
+      });
+    } else {
+      videos = await Video.find({ category }).sort({
+        createdAt: -1,
+      });
+    }
+
+    // If no videos found, return a 404 status
+    if (videos.length === 0) {
       return res.status(404).json({ message: "No videos found" });
     }
 
-    res.status(200).json({ filteredVideos });
+    res.status(200).json({ videos });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
   }
 }
 
+// Function to update video details
 export async function updateVideo(req, res) {
   const { videoId } = req.params;
-  console.log(videoId);
+  const { title, description, category, videoUrl, thumbnailUrl } = req.body;
+
+  if (!title || !category || !description || !videoUrl || !thumbnailUrl) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
   try {
-    const videoFound = videos.find((vid) => vid.videoId === videoId);
+    // find the channel by channelId
+    const activeChannel = await Channel.findById(req.body?.activeChannel);
+
+    if (!activeChannel) {
+      return res.status(404).json({ message: "Channel not found" });
+    }
+
+    // Check if the user is the owner of the channel
+    if (activeChannel.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        messahe: "You are not authorize to upload video to this channel",
+      });
+    }
+
+    // Find the video by videoId and update its details
+    const videoFound = await Video.findByIdAndUpdate(videoId, {
+      $set: {
+        title,
+        description,
+        category,
+        video: videoUrl,
+        thumbnail: thumbnailUrl,
+      },
+    });
+
     if (!videoFound) {
       return res.status(404).json({ message: "Video not found" });
     }
-
-    const { title, description, category, videoUrl, thumbnailUrl } = req.body;
-    videoFound.title = title;
-    videoFound.description = description;
-    videoFound.category = category;
-    videoFound.src = videoUrl;
-    videoFound.thumbnailUrl = thumbnailUrl;
-    videoFound.uploadDate = new Date().toISOString().split("T")[0]; // Update upload date to current date
 
     res.status(200).json({ message: "Video updated successfully" });
   } catch (error) {
@@ -95,13 +136,26 @@ export async function deleteVideo(req, res) {
   const { videoId } = req.params;
 
   try {
-    const index = videos.findIndex((vid) => vid.videoId === videoId);
+    // find the channel by channelId
+    const activeChannel = await Channel.findById(req.body?.activeChannel);
 
-    if (index === -1) {
-      return res.status(404).json({ message: "Video not found" });
+    if (!activeChannel) {
+      return res.status(404).json({ message: "Channel not found" });
     }
 
-    videos.splice(index, 1);
+    // Check if the user is the owner of the channel
+    if (activeChannel.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        messahe: "You are not authorize to upload video to this channel",
+      });
+    }
+
+    // Find the video by videoId and update its details
+    const videoFound = await Video.findByIdAndDelete(videoId);
+
+    if (!videoFound) {
+      return res.status(404).json({ message: "Video not found" });
+    }
 
     res.status(200).json({ message: "video deleted successfully" });
   } catch (error) {

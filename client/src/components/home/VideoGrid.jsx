@@ -1,4 +1,3 @@
-
 import { useFetchVideos } from "../../hooks";
 import { Card } from "../ui";
 
@@ -9,7 +8,7 @@ const VideoGrid = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 pt-6 relative">
       {items.map((video) => (
         <Card
-          key={video.videoId}
+          key={video._id}
           video={video}
           // Pass styles as props
           styles={{

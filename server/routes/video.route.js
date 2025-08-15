@@ -1,16 +1,17 @@
 import express from "express";
 import {
   deleteVideo,
-  getVideos,
+  getVideosByCategory,
   updateVideo,
   uploadVideo,
 } from "../controllers/videos.controller.js";
+import { authorization } from "../middleware/authorization.js";
 
 const router = express.Router();
 
-router.post("/upload", uploadVideo);
-router.get("/", getVideos);
-router.put("/update/:videoId", updateVideo);
-router.delete("/delete/:videoId", deleteVideo);
+router.post("/upload", authorization, uploadVideo);
+router.get("/", getVideosByCategory);
+router.put("/update/:videoId", authorization, updateVideo);
+router.delete("/delete/:videoId", authorization, deleteVideo);
 
 export default router;
