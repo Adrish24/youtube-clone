@@ -84,7 +84,7 @@ const SwitchAccountMenu = ({
             ? activeChannel.channelName
             : userInfo?.currentUser?.username}
         </h2>
-        <p className="text-xs text-base-content/40">
+        <p className="text-xs text-base-content/40 truncate w-46">
           {userInfo.currentUser.email}
         </p>
       </div>
@@ -113,8 +113,8 @@ const SwitchAccountMenu = ({
                 <Avatar avatar={channel.avatar} name={channel.channelName} />
               </div>
               <div className="flex flex-col w-full">
-                <p className=" font-semibold">{channel.channelName}</p>
-                <p className="text-xs text-base-content/40">{channel.handle}</p>
+                <p className=" font-semibold truncate w-46">{channel.channelName}</p>
+                <p className="text-xs text-base-content/40 truncate w-46">{channel.handle}</p>
               </div>
               {userInfo.currentUser.activeChannel === channel._Id ? (
                 <div>
@@ -154,7 +154,7 @@ const SwitchAccountMenu = ({
               <p className=" font-semibold">
                 {userInfo?.currentUser?.username}
               </p>
-              <p className="text-xs text-base-content/40">
+              <p className="text-xs text-base-content/40 truncate w-46">
                 {userInfo?.currentUser?.email}
               </p>
               <p className="text-xs text-base-content/40">No channels</p>

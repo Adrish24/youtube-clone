@@ -78,7 +78,7 @@ const UploadVideo = ({ close, type, video }) => {
 
   return (
     <div className="fixed left-0 top-0 right-0 bottom-0 bg-base-300/60 z-[200] grid justify-center items-center">
-      <div className="bg-base-100 py-4 px-5 rounded-2xl">
+      <div className="bg-base-100 py-4 px-5 rounded-2xl overflow-y-auto">
         <h2 className="text-2xl font-bold mb-10">
           {type === "upload" ? "Upload" : "Edit"} video
         </h2>

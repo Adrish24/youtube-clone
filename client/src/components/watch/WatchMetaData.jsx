@@ -60,7 +60,7 @@ const WatchMetaData = ({ currentVideo }) => {
           {isDescriptionLong ? (
             <span
               onClick={toggleShowMore}
-              className="absolute bottom-0 right-0 pl-4 bg-linear-to-l from-base-100 from-70% to-transparent coursor-pointer"
+              className="absolute bottom-0 right-0 pl-4 bg-linear-to-l from-base-100 from-70% to-transparent cursor-pointer"
             >
               {showMoreDescription ? "Show less" : "...more"}
             </span>
