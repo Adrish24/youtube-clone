@@ -48,7 +48,6 @@ const FormComment = ({ videoId }) => {
           },
         }
       );
-      console.log(res.data.comments);
       dispatch(setComments(res.data.comments));
       setIsCommentFormActive(false);
     } catch (error) {

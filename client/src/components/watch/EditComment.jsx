@@ -33,7 +33,6 @@ const EditComment = ({ close, comment }) => {
           },
         }
       );
-      console.log(res.data.comments);
       dispatch(setComments(res.data.comments));
       close();
     } catch (error) {

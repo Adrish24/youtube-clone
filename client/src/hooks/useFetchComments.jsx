@@ -20,7 +20,6 @@ const useFetchComments = () => {
       setError(null);
       try {
         const res = await axios.get(`${apiUrl}/api/comments/${videoId}`);
-        console.log(res.data.comments);
         dispatch(setComments(res.data.comments));
       } catch (error) {
         console.log(error.message);

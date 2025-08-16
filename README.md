@@ -1,6 +1,10 @@
 
 # YouTube Clone - Project Overview
 
+## Repository
+
+GitHub:[GutHub Repository](https://github.com/Adrish24/youtube-clone/)
+
 ## Introduction
 
 This repository contains a full-stack YouTube clone project developed as part of the FULL-STACK Development with DSA placement guarantee course. The project is split into two main parts:

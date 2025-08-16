@@ -2,7 +2,7 @@ import { Card } from "../ui";
 
 const Suggestions = ({ suggestions }) => {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:flex flex-col gap-4 lg:gap-0 lg:pr-6 lg:pt-6">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:flex flex-col gap-4 lg:gap-0 lg:pr-6 lg:pt-6 lg:mb-2">
       {suggestions.length > 0 &&
         suggestions.map((vid) => (
           <Card
@@ -11,7 +11,7 @@ const Suggestions = ({ suggestions }) => {
             // Pass styles as props
             styles={{
               cardContainer: "lg:mb-4 lg:p-0",
-              card: "lg:card-side lg:h-24",
+              card: "lg:card-side",
               thumbnailContainer: "flex lg:w-44 lg:pr-2",
               thumbnail: "w-full h-full aspect-video object-cover rounded-xl",
               cardBody: "flex lg:flex-1 relative",
@@ -20,7 +20,7 @@ const Suggestions = ({ suggestions }) => {
               metadataContainer: "grow pr-6 pt-3 lg:p-0",
               title: "font-bold line-clamp-2 lg:pr-7",
               uploader:
-                "text-sm  text-base-content/50 hover:text-base-content line-clamp-1",
+                "text-xs text-base-content/50 hover:text-base-content",
               metadata: "text-sm text-base-content/50 line-clamp-1",
             }}
           >

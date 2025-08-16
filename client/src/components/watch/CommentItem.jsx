@@ -29,7 +29,6 @@ const CommentItem = ({ comment, fetchComments }) => {
           },
         }
       );
-      console.log(res.data.comments);
       dispatch(setComments(res.data.comments));
     } catch (error) {
       console.log(error);
