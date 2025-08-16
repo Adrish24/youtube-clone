@@ -9,10 +9,6 @@ import Channel from "../models/Channel.model.js";
 export async function register(req, res) {
   const { username, password, email } = req.body;
 
-  // Validate input
-  if (!username || !password || !email) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
   try {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -49,10 +45,6 @@ export async function register(req, res) {
 export async function login(req, res) {
   const { password, email } = req.body;
 
-  // Validate input
-  if (!password || !email) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
   try {
     // Find the user by email
     const userFound = await User.findOne({ email });
@@ -95,14 +87,11 @@ export async function login(req, res) {
 export async function switchChannel(req, res) {
   const { userId, channelId } = req.body;
 
-  if (!userId || !channelId) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
   try {
     const userFound = await User.findOneAndUpdate(
       { _id: userId },
       {
-        $set: { activeChannel: channelId },
+        $set: { activeChannelId: channelId },
       },
       { new: true }
     );

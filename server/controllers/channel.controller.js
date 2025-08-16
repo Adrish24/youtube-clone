@@ -6,10 +6,6 @@ export async function createMyChannel(req, res) {
   const { name, handle } = req.body;
   const { user } = req;
 
-  if (!name || !handle) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
   try {
     // create a new channel
     // it will automatically throw an error if the channelName or handle already exists
@@ -28,7 +24,7 @@ export async function createMyChannel(req, res) {
           channels: createdChannel._id,
         },
         $set: {
-          activeChannel: createdChannel._id,
+          activeChannelId: createdChannel._id,
         },
       },
       { new: true }

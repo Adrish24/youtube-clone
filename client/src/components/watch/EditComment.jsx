@@ -3,26 +3,39 @@ import { useState } from "react";
 import { Emojis } from "../features";
 import { useActiveChannel } from "../../hooks";
 import axios from "axios";
+import { setComments } from "../../context/redux/commentSlice";
+import { useDispatch } from "react-redux";
 
-const EditComment = ({ setIsEdit, comment, fetchComments }) => {
+const EditComment = ({ close, comment }) => {
   const { activeChannel } = useActiveChannel();
 
   const [isInputActive, setIsInputActive] = useState(false);
-  
+
   const [editText, setEditText] = useState(comment?.text || "");
+
+  const dispatch = useDispatch();
 
   // Handle form submission
   // This function will be called when the user submits the comment form
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const token = localStorage.getItem("token");
+
     try {
       const res = await axios.put(
-        `${apiUrl}/api/comments/update/${comment?.videoId}?commentId=${comment?.commentId}`,
-        { text: editText }
+        `${apiUrl}/api/comments/update/${comment?.videoId}?commentId=${comment?._id}`,
+        { text: editText },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(res.data.comments);
-      await fetchComments(comment?.videoId);
+      dispatch(setComments(res.data.comments));
+      close();
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +46,7 @@ const EditComment = ({ setIsEdit, comment, fetchComments }) => {
   const handleCancel = (e) => {
     e.preventDefault();
     console.log("Cancel clicked");
-    setIsEdit(false);
+    close();
     setEditText("");
   };
 

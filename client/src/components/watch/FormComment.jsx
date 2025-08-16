@@ -5,8 +5,10 @@ import { CreateChannel } from "../channel";
 import axios from "axios";
 import { useActiveChannel } from "../../hooks";
 import { Avatar } from "../ui";
+import { useDispatch } from "react-redux";
+import { setComments } from "../../context/redux/commentSlice";
 
-const FormComment = ({ videoId, fetchComments }) => {
+const FormComment = ({ videoId }) => {
   const location = useLocation();
 
   const { activeChannel, userInfo } = useActiveChannel(); // Get the active channel and user info from the custom hook
@@ -20,22 +22,35 @@ const FormComment = ({ videoId, fetchComments }) => {
   const [showCreateChannel, setShowCreateChannel] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Handle form submission
   // This function will be called when the user submits the comment form
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setPostingComment(true);
+
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const token = localStorage.getItem("token");
+
     try {
-      const res = await axios.post(`${apiUrl}/api/comments/create`, {
-        videoId,
-        userId: userInfo?.currentUser?.userId,
-        handle: activeChannel?.handle,
-        text: commentText,
-      });
+      const res = await axios.post(
+        `${apiUrl}/api/comments/create`,
+        {
+          videoId,
+          channelId: activeChannel?._id,
+          handle: activeChannel?.handle,
+          text: commentText,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log(res.data.comments);
-      await fetchComments(videoId);
+      dispatch(setComments(res.data.comments));
+      setIsCommentFormActive(false);
     } catch (error) {
       console.log(error);
     } finally {
@@ -49,15 +64,20 @@ const FormComment = ({ videoId, fetchComments }) => {
   // If user is not logged in, redirect to login page
   const handleInputClick = (e) => {
     e.preventDefault();
+
+    // If user is not logged in
+    // Save the current path to redirect after login
+    // redirect to login page
     if (!userInfo || !userInfo.currentUser?.email) {
       localStorage.setItem(
         "redirectPath",
-        `${location.pathname}${location.search}` // Save the current path to redirect after login
+        `${location.pathname}${location.search}`
       );
       navigate("/login");
       return;
     }
 
+    // If user does not have an active channel, show the create channel modal
     if (!activeChannel || !activeChannel._id) {
       setShowCreateChannel(true);
       e.target.blur(); // Prevents the input from gaining focus

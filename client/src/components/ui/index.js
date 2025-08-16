@@ -1,4 +1,3 @@
-import Modal from "./Modal";
 import ClickableItem from "./ClickableItem";
 import Card from "./Card";
 import Carousel from "./Carousel";
@@ -10,7 +9,6 @@ import TextareaField from "./TextareaField";
 import Avatar from "./Avatar";
 
 export {
-  Modal,
   ClickableItem,
   Card,
   Carousel,

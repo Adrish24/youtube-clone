@@ -1,40 +1,41 @@
-import { comments } from "../utils/comments.js";
+import Comment from "../models/Comment.model.js";
 
 export async function createComment(req, res) {
-  const { videoId, userId, handle, text } = req.body;
+  const { videoId, channelId, handle, text } = req.body;
+
   try {
-    comments.push({
-      commentId: Math.floor(100000 + Math.random() * 900000).toString(),
-      videoId: videoId,
-      userId: userId,
-      handle: handle,
-      text: text,
-      timestamp: new Date(Date.now()),
+    // Create a new comment in the database
+    await Comment.create({
+      videoId,
+      channelId,
+      handle,
+      text,
     });
 
-    const filtredComments = comments.filter(
-      (comment) => comment.videoId === videoId
-    );
+    // Fetch all comments for the video
+    const comments = await Comment.find({ videoId }).sort({
+      createdAt: -1,
+    });
 
-    res.status(201).json({ comments: filtredComments });
+    res.status(201).json({ comments });
   } catch (error) {
     console.log("Error fetching comments:", error);
     res.status(500).json({ error: "Something went wrong!. Try gain later" });
   }
 }
 
-export async function getCommentsById(req, res) {
+// This function fetches comments for a specific video by its ID
+// It returns the comments in descending order of creation date
+export async function getCommentsByVideoId(req, res) {
   const { videoId } = req.params;
+
   try {
-    const filtredComments = comments.filter(
-      (comment) => comment.videoId === videoId
-    );
+    // Fetch comments from the database
+    const comments = await Comment.find({ videoId }).sort({
+      createdAt: -1,
+    });
 
-    if (filtredComments.length === 0) {
-      return res.status(404).json({ comments: [] });
-    }
-
-    return res.status(200).json({ comments: filtredComments });
+    return res.status(200).json({ comments });
   } catch (error) {
     console.log("Error fetching comments:", error);
     res.status(500).json({ error: "Failed to fetch comments" });
@@ -45,24 +46,19 @@ export async function deleteComment(req, res) {
   const { videoId } = req.params;
   const { commentId } = req.query;
   if (!commentId) {
-    return res.status(400).json({ message: "commentId requried" });
+    return res.status(400).json({ message: "commentId missing" });
   }
 
   try {
-    const index = comments.findIndex(
-      (comment) => comment.commentId == commentId && comment.videoId === videoId
-    );
-    if (index === -1) {
-      return res.status(404).json({ message: "Comment not found" });
-    }
-    comments.splice(index, 1);
+    // Find the comment by ID and delete it
+    await Comment.findByIdAndDelete(commentId);
 
-    // Return the updated list for the video
-    const filtredComments = comments.filter(
-      (comment) => comment.videoId === videoId
-    );
+    // Fetch all comments for the video
+    const comments = await Comment.find({ videoId }).sort({
+      createdAt: -1,
+    });
 
-    res.status(200).json({ comments: filtredComments });
+    res.status(200).json({ comments });
   } catch (error) {
     console.log("Error fetching comments:", error);
     return res
@@ -77,25 +73,20 @@ export async function updateComment(req, res) {
   const { text } = req.body;
 
   if (!commentId) {
-    return res.status(400).json({ message: "commentId requried" });
+    return res.status(400).json({ message: "commentId missing" });
   }
 
   try {
-    const commentFound = comments.find(
-      (comment) => comment.commentId == commentId && comment.videoId === videoId
-    );
-    if (!commentFound) {
-      return res.status(404).json({ message: "Comment not found" });
-    }
+    await Comment.findByIdAndUpdate(commentId, {
+      $set: { text },
+    });
 
-    commentFound.text = text;
+    // Fetch all comments for the video
+    const comments = await Comment.find({ videoId }).sort({
+      createdAt: -1,
+    });
 
-    // Return the updated list for the video
-    const filtredComments = comments.filter(
-      (comment) => comment.videoId === videoId
-    );
-
-    res.status(200).json({ comments: filtredComments });
+    res.status(200).json({ comments });
   } catch (error) {
     console.log("Error fetching comments:", error);
     return res

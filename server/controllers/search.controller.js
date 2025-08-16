@@ -1,4 +1,4 @@
-import { videos } from "../utils/videos.js";
+import Video from "../models/Video.model.js";
 
 export async function searchVideos(req, res) {
   const { q } = req.query;
@@ -6,9 +6,16 @@ export async function searchVideos(req, res) {
     return res.status(400).json({ message: "Search query cannot be empty" });
   }
   try {
-    const results = videos.filter((vid) =>
-      vid.title.toLowerCase().includes(q.toLowerCase())
-    );
+    // Use regex to search in title, category, description, and channelName
+    const results = await Video.find({
+      $or: [
+        { title: { $regex: q, $options: "i" } },
+        { category: { $regex: q, $options: "i" } },
+        { channelName: { $regex: q, $options: "i" } },
+      ],
+    });
+
+    // If no results found, return a 404 status
     if (results.length === 0) {
       return res.status(404).json({ message: "No results found" });
     }

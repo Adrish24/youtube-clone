@@ -15,12 +15,12 @@ const Suggestions = ({ suggestions }) => {
               thumbnailContainer: "flex lg:w-44 lg:pr-2",
               thumbnail: "w-full h-full aspect-video object-cover rounded-xl",
               cardBody: "flex lg:flex-1 relative",
-              profile: "hidden",
-              profileImage: "bg-gray-300 h-9 w-full rounded-full object-fit",
+              profile: "lg:hidden mt-3 mr-3 h-9 w-9",
+              profileImage: "bg-gray-300 rounded-full object-fit",
               metadataContainer: "grow pr-6 pt-3 lg:p-0",
-              title: "font-semibold line-clamp-2 lg:pr-7",
+              title: "font-bold line-clamp-2 lg:pr-7",
               uploader:
-                "text-sm text-base-content/50 hover:text-base-content line-clamp-1",
+                "text-sm  text-base-content/50 hover:text-base-content line-clamp-1",
               metadata: "text-sm text-base-content/50 line-clamp-1",
             }}
           >

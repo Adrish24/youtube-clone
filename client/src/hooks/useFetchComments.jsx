@@ -1,10 +1,14 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setComments } from "../context/redux/commentSlice";
 
 const useFetchComments = () => {
-  const [comments, setComments] = useState([]);
+  const comments = useSelector((state) => state.comments.data);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -17,7 +21,7 @@ const useFetchComments = () => {
       try {
         const res = await axios.get(`${apiUrl}/api/comments/${videoId}`);
         console.log(res.data.comments);
-        setComments(res.data.comments);
+        dispatch(setComments(res.data.comments));
       } catch (error) {
         console.log(error.message);
         setError("No comments found");
@@ -25,10 +29,10 @@ const useFetchComments = () => {
         setIsLoading(false);
       }
     },
-    [apiUrl]
+    [apiUrl, dispatch]
   );
 
-  return { comments, setComments, isLoading, error, fetchComments };
+  return { comments, isLoading, error, fetchComments };
 };
 
 export default useFetchComments;

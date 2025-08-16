@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
       ref: "Channel",
       default: [],
     },
-    activeChannel: {
+    activeChannelId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Channel",
       default: null,

@@ -5,6 +5,8 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const theme = localStorage.getItem("theme") || "light"; // Default theme
 
+  document.documentElement.setAttribute("data-theme", theme);
+
   const mainContentRef = useRef(null);
   const commentSectionRef = useRef(null);
 

@@ -53,7 +53,7 @@ const WatchVideo = () => {
       <div className="flex flex-col lg:flex-row w-full h-full 2xl:w-[90vw]">
         <div className="w-full lg:pr-6 lg:pt-6 lg:ml-6">
           <VideoPlayer src={currentVideo?.video} title={currentVideo?.title} />
-          <div className="py-4 lg:w-[640px] xl:w-[800px] 2xl:w-[1062px]">
+          <div id="video-metadata" className="py-4 lg:w-[640px] xl:w-[800px] 2xl:w-[1062px]">
             {/* Title of the video */}
             <h2
               title={currentVideo.title}

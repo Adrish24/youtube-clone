@@ -20,12 +20,6 @@ const Header = memo(() => {
     }
   }, [windowWidth]);
 
-  // const toggleTheme = () => {
-  //   const currentTheme = document.documentElement.getAttribute("data-theme");
-  //   const newTheme = currentTheme === "light" ? "black" : "light";
-  //   document.documentElement.setAttribute("data-theme", newTheme);
-  // };
-
   return (
     <header
       className="

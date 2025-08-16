@@ -4,13 +4,9 @@ import Channel from "../models/Channel.model.js";
 export async function uploadVideo(req, res) {
   const { title, category, description, videoUrl, thumbnailUrl } = req.body;
 
-  if (!title || !category || !description || !videoUrl || !thumbnailUrl) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
   try {
     // find the channel by channelId
-    const activeChannel = await Channel.findById(req.body?.activeChannel);
+    const activeChannel = await Channel.findById(req.user?.activeChannelId);
 
     if (!activeChannel) {
       return res.status(404).json({ message: "Channel not found" });
@@ -23,21 +19,23 @@ export async function uploadVideo(req, res) {
       });
     }
 
+    // Create a new video
+    // and associate it with the channel
     const newVideo = await Video.create({
       title,
       category,
       description,
       video: videoUrl,
       thumbnail: thumbnailUrl,
-      channelName: channelFound.channelName,
-      channelId: channelFound._id,
-      avatar: channelFound.avatar,
-      handle: channelFound.handle,
-      uploader: req.user._id,
+      channelName: activeChannel.channelName,
+      channelId: activeChannel._id,
+      avatar: activeChannel.avatar,
+      handle: activeChannel.handle,
+      uploader: req.user?._id,
     });
 
     // Add the new video to the channel's videos array
-    await Channel.findByIdAndUpdate(channelId, {
+    await Channel.findByIdAndUpdate(activeChannel._id, {
       $push: { videos: newVideo._id },
     });
 
@@ -89,13 +87,9 @@ export async function updateVideo(req, res) {
   const { videoId } = req.params;
   const { title, description, category, videoUrl, thumbnailUrl } = req.body;
 
-  if (!title || !category || !description || !videoUrl || !thumbnailUrl) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
   try {
     // find the channel by channelId
-    const activeChannel = await Channel.findById(req.body?.activeChannel);
+    const activeChannel = await Channel.findById(req.user?.activeChannelId);
 
     if (!activeChannel) {
       return res.status(404).json({ message: "Channel not found" });
@@ -137,7 +131,7 @@ export async function deleteVideo(req, res) {
 
   try {
     // find the channel by channelId
-    const activeChannel = await Channel.findById(req.body?.activeChannel);
+    const activeChannel = await Channel.findById(req.user?.activeChannelId);
 
     if (!activeChannel) {
       return res.status(404).json({ message: "Channel not found" });
@@ -149,6 +143,12 @@ export async function deleteVideo(req, res) {
         messahe: "You are not authorize to upload video to this channel",
       });
     }
+
+    activeChannel.videos = activeChannel.videos.filter(
+      (vid) => vid.toString() !== videoId
+    );
+
+    await activeChannel.save();
 
     // Find the video by videoId and update its details
     const videoFound = await Video.findByIdAndDelete(videoId);

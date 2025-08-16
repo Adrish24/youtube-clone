@@ -11,8 +11,12 @@ const CommentSection = ({ currentVideo }) => {
 
   const commentSectionRef = useRef(null);
 
+
+  // Use Intersection Observer to fetch comments when the section is in view
+  // This prevents unnecessary API calls when the section is not visible
   useEffect(() => {
     let wasIntersecting = false;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -28,11 +32,14 @@ const CommentSection = ({ currentVideo }) => {
       }
     );
 
+    // Observe the comment section node
+    // This will trigger the observer when the section comes into view
     const sectionNode = commentSectionRef.current;
     if (sectionNode) {
       observer.observe(sectionNode);
     }
 
+    // Cleanup observer when component unmounts
     return () => {
       if (sectionNode) observer.unobserve(sectionNode);
     };
@@ -62,23 +69,18 @@ const CommentSection = ({ currentVideo }) => {
         </div>
 
         {/* Input field for adding a comment */}
-        <FormComment
-          videoId={currentVideo._id}
-          fetchComments={fetchComments}
-        />
+        <FormComment videoId={currentVideo._id} fetchComments={fetchComments} />
+        
       </div>
       <div className="flex flex-col space-y-3 justify-center ">
-        {comments.length > 0 ? (
-          comments
-            ?.slice()
-            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-            .map((comment) => (
-              <CommentItem
-                key={comment._id}
-                comment={comment}
-                fetchComments={fetchComments}
-              />
-            ))
+        {comments && comments.length > 0 ? (
+          comments.map((comment) => (
+            <CommentItem
+              key={comment._id}
+              comment={comment}
+              fetchComments={fetchComments}
+            />
+          ))
         ) : (
           <p>{error}</p>
         )}

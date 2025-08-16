@@ -2,46 +2,56 @@ import { useState } from "react";
 import EditComment from "./EditComment";
 import axios from "axios";
 import { useActiveChannel } from "../../hooks";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setComments } from "../../context/redux/commentSlice";
 
 const CommentItem = ({ comment, fetchComments }) => {
   const { activeChannel } = useActiveChannel();
 
   const [isEdit, setIsEdit] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  // Handle delete comment
   const handleDeleteComment = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const token = localStorage.getItem("token");
+
     try {
       const res = await axios.delete(
-        `${apiUrl}/api/comments/delete/${comment?.videoId}?commentId=${comment?.commentId}`
+        `${apiUrl}/api/comments/delete/${comment?.videoId}?commentId=${comment?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(res.data.comments);
-      await fetchComments(comment?.videoId);
+      dispatch(setComments(res.data.comments));
     } catch (error) {
       console.log(error);
     }
   };
 
   // Format the upload date to a more readable format
-  const commentDate = new Date(comment?.timestamp).toLocaleDateString("en-US", {
+  const commentDate = new Date(comment?.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 
-  const handleNavigateToChannel = (e) => {
-    e.stopPropagation(); // Prevent the card click event
-    navigate(`/${comment.handle}`);
-  };
+  // const handleNavigateToChannel = (e) => {
+  //   e.stopPropagation(); // Prevent the card click event
+  //   navigate(`/${comment.handle}`);
+  // };
 
   if (isEdit)
     return (
       <EditComment
-        setIsEdit={setIsEdit}
+        close={() => setIsEdit(false)}
         comment={comment}
         fetchComments={fetchComments}
       />
@@ -64,7 +74,7 @@ const CommentItem = ({ comment, fetchComments }) => {
       </div>
       <div className="w-full">
         <h2
-          onClick={handleNavigateToChannel}
+          // onClick={handleNavigateToChannel}
           className="flex items-center space-x-1"
         >
           <span className="font-bold cursor-pointer">
