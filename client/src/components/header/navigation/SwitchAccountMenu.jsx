@@ -8,11 +8,7 @@ import { useActiveChannel } from "../../../hooks";
 
 // This component renders the switch account menu with user information and options
 // It allows users to switch between different accounts
-const SwitchAccountMenu = ({
-  closeSwitchAccount,
-  handleMenuClick,
-  handleNavigation,
-}) => {
+const SwitchAccountMenu = ({ closeSwitchAccount, handleMenuClick }) => {
   const { activeChannel, userInfo } = useActiveChannel();
 
   const dispatch = useDispatch();
@@ -21,16 +17,25 @@ const SwitchAccountMenu = ({
 
   // This function handles the switching of accounts
   // It updates the active channel for the user and dispatches the updated user info to the Redux store
-  const handleSwitchAccount = async (e, userId, channelId) => {
+  const handleSwitchAccount = async (e, channelId) => {
     e.stopPropagation();
     e.preventDefault();
     setIsSwitchingChannel(true);
+
     const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const token = localStorage.getItem("token");
     try {
-      const res = await axios.post(`${apiUrl}/api/auth/switch-channel`, {
-        userId,
-        channelId,
-      });
+      const res = await axios.post(
+        `${apiUrl}/api/auth/switch-channel`,
+        {
+          channelId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       dispatch(setUserInfo(res.data)); // Dispatch the user info to the Redux store
 
@@ -45,7 +50,7 @@ const SwitchAccountMenu = ({
   };
 
   return (
-    <ul className="absolute right-0 menu menu-sm  bg-base-100 rounded-box z-1 mt-3 w-60 p-0 py-2">
+    <ul className="absolute right-0 menu menu-sm  bg-base-100 rounded-box z-1 mt-3 w-64 p-0 py-2 ">
       {/* Overlay for switching channel */}
       {/* This is used to prevent clicks on the background while switching accounts */}
       {isSwitchingChannel ? (
@@ -53,7 +58,7 @@ const SwitchAccountMenu = ({
       ) : null}
 
       {/* go back */}
-      <div className="flex items-center px-3 space-x-2">
+      <div className="flex items-center px-3 space-x-2 w-full">
         <ClickableItem
           className="hover:bg-base-content/20"
           onClick={closeSwitchAccount}
@@ -75,10 +80,10 @@ const SwitchAccountMenu = ({
         <p className="text-lg font-semibol">Accounts</p>
       </div>
 
-      <hr className="border-base-content/20 my-2" />
+      <hr className="border-base-content/20 my-2 w-full" />
 
       {/* User information */}
-      <div className="px-3 flex flex-col">
+      <div className="px-3 flex flex-col w-full">
         <h2>
           {activeChannel
             ? activeChannel.channelName
@@ -89,7 +94,7 @@ const SwitchAccountMenu = ({
         </p>
       </div>
 
-      <hr className="border-base-content/20 mt-2" />
+      <hr className="border-base-content/20 mt-2 w-full" />
 
       {/* List of accounts */}
       {/* If the user has owned channels, display them */}
@@ -100,23 +105,21 @@ const SwitchAccountMenu = ({
           userInfo?.ownedChannels.map((channel) => (
             <ClickableItem
               key={channel._id}
-              onClick={(e) =>
-                handleSwitchAccount(
-                  e,
-                  userInfo.currentUser.userId,
-                  channel._id
-                )
-              }
-              className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none"
+              onClick={(e) => handleSwitchAccount(e, channel._id)}
+              className="px-3 py-2 flex items-start hover:bg-base-content/10 rounded-none "
             >
               <div className="rounded-full mr-3 text-center">
                 <Avatar avatar={channel.avatar} name={channel.channelName} />
               </div>
-              <div className="flex flex-col w-full">
-                <p className=" font-semibold truncate w-46">{channel.channelName}</p>
-                <p className="text-xs text-base-content/40 truncate w-46">{channel.handle}</p>
+              <div className="flex flex-col">
+                <p className=" font-semibold truncate w-40">
+                  {channel.channelName}
+                </p>
+                <p className="text-xs text-base-content/40 truncate w-40">
+                  {channel.handle}
+                </p>
               </div>
-              {userInfo.currentUser.activeChannel === channel._Id ? (
+              {activeChannel?._id === channel._id ? (
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +157,7 @@ const SwitchAccountMenu = ({
               <p className=" font-semibold">
                 {userInfo?.currentUser?.username}
               </p>
-              <p className="text-xs text-base-content/40 truncate w-46">
+              <p className="text-xs text-base-content/40 truncate w-40">
                 {userInfo?.currentUser?.email}
               </p>
               <p className="text-xs text-base-content/40">No channels</p>
@@ -167,7 +170,7 @@ const SwitchAccountMenu = ({
         {userInfo?.currentUser?.channels?.length > 0 ? (
           <Link
             className="px-3 py-2 text-info hover:text-info/80"
-            onClick={handleNavigation}
+            onClick={(e) => handleMenuClick(e, "View all channels")}
           >
             View All channels
           </Link>
@@ -181,7 +184,7 @@ const SwitchAccountMenu = ({
         )}
       </div>
 
-      <hr className="border-base-content/20 my-2" />
+      <hr className="border-base-content/20 my-2 w-full" />
 
       {/* Add account */}
       <ClickableItem

@@ -85,7 +85,8 @@ export async function login(req, res) {
 
 // Function to switch the active channel for a user
 export async function switchChannel(req, res) {
-  const { userId, channelId } = req.body;
+  const { channelId } = req.body;
+  const userId = req.user._id;
 
   try {
     const userFound = await User.findOneAndUpdate(

@@ -17,7 +17,7 @@ router.post("/login", validator("password", "email"), login);
 router.post(
   "/switch-channel",
   authorization,
-  validator("userId", "channelId"),
+  validator("channelId"),
   switchChannel
 );
 

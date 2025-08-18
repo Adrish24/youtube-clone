@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ProfileMenuList from "./ProfileMenuList";
 import SwitchAccountMenu from "./SwitchAccountMenu";
 
-import { CreateChannel } from "../../channel";
+import { CreateChannel, MyChannels } from "../../channel";
 import { useActiveChannel } from "../../../hooks";
 import { Avatar } from "../../ui";
 
@@ -18,6 +18,7 @@ const ProfileButton = memo(() => {
   const [showSwitchAccount, setShowSwitchAccount] = useState(false);
 
   const [showCreateChannel, setShowCreateChannel] = useState(false);
+  const [showMyChannels, setShowMyChannels] = useState(false);
 
   const profileButtonRef = useRef(null);
 
@@ -39,6 +40,8 @@ const ProfileButton = memo(() => {
       case "Switch Account":
         setShowSwitchAccount(true);
         break;
+
+      // This case handles the sign out functionality
       case "Sign out":
         console.log("Signing out...");
         localStorage.removeItem("userInfo");
@@ -46,14 +49,22 @@ const ProfileButton = memo(() => {
         window.location.reload();
         break;
 
+      // This case handles the creation of a new channel
       case "Create channel":
         setShowCreateChannel(true);
         setShowProfileMenu(false);
         setShowSwitchAccount(false);
         break;
 
+      // This case navigates to the user's channel
       case "My channel":
         handleNavigation(`/${activeChannel?.handle}`);
+        break;
+
+      // This case shows the user's channels
+      case "View all channels":
+        setShowMyChannels(true);
+        setShowProfileMenu(false);
         break;
     }
   };
@@ -132,7 +143,6 @@ const ProfileButton = memo(() => {
             <SwitchAccountMenu
               closeSwitchAccount={closeSwitchAccount}
               handleMenuClick={handleMenuClick}
-              handleNavigation={handleNavigation}
             />
           ) : null}
         </div>
@@ -150,6 +160,9 @@ const ProfileButton = memo(() => {
           Sign in
         </button>
       )}
+      {showMyChannels ? (
+        <MyChannels close={() => setShowMyChannels(false)} />
+      ) : null}
     </div>
   );
 });

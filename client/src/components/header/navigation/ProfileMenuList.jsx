@@ -2,18 +2,25 @@ import { Link } from "react-router-dom";
 import { profileMenu, ProfileMiscMenu } from "../../../constants/profileMenu";
 import { Avatar, ClickableItem } from "../../ui";
 import { useActiveChannel } from "../../../hooks";
+import { useState } from "react";
 
 // This component renders the profile menu list with user information and various options
 // It includes a toggle for appearance settings and a switch account option
 const ProfileMenuList = ({ handleMenuClick }) => {
   const { activeChannel, userInfo } = useActiveChannel();
 
+  const [isDarkMode, setIsDarkMode] = useState(
+    document.documentElement.getAttribute("data-theme") === "dark"
+  );
+
+  // Function to toggle the theme between light and dark modes
+  // It updates the document's data-theme attribute and saves the preference in localStorage
   const toggleTheme = () => {
-    console.log("Toggling theme"); // Debugging line to check theme toggle
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "light" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme); // Save the new theme to localStorage
+    setIsDarkMode((prev) => !prev);
   };
 
   return (
@@ -77,7 +84,13 @@ const ProfileMenuList = ({ handleMenuClick }) => {
       {profileMenu.map((item) => (
         <li key={item.name} title={item.name}>
           <ClickableItem
-            onClick={(e) => handleMenuClick(e, item.name)}
+            onClick={(e) => {
+              if (item.name === "Appearance") {
+                toggleTheme();
+                return;
+              }
+              handleMenuClick(e, item.name);
+            }}
             className="py-2 px-3 flex items-center space-x-1 text-sm hover:bg-base-content/20 rounded-none"
           >
             <div>{item.svg}</div>
@@ -86,12 +99,9 @@ const ProfileMenuList = ({ handleMenuClick }) => {
             {/* If the item is "Appearance", add a toggle switch */}
             {item.name === "Appearance" ? (
               <input
-                onChange={toggleTheme}
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent parent click events
-                }}
                 type="checkbox"
-                defaultChecked
+                checked={isDarkMode}
+                readOnly
                 className="toggle ml-auto"
               />
             ) : null}
